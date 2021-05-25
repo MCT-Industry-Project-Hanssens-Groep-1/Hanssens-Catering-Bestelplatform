@@ -33,25 +33,31 @@
 <body>
     <section class="c-login">
         <div class="c-login__item">
-            <div>
-                <img src="src/Logo.png" alt="Hanssens Catering Logo">
-                <p>Wie slim is, eet gezond!</p>
-                <p>LEKKERE EN GEVARIEERDE MAALTIJDEN, DAGVERS VOOR U BEREID!</p>
+            <div class="c-slogan">
+                <img class="c-slogan-logo" src="src/Logo.png" alt="Hanssens Catering Logo">
+                <p class="c-slogan-title">Wie slim is, eet gezond!</p>
+                <p class="c-slogan-subtitle">LEKKERE EN GEVARIEERDE MAALTIJDEN, DAGVERS VOOR U BEREID!</p>
             </div>
         </div>
         <div class="c-login__item c-login__background">
             <div>
-                <h1>Online bestelplatform van Hanssens Catering</h1>
-            <div>
-                <p>E-mailadres:</p>
-                <input type="text" id="emailField">
-            </div>
-            <div>
-                <p>Wachtwoord: </p>
-                <input type="password" id="passwordField">
-            </div>
-            <button onclick="login()">AANMELDEN</button>
-            <p>Nog geen account? <a href="signup.html">Registreren</a></p>
+                <h1 class="c-form-title">Online bestelplatform van Hanssens Catering</h1>
+                <div class="c-form">
+                        <div>
+                            <label class="c-label">E-mailadres:</label>
+                            <input class="c-input" type="text" id="emailField">
+                        </div>
+                        <div>
+                            <label class="c-label">Wachtwoord: </label>
+                            <input class="c-input" type="password" id="passwordField">
+                        </div>
+                        <button class="o-button-reset c-button" onclick="login()">AANMELDEN</button>
+                        <p class="c-label-account">Nog geen account? <a href="signup.html">Registreren</a></p>
+
+                        <div class="js-error c-error">
+                            Something went wrong!
+                        </div>
+                </div>
             </div>
         </div>
     </section>

@@ -1,6 +1,7 @@
 login = () => {
     var userEmail = document.getElementById("emailField").value;
     var userPassword = document.getElementById("passwordField").value;
+    var errorText = document.querySelector('.js-error');
 
     firebase.auth().signInWithEmailAndPassword(userEmail, userPassword)
     .then((userCredential) => {
@@ -13,6 +14,8 @@ login = () => {
       var errorCode = error.code;
       var errorMessage = error.message;
       console.log(errorMessage);
+      errorText.innerText = `${errorMessage}`
+      errorText.style.opacity = "100";
     });
 }
 
