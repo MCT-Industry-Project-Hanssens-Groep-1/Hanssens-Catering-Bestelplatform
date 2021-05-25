@@ -88,8 +88,6 @@ html {
   box-sizing: inherit;
 }
 
-<<<<<<< HEAD
-=======
 
 /*------------------------------------*\
 #Elements
@@ -230,7 +228,6 @@ input::placeholder {
     margin-right: auto;
 }
 
->>>>>>> develop
 .c-login {
     display: flex;
   }
@@ -240,26 +237,12 @@ input::placeholder {
     display: flex;
     align-items: center;
     min-height: 100vh;
-<<<<<<< HEAD
     justify-content: center;
 }
 
 .c-login__background {
     background: #F3F3F6;
 }
-
-@media (max-width: 1500px) {
-    .c-login {
-        display: unset;
-    }
-
-    .c-login__item {
-        width: 100%;
-        min-height: 50vh;
-    }
-}
-=======
-  }
 
   
 /*
@@ -333,12 +316,16 @@ input::placeholder {
     Everything form related here
 */
 
-.c-form-field--option {
-  display: -webkit-flex;
-  display: -ms-flex;
-  display: flex;
-  -ms-align-items: center;
-  align-items: center;
+.c-form {
+    width: 60%;
+    margin: auto;
+    margin-top: 48;
+}
+
+.c-form-title {
+    font-size: 32px;
+    font-weight: 400;
+    margin-bottom: 120px;
 }
 
 /*
@@ -352,7 +339,7 @@ input::placeholder {
   -moz-appearance: none;
   appearance: none;
   width: 100%;
-  border: var(--global-borderWidth) solid var(var--global-color-neutral);
+  border: var(--global-borderWidth) solid var(--global-color-neutral);
   border-radius: var(--global-borderRadius);
   color: var(--global-color-neutral-x-dark);
   background-color: var(--global-color-neutral-x-light);
@@ -363,6 +350,7 @@ input::placeholder {
     var(--global-whitespace-md);
   outline: none;
   transition: border var(--global-transition-timing-alpha);
+  margin-bottom: 48px;
 }
 
 .c-input:hover {
@@ -432,6 +420,11 @@ input::placeholder {
   padding-bottom: 0;
 }
 
+.c-label-account {
+    margin: 8px;
+    text-align: center;
+  }
+
 /*
     Component: Button
     ---
@@ -463,6 +456,47 @@ input::placeholder {
 .c-button:active {
   background-color: var(--global-color-alpha-dark);
   box-shadow: none;
+}
+
+/*
+    Component: Error
+    ---
+    Error message formatting
+*/
+
+.c-error {
+    opacity: 0;
+    color: #cc0000;
+}
+
+
+/*
+    Component: Slogan
+    ---
+    Everything slogan related here
+*/
+
+.c-slogan {
+    display: flex;
+    flex-direction: column;
+}
+
+.c-slogan-logo {
+    width: 300px;
+    align-self: center;
+    margin-bottom: 205px;
+}
+
+.c-slogan-title {
+    font-family: 'Allura', Helvetica, arial, sans-serif;
+    font-weight: 400;
+    font-size: 32px;
+    margin-bottom: 63px;
+}
+
+.c-slogan-subtitle {
+    font-size: 24px;
+    max-width: 645px;
 }
 
 
@@ -570,4 +604,40 @@ input::placeholder {
 .u-text-sm {
   font-size: 14px;
 }
->>>>>>> develop
+
+
+
+@media (max-width: 1500px) {
+    .c-login {
+        display: unset;
+    }
+
+    .c-login__item {
+        width: 100%;
+        min-height: 50vh;
+    }
+
+    .c-slogan-logo {
+        width: 300px;
+        align-self: center;
+        margin-bottom: 16px;
+    }
+    
+    .c-slogan-title {
+        font-family: 'Allura', Helvetica, arial, sans-serif;
+        font-weight: 400;
+        font-size: 32px;
+        text-align: center;
+        margin-bottom: 16px;
+    }
+    
+    .c-slogan-subtitle {
+        font-size: 24px;
+        max-width: 645px;
+        text-align: center;
+    }
+
+    .c-form-title {
+        margin-bottom: 32px;
+    }
+}
