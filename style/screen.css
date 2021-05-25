@@ -1,3 +1,88 @@
+/*------------------------------------*\
+#FONTS
+\*------------------------------------*/
+
+@font-face {
+    font-family: 'Allura';
+    font-weight: 400;
+    src: url('../fonts/Allura-Regular.ttf') format('ttf');
+  }
+  
+  @font-face {
+    font-family: 'Raleway';
+    font-weight: 400;
+    src: url('../fonts/Raleway-Regular.ttf') format('ttf');
+  }
+
+  @font-face {
+    font-family: 'Raleway-SemiBold';
+    font-weight: 600;
+    src: url('../fonts/Raleway-SemiBold.ttf') format('ttf');
+  }
+  
+  /*------------------------------------*\
+  #Variables
+  \*------------------------------------*/
+  
+  :root {
+    /* colors */
+    --global-color-alpha: #2E2F8B;
+    --global-color-beta: #F8B000; 
+  
+    --global-color-neutral-x-light: #ffffff;
+    --global-color-neutral-light: #F3F3F6;
+    --global-color-neutral: #DFDFDF;
+    --global-color-neutral-dark: #222222;
+    --global-color-neutral-x-dark: #1F1F1F;
+
+    --global-backgroundcolor-dark: var(--global-color-neutral-light);
+    --global-backgroundcolor-light: var(--global-color-neutral-x-light);
+    /* border  */
+    --global-borderRadius: 8px;
+    --global-borderWidth: 1px;
+  
+    /* transitions */
+    --global-transitionTiming-alpha: 0.1s ease-out;
+  
+    /* Baseline settings */
+    --global-baseline: 8px;
+    --global-whitespace: calc(var(--global-baseline) * 3); /* = 24px */
+  
+    --global-whitespace-xs: calc(var(--global-baseline) / 2); /* = 4px */
+    --global-whitespace-sm: calc(var(--global-baseline) * 1); /*  = 8px */
+    --global-whitespace-md: calc(var(--global-baseline) * 2); /*  = 16px */
+    --global-whitespace-lg: calc(var(--global-baseline) * 4); /*  = 32px */
+    --global-whitespace-xl: calc(var(--global-whitespace) * 2); /*  = 48px */
+    --global-whitespace-xxl: calc(var(--global-whitespace) * 3); /*  = 72px */
+  }
+  
+  /* @media (prefers-color-scheme: dark) {
+      :root{--global-input-backgroundColor: White;
+      --global-input-color: var(--global-color-neutral-xxxx-dark);
+      --global-input-borderColor: var(--global-color-neutral-xxx-light);
+      --global-input-hover-borderColor: var(--global-color-neutral-xx-light);
+      --global-input-focus-borderColor: var(--global-color-alpha);
+      --global-input-boxShadow: 0 0 0 3px var(--global-color-alpha-x-transparent);
+      } */
+ 
+      
+html {
+  font-size: 16px;
+  line-height: 1.5;
+  font-family: 'Raleway', Helvetica, arial, sans-serif;
+  color: var(--global-color-alpha);
+  background-color: var(--global-backgroundcolor-light);
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
 .o-container {
     max-width: 56em;
     width: 100%;
