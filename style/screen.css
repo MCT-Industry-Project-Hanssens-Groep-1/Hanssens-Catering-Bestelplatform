@@ -26,14 +26,19 @@
   
   :root {
     /* colors */
+    --global-color-alpha-light: #3738A6; 
     --global-color-alpha: #2E2F8B;
+    --global-color-alpha-dark: #262773;
+    --global-color-alpha-transparent: #3385ffbf;
+    --global-color-alpha-x-transparent: #3385ff4d;
     --global-color-beta: #F8B000; 
   
     --global-color-neutral-x-light: #ffffff;
     --global-color-neutral-light: #F3F3F6;
     --global-color-neutral: #DFDFDF;
-    --global-color-neutral-dark: #222222;
-    --global-color-neutral-x-dark: #1F1F1F;
+    --global-color-neutral-dark: #CBCBCB;
+    --global-color-neutral-x-dark: #222222;
+    --global-color-neutral-xx-dark: #1F1F1F;
 
     --global-backgroundcolor-dark: var(--global-color-neutral-light);
     --global-backgroundcolor-light: var(--global-color-neutral-x-light);
@@ -83,6 +88,139 @@ html {
   box-sizing: inherit;
 }
 
+
+/*------------------------------------*\
+#Elements
+\*------------------------------------*/
+
+/*
+Elements: Images
+---
+Default markup for images to make them responsive
+*/
+
+img {
+  max-width: 100%;
+  vertical-align: top;
+}
+
+/*
+    Elements: typography
+    ---
+    Default markup for typographic elements
+*/
+
+h1,
+h2,
+h3 {
+  font-weight: 700;
+}
+
+h1 {
+  font-size: 36px;
+  line-height: calc(var(--global-baseline) * 6);
+  margin: 0 0 var(--global-whitespace);
+}
+
+h2 {
+  font-size: 32px;
+  line-height: calc(var(--global-baseline) * 5);
+  margin: 0 0 var(--global-whitespace);
+}
+
+h3 {
+  font-size: 26px;
+  line-height: calc(var(--global-baseline) * 4);
+  margin: 0 0 var(--global-whitespace);
+}
+
+h4,
+h5,
+h6 {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: calc(var(--global-baseline) * 3);
+  margin: 0 0 var(--global-whitespace);
+}
+
+p,
+ol,
+ul,
+dl,
+table,
+address,
+figure {
+  margin: 0 0 var(--global-whitespace);
+}
+
+ul,
+ol {
+  padding-left: var(--global-whitespace);
+}
+
+li ul,
+li ol {
+  margin-bottom: 0;
+}
+
+blockquote {
+  font-style: normal;
+  font-size: 23px;
+  line-height: calc(var(--global-baseline) * 6);
+  margin: 0 0 var(--global-whitespace);
+}
+
+blockquote * {
+  font-size: inherit;
+  line-height: inherit;
+}
+
+figcaption {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: calc(var(--global-baseline) * 2);
+  margin-top: var(--global-whitespace-xxs);
+}
+
+hr {
+  border: 0;
+  height: var(--global-borderWidth);
+  background: LightGrey;
+  margin: 0 0 var(--global-whitespace);
+}
+
+a,
+a:visited {
+  transition: all var(--global-transitionTiming-alpha);
+  color: var(--global-color-alpha);
+  outline-color: var(--global-link-BoxShadowColor);
+  outline-width: medium;
+  outline-offset: 2px;
+}
+
+a:hover,
+a:focus {
+  color: var(--global-color-alpha);
+}
+
+a:active {
+  color: var(--global-color-alpha);
+}
+
+label,
+input {
+  display: block;
+}
+
+input::placeholder {
+  color: var(--global-color-neutral-x-light);
+}
+
+/*------------------------------------*\
+#OBJECTS
+\*------------------------------------*/
+
+
 .o-container {
     max-width: 56em;
     width: 100%;
@@ -98,3 +236,313 @@ html {
     align-items: center;
     min-height: 100vh;
   }
+
+  
+/*
+    Object: Button reset
+    ---
+    Small button reset object
+*/
+
+.o-button-reset {
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  overflow: visible;
+  background: transparent;
+
+  /* inherit font & color from ancestor */
+  color: inherit;
+  font: inherit;
+
+  /* Normalize `line-height`. Cannot be changed from `normal` in Firefox 4+. */
+  line-height: normal;
+
+  /* Corrects font smoothing for webkit */
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+
+  /* Corrects inability to style clickable `input` types in iOS */
+  -webkit-appearance: none;
+}
+
+/*
+    Object: Hide accessible
+    ---
+    Accessibly hide any element
+*/
+
+.o-hide-accessible {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/*------------------------------------*\
+#COMPONENTS
+\*------------------------------------*/
+
+/*
+    Component: Logo
+    ---
+    Website main logo
+*/
+
+.c-logo {
+  height: var(--global-whitespace);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--global-whitespace-lg);
+}
+
+
+/*
+    Component: Forms
+    ---
+    Everything form related here
+*/
+
+.c-form-field--option {
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  -ms-align-items: center;
+  align-items: center;
+}
+
+/*
+    Component: Input
+    ---
+    Class to put on all input="text" like form inputs
+*/
+
+.c-input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  border: var(--global-borderWidth) solid var(var--global-color-neutral);
+  border-radius: var(--global-borderRadius);
+  color: var(--global-color-neutral-x-dark);
+  background-color: var(--global-color-neutral-x-light);
+  font-family: inherit;
+  font-size: 16px;
+  line-height: calc(var(--global-baseline) * 3);
+  padding: calc(var(--global-baseline) * 1.5 - var(--global-borderWidth))
+    var(--global-whitespace-md);
+  outline: none;
+  transition: border var(--global-transition-timing-alpha);
+}
+
+.c-input:hover {
+  border-color: var(--global-color-neutral-x-dark);
+}
+
+.c-input:focus,
+.c-input:active {
+  border-color: var(--global-color-alpha);
+}
+
+/* option input for checkboxes and radio buttons */
+
+.c-option {
+  margin-right: var(--global-whitespace-sm);
+}
+
+.c-option--hidden:checked + .c-custom-option {
+    
+      
+    
+}
+
+.c-option--hidden:checked + .c-custom-option .c-custom-option__fake-input--checkbox .c-custom-option__symbol {
+    width: 10px;
+    height: 10px;
+    fill: #2E2F8B ;    
+  }
+
+  .c-custom-option{
+    display: flex;
+    align-items: flex-start;
+  }
+.c-option--hidden + .c-custom-option .c-custom-option__fake-input{
+    display: flex;
+    width: 16px;
+    height: 16px;
+    border: 1px solid var(--global-color-neutral-x-light);
+    margin-right: 8px;
+  }
+
+  
+.c-option--hidden + .c-custom-option .c-custom-option__fake-input--radio {
+    
+    border-radius: 100%;
+}
+
+.c-option--hidden + .c-custom-option .c-custom-option__fake-input--checkbox {
+    
+    border-radius: 3px;
+  
+}
+/*
+    Component: Label
+    ---
+    Class to put on all form labels
+*/
+
+.c-label {
+  margin-bottom: 0;
+  font-size: 14px;
+  padding-bottom: var(--global-whitespace-xs);
+  line-height: calc(var(--global-baseline) * 2);
+}
+
+.c-label--option {
+  padding-bottom: 0;
+}
+
+/*
+    Component: Button
+    ---
+    Class to put on form buttons or
+*/
+
+.c-button {
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: var(--global-borderRadius);
+  background-color: var(--global-color-alpha);
+  color: #fff;
+  padding: calc(var(--global-baseline) * 1.5 - var(--global-borderWidth))
+    var(--global-whitespace-md);
+  line-height: calc(var(--global-baseline) * 3);
+  width: 100%;
+  outline: none;
+  transition: all var(--global-transition-timing-alpha);
+}
+
+.c-button:hover {
+  background-color: var(--global-color-alpha-light);
+}
+
+.c-button:focus {
+  box-shadow: 0 0 0 3px var(--global-color-alpha-x-transparent);
+}
+
+.c-button:active {
+  background-color: var(--global-color-alpha-dark);
+  box-shadow: none;
+}
+
+
+/*------------------------------------*\
+#UTILITIES
+\*------------------------------------*/
+
+/*
+    Utilities: color
+    ---
+    Utility classes to put specific colors onto elements
+*/
+
+.u-color-neutral {
+  color: var(--global-color-neutral);
+}
+
+.u-color-neutral-dark {
+  color: var(--global-color-neutral-dark);
+}
+
+/*
+    Utilities: spacing
+    ---
+    Utility classes to put specific margins and paddings onto elements
+*/
+
+.u-pt-clear {
+  padding-top: 0 !important;
+}
+
+.u-mb-clear {
+  margin-bottom: 0 !important;
+}
+
+.u-mb-xs {
+  margin-bottom: var(--global-whitespace-xs) !important;
+}
+
+.u-mb-sm {
+  margin-bottom: var(--global-whitespace-sm) !important;
+}
+
+.u-mb-md {
+  margin-bottom: var(--global-whitespace-md) !important;
+}
+
+.u-mb-lg {
+  margin-bottom: var(--global-whitespace-lg) !important;
+}
+
+.u-mb-xl {
+  margin-bottom: var(--global-whitespace-xl) !important;
+}
+
+.u-mb-xl {
+  margin-bottom: var(--global-whitespace-xl) !important;
+}
+
+/*
+    Utilities: max-width
+    ---
+    Utility classes to put specific max widths onto elements
+*/
+
+.u-max-width-xs {
+  max-width: 27em !important;
+}
+
+.u-max-width-sm {
+  max-width: 39em !important;
+}
+
+.u-max-width-md {
+  max-width: 50em !important;
+}
+
+.u-max-width-lg {
+  max-width: 63.5em !important;
+}
+
+.u-max-width-none {
+  max-width: none !important;
+}
+
+/*
+    Utilities: align
+    ---
+    Utility classes align text or components
+*/
+
+.u-align-text-center {
+  text-align: center;
+}
+
+.u-align-center {
+  margin: 0 auto;
+}
+
+/*
+    Utilities: text
+    Utility classes to create smaller or bigger test
+*/
+
+.u-text-sm {
+  font-size: 14px;
+}
