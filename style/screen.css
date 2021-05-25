@@ -83,18 +83,29 @@ html {
   box-sizing: inherit;
 }
 
-.o-container {
-    max-width: 56em;
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
 .c-login {
-    display: grid;
-    height: 100vh;
-    grid-template-columns: auto auto;
+    display: flex;
+  }
+
+.c-login__item {
+    width: 50%;
     display: flex;
     align-items: center;
     min-height: 100vh;
-  }
+    justify-content: center;
+}
+
+.c-login__background {
+    background: #F3F3F6;
+}
+
+@media (max-width: 1500px) {
+    .c-login {
+        display: unset;
+    }
+
+    .c-login__item {
+        width: 100%;
+        min-height: 50vh;
+    }
+}
