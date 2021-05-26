@@ -37,8 +37,9 @@
     --global-color-neutral-light: #F3F3F6;
     --global-color-neutral: #DFDFDF;
     --global-color-neutral-dark: #CBCBCB;
-    --global-color-neutral-x-dark: #222222;
-    --global-color-neutral-xx-dark: #1F1F1F;
+    --global-color-neutral-x-dark: #b1b1b1;
+    --global-color-neutral-xx-dark: #222222;
+    --global-color-neutral-xxx-dark: #1F1F1F;
 
     --global-backgroundcolor-dark: var(--global-color-neutral-light);
     --global-backgroundcolor-light: var(--global-color-neutral-x-light);
@@ -244,6 +245,18 @@ input::placeholder {
     background: #F3F3F6;
 }
 
+
+/*
+    Objects: List
+    ---
+    Small reusable object to remove default list styling from lists
+*/
+
+.o-list {
+  list-style: none;
+  padding: 0;
+}
+
   
 /*
     Object: Button reset
@@ -328,6 +341,11 @@ input::placeholder {
     margin-bottom: 120px;
 }
 
+.c-form-field--option {
+  display: flex;
+  align-items: center;
+}
+
 /*
     Component: Input
     ---
@@ -341,7 +359,7 @@ input::placeholder {
   width: 100%;
   border: var(--global-borderWidth) solid var(--global-color-neutral);
   border-radius: var(--global-borderRadius);
-  color: var(--global-color-neutral-x-dark);
+  color: var(--global-color-neutral-xx-dark);
   background-color: var(--global-color-neutral-x-light);
   font-family: inherit;
   font-size: 16px;
@@ -364,45 +382,6 @@ input::placeholder {
 
 /* option input for checkboxes and radio buttons */
 
-.c-option {
-  margin-right: var(--global-whitespace-sm);
-}
-
-.c-option--hidden:checked + .c-custom-option {
-    
-      
-    
-}
-
-.c-option--hidden:checked + .c-custom-option .c-custom-option__fake-input--checkbox .c-custom-option__symbol {
-    width: 10px;
-    height: 10px;
-    fill: #2E2F8B ;    
-  }
-
-  .c-custom-option{
-    display: flex;
-    align-items: flex-start;
-  }
-.c-option--hidden + .c-custom-option .c-custom-option__fake-input{
-    display: flex;
-    width: 16px;
-    height: 16px;
-    border: 1px solid var(--global-color-neutral-x-light);
-    margin-right: 8px;
-  }
-
-  
-.c-option--hidden + .c-custom-option .c-custom-option__fake-input--radio {
-    
-    border-radius: 100%;
-}
-
-.c-option--hidden + .c-custom-option .c-custom-option__fake-input--checkbox {
-    
-    border-radius: 3px;
-  
-}
 /*
     Component: Label
     ---
@@ -458,6 +437,118 @@ input::placeholder {
   box-shadow: none;
 }
 
+
+/*
+    Component: Option list
+*/
+
+.c-option-list {
+  margin-bottom: var(--global-whitespace);
+}
+
+.c-option-list__item {
+  margin-bottom: calc(var(--global-whitespace) / 2);
+}
+
+/*
+    Custom option
+    ---
+    Custom checkboxes
+*/
+
+/* Hide the actual input with the class .o-hide-accessible */
+
+.c-custom-option {
+  --custom-option__symbol-Fill: var(--global-color-alpha);
+  display: flex;
+  align-items: center;
+}
+
+.c-custom-option__fake-input {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--global-whitespace-md);
+  height: var(--global-whitespace-md);
+  margin-right: var(--global-whitespace-sm);
+  border: var(--global-borderWidth) solid
+    var(--custom-option-borderColor, var(--global-input-borderColor));
+  background: var(--global-color-neutral-x-light);
+  box-shadow: var(--custom-option-boxShadow, 0);
+  transition: border var(--global-transitionTiming-alpha),
+    box-shadow var(--global-transitionTiming-alpha);
+}
+
+.c-custom-option__fake-input--checkbox {
+  border-radius: var(--global-borderRadius);
+}
+
+
+.c-custom-option__symbol {
+  display: block;
+  opacity: 0; /* Hide the symbol initially */
+  transform: scale(0.5);
+  transition: transform var(--global-transitionTiming-alpha),
+    opacity var(--global-transitionTiming-alpha);
+}
+
+.c-custom-option__fake-input--checkbox .c-custom-option__symbol {
+  width: 10px;
+  height: 10px;
+  fill: var(--custom-option__symbol-Fill);
+}
+
+.c-option--hidden:checked + .c-custom-option .c-custom-option__symbol {
+  opacity: 1; /* Show the symbol when the invisible checkbox/radio button is checked */
+  transform: scale(1);
+}
+
+.c-option {
+  margin-right: var(--global-whitespace-sm);
+}
+
+.c-option--hidden:checked + .c-custom-option .c-custom-option__fake-input--checkbox .c-custom-option__symbol {
+    width: 11px;
+    height: 11px;
+    fill: white ;    
+  }
+
+.c-option--hidden:checked + .c-custom-option .c-custom-option__fake-input--checkbox  {
+    background-color: var(--global-color-alpha);   
+  }
+
+.c-custom-option{
+    display: flex;
+    align-items: flex-start;
+  }
+
+.c-option--hidden + .c-custom-option .c-custom-option__fake-input{
+    display: flex;
+    width: 16px;
+    height: 16px;
+    border: 1px solid var(--global-color-alpha);
+    margin-right: 8px;
+  }
+
+  .c-option--hidden:hover + .c-custom-option .c-custom-option__fake-input{
+    border: 1px solid var(--global-color-beta);
+  }
+
+  .c-option--hidden:checked:hover + .c-custom-option .c-custom-option__fake-input--checkbox{
+    background-color: var(--global-color-beta);
+  }
+
+  
+.c-option--hidden + .c-custom-option .c-custom-option__fake-input--radio {
+    
+    border-radius: 100%;
+}
+
+.c-option--hidden + .c-custom-option .c-custom-option__fake-input--checkbox {
+    
+    border-radius: 3px;
+  
+}
 /*
     Component: Error
     ---
