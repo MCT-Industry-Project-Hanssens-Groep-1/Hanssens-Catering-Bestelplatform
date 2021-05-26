@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hanssens Catering - Login</title>
+
+    <link rel="stylesheet" href="style/normalize.css">
+    <link rel="stylesheet" href="style/screen.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js"></script>
+
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyBdUbMGYO_xd0GfKlS1okuTAistnWoMsxA",
+            authDomain: "hanssens-catering-project.firebaseapp.com",
+            projectId: "hanssens-catering-project",
+            storageBucket: "hanssens-catering-project.appspot.com",
+            messagingSenderId: "152936813269",
+            appId: "1:152936813269:web:35b11bceae2f01c291c85c",
+            measurementId: "G-SR3RLLW4CY"
+        };
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+    </script>
+</head>
+<body>
+    <section class="c-instellingen">
+            <div class="c-sidebar">
+                <div class="c-sidebar-back">
+                    <a href="#"><i class="material-icons">arrow_back</i>Ga terug</a>
+                </div>
+                <img class="c-sidebar-logo" src="src/Logo.png" alt="Hanssens Catering Logo">
+              <ul>
+                <li class="active">
+                    <a href="profielen.html"><i class="material-icons">account_circle</i>Profielen</a>
+                </li>
+                <li>
+                    <a href="#"><i class="material-icons">language</i>Taalinstellingen</a>
+                </li>
+                <li>
+                    <a href="#"><i class="material-icons">password</i>Wachtwoord wijzigen</a>
+                </li>
+                <li>
+                    <a href="management.html"><i class="material-icons">logout</i>Uitloggen</a>
+                </li>
+              </ul>
+            </div>
+            <div class="c-profielen">
+                <div class="c-profielen-container">
+                    <div class="c-profielen-title">
+                        <h1>Profielen</h1>
+                        <i class="material-icons">add</i>
+                    </div>
+                    <div class="c-profielen-list">
+                        <div class="c-profielen-subtitle">
+                            <h2>John</h2>
+                            <i class="material-icons">edit</i>
+                        </div>
+                        <div class="c-profielen-voorkeuren">
+                            <p>Voorkeuren: Vegetarisch</p>
+                            <p>School: Howest Kortrijk Weide</p>
+                            <p>Leerjaar: 4a</p>
+                        </div>
+                        <div class="c-profielen-subtitle">
+                            <h2>John</h2>
+                            <i class="material-icons">edit</i>
+                        </div>
+                        <div class="c-profielen-voorkeuren">
+                            <p>Voorkeuren: Vegetarisch</p>
+                            <p>School: Howest Kortrijk Weide</p>
+                            <p>Leerjaar: 4a</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    <script src="script/profielen.js"></script>
+</body>
+</html>

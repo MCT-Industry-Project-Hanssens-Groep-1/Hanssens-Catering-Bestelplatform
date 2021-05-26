@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hanssens Catering - Login</title>
 
+    <link rel="stylesheet" href="style/normalize.css">
+    <link rel="stylesheet" href="style/screen.css">
+
     <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
 
@@ -24,12 +27,39 @@
         firebase.analytics();
     </script>
 
-    <script src="script/signup.js"></script>
 </head>
 <body>
-    <input placeholder="E-mail" type="text" id="emailField">
-    <input placeholder="Password" type="password" id="passwordField">
-    <button onclick="signup()">Sign up</button>
-    <p>Already have an account? <a href="login.html">Login</a></p>
+    <section class="c-login">
+        <div class="c-login__item">
+            <div class="c-slogan">
+                <img class="c-slogan-logo" src="src/Logo.png" alt="Hanssens Catering Logo">
+                <p class="c-slogan-title">Wie slim is, eet gezond!</p>
+                <p class="c-slogan-subtitle">LEKKERE EN GEVARIEERDE MAALTIJDEN, DAGVERS VOOR U BEREID!</p>
+            </div>
+        </div>
+        <div class="c-login__item c-login__background">
+            <div>
+                <h1 class="c-form-title">Maak je account</h1>
+                <div class="c-form">
+                        <div>
+                            <label class="c-label">E-mailadres:</label>
+                            <input class="c-input" type="text" id="emailField">
+                        </div>
+                        <div>
+                            <label class="c-label">Wachtwoord: </label>
+                            <input class="c-input" type="password" id="passwordField">
+                        </div>
+                        <button class="o-button-reset c-button" onclick="signup()">REGISTREREN</button>
+                        <p class="c-label-account">Al een account? <a href="login.html">Inloggen</a></p>
+
+                        <div class="js-error c-error">
+                            Something went wrong!
+                        </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <script src="script/signup.js"></script>
 </body>
 </html>

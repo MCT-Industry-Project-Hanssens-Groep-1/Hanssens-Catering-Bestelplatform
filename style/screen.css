@@ -228,35 +228,6 @@ input::placeholder {
     margin-left: auto;
     margin-right: auto;
 }
-
-.c-login {
-    display: flex;
-  }
-
-.c-login__item {
-    width: 50%;
-    display: flex;
-    align-items: center;
-    min-height: 100vh;
-    justify-content: center;
-}
-
-.c-login__background {
-    background: #F3F3F6;
-}
-
-
-/*
-    Objects: List
-    ---
-    Small reusable object to remove default list styling from lists
-*/
-
-.o-list {
-  list-style: none;
-  padding: 0;
-}
-
   
 /*
     Object: Button reset
@@ -330,12 +301,13 @@ input::placeholder {
 */
 
 .c-form {
-    width: 60%;
+    width: 25em;
     margin: auto;
     margin-top: 48;
 }
 
 .c-form-title {
+    text-align: center;
     font-size: 32px;
     font-weight: 400;
     margin-bottom: 120px;
@@ -560,6 +532,27 @@ input::placeholder {
     color: #cc0000;
 }
 
+/*
+    Component: Login
+    ---
+    Login page components
+*/
+
+.c-login {
+  display: flex;
+}
+
+.c-login__item {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  justify-content: center;
+}
+
+.c-login__background {
+  background: #F3F3F6;
+}
 
 /*
     Component: Slogan
@@ -589,6 +582,142 @@ input::placeholder {
     font-size: 24px;
     max-width: 645px;
 }
+
+
+/*
+    Component: Instellingen
+    ---
+    Instellingen page components
+*/
+
+.c-instellingen {
+  display: flex;
+  position: relative;
+  height: 100vh;
+}
+
+.c-instellingen .c-sidebar {
+  position: fixed;
+  width: 24em;
+  height: 100%;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+}
+
+.c-instellingen .c-sidebar .c-sidebar-logo {
+  width: 300px;
+  display: flex;
+  margin: auto;
+  margin-bottom: 70px;
+  margin-top: 70px;
+}
+
+.c-instellingen .c-sidebar .c-sidebar-back {
+  margin: 48px;
+}
+
+.c-instellingen .c-sidebar ul {
+  padding-left: 48px;
+}
+
+.c-instellingen .c-sidebar ul li {
+  padding: 16px;
+  position: relative;
+  list-style-type: none;
+}
+
+.c-instellingen .c-sidebar ul li a {
+  color: var(--global-color-alpha);
+  font-weight: 600;
+  display: block;
+  text-decoration: none;
+}
+
+.c-instellingen .c-sidebar .c-sidebar-back a {
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.c-instellingen .c-sidebar .material-icons {
+  width: 36px;
+  color: var(--global-color-beta);
+  vertical-align: middle;
+}
+
+.c-instellingen .c-sidebar ul li a .material-icons {
+  width: 36px;
+  color: var(--global-color-beta);
+  vertical-align: middle;
+}
+
+.c-instellingen .c-sidebar ul li:hover,
+.c-instellingen .c-sidebar ul li.active {
+}
+
+.c-instellingen .c-sidebar ul li a:hover {
+}
+
+/*
+    Component: Instellingen - Profielen
+    ---
+    Instellingen - Profielen page components
+*/
+
+.c-instellingen .c-profielen {
+  width: 100%;
+  margin-left: 24em;
+  background: #F3F3F6;
+  box-sizing: border-box;
+}
+
+.c-instellingen .c-profielen .c-profielen-container {
+  margin: 70px;
+  width: calc(100% - 9em);
+}
+
+.c-instellingen .c-profielen .c-profielen-title {
+  display: flex;
+  justify-content: space-between;
+  color: var(--global-color-neutral-x-dark);
+}
+
+.c-instellingen .c-profielen .c-profielen-subtitle {
+  display: flex;
+  justify-content: space-between;
+}
+
+.c-instellingen .c-profielen .c-profielen-title h1 {
+  font-size: 24px;
+}
+
+.c-instellingen .c-profielen .c-profielen-list h2 {
+  font-size: 16px;
+}
+
+.c-instellingen .c-profielen .c-profielen-title .material-icons {
+  font-size: 32px;
+  margin: 8px;
+}
+
+.c-instellingen .c-profielen .c-profielen-subtitle .material-icons {
+  font-size: 24px;
+  margin: 12px;
+  color: var(--global-color-beta);
+}
+
+.c-instellingen .c-profielen .c-profielen-list {
+  margin-left: 32px;
+  padding-bottom: 16px;
+}
+
+.c-instellingen .c-profielen .c-profielen-list .c-profielen-voorkeuren {
+  margin-bottom: 48px;
+}
+
+.c-instellingen .c-profielen .c-profielen-list .c-profielen-voorkeuren p {
+  margin: 0;
+  margin-left: 24px;
+}
+
 
 
 /*------------------------------------*\
