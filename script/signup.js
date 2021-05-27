@@ -11,7 +11,13 @@ signup = () => {
             var errorCode = error.code;
             var errorMessage = error.message;
             console.log(errorMessage);
-            errorText.innerText = `${errorMessage}`
+            if (errorCode == 'auth/invalid-email') {
+                errorText.innerText = "Ongeldig e-mailadres!"
+              } else if (errorCode == 'auth/email-already-in-use') {
+                errorText.innerText = "Gebruiker bestaat al!"
+              } else if (errorCode == 'auth/weak-password') {
+                errorText.innerText = "Wachtwoord moet minimum 6 karakters bevatten!"
+              }
             errorText.style.opacity = "100";
         });
 }
