@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hanssens Catering - Login</title>
 
-    <link rel="stylesheet" href="style/normalize.css">
-    <link rel="stylesheet" href="style/screen.css">
+    <link rel="stylesheet" href="../../style/normalize.css">
+    <link rel="stylesheet" href="../../style/screen.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
 
     <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
@@ -27,6 +27,8 @@
         firebase.initializeApp(firebaseConfig);
         firebase.analytics();
     </script>
+
+    <script src="../../script/checkLoggedIn.js"></script>
 </head>
 <body>
     <section class="c-instellingen">
@@ -34,10 +36,10 @@
                 <div class="c-sidebar-back">
                     <a href="#"><i class="material-icons">arrow_back</i>Ga terug</a>
                 </div>
-                <img class="c-sidebar-logo" src="src/Logo.png" alt="Hanssens Catering Logo">
+                <img class="c-sidebar-logo" src="../../src/Logo.png" alt="Hanssens Catering Logo">
               <ul>
                 <li class="active">
-                    <a href="profielen.html"><i class="material-icons">account_circle</i>Profielen</a>
+                    <a href="/instellingen/profielen"><i class="material-icons">account_circle</i>Profielen</a>
                 </li>
                 <li>
                     <a href="#"><i class="material-icons">language</i>Taalinstellingen</a>
@@ -46,7 +48,7 @@
                     <a href="#"><i class="material-icons">password</i>Wachtwoord wijzigen</a>
                 </li>
                 <li>
-                    <a href="management.html"><i class="material-icons">logout</i>Uitloggen</a>
+                    <a href="#"><i class="material-icons">logout</i>Uitloggen</a>
                 </li>
               </ul>
             </div>
@@ -80,6 +82,6 @@
             </div>
     </section>
 
-    <script src="script/profielen.js"></script>
+    <script src="../../script/profielen.js"></script>
 </body>
 </html>
