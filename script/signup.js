@@ -1,18 +1,18 @@
 signup = () => {
     var userEmail = document.getElementById("emailField").value;
     var userPassword = document.getElementById("passwordField").value;
-    var userNaam = document.getElementById("naamField").value;
-    var userVoornaam = document.getElementById("voornaamField").value;
+    var userNaam = (document.getElementById("naamField").value).toLowerCase();
+    var userVoornaam = (document.getElementById("voornaamField").value).toLowerCase();
     var errorText = document.querySelector('.js-error');
     
     if(!userNaam == "" && !userVoornaam == "") {
-      console.log("yes");
       firebase.auth().createUserWithEmailAndPassword(userEmail, userPassword)
         .then((userCredential) => {
             var user = userCredential.user;
             user.updateProfile({
               displayName: `${userNaam.charAt(0).toUpperCase() + userNaam.slice(1)}` + " " + `${userVoornaam.charAt(0).toUpperCase() + userVoornaam.slice(1)}`,
             })
+            window.location.replace("/")
         })
         .catch((error) => {
             var errorCode = error.code;
@@ -35,9 +35,5 @@ signup = () => {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
-          window.location.replace("/")
-        }
-      });
+    firebase.auth().signOut();
 });

@@ -677,7 +677,7 @@ input::placeholder {
 .c-instellingen .c-profielen .c-profielen-title {
   display: flex;
   justify-content: space-between;
-  color: var(--global-color-neutral-x-dark);
+  color: var(--global-color-neutral-xx-dark);
 }
 
 .c-instellingen .c-profielen .c-profielen-subtitle {
@@ -696,12 +696,14 @@ input::placeholder {
 .c-instellingen .c-profielen .c-profielen-title .material-icons {
   font-size: 32px;
   margin: 8px;
+  cursor: pointer;
 }
 
 .c-instellingen .c-profielen .c-profielen-subtitle .material-icons {
   font-size: 24px;
   margin: 12px;
   color: var(--global-color-beta);
+  cursor: pointer;
 }
 
 .c-instellingen .c-profielen .c-profielen-list {
@@ -718,6 +720,55 @@ input::placeholder {
   margin-left: 24px;
 }
 
+.c-profielen-modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 50px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.c-profielen-modal-content {
+  background-color: #fefefe;
+  border-radius: 30px;
+  margin: auto;
+  padding: 48px;
+  border: 1px solid #888;
+  width: 90%;
+  max-width: 36em;
+}
+
+.c-profielen-modal-content h1 {
+  font-size: 24px;
+}
+
+.c-profielen-modal-content .c-input {
+  margin-bottom: 24px;
+}
+
+.c-profielen-modal-content .c-button {
+  margin-top: 24px;
+}
+
+.c-profielen-modal-close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.c-profielen-modal-close:hover,
+.c-profielen-modal-close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
 
 
 /*------------------------------------*\

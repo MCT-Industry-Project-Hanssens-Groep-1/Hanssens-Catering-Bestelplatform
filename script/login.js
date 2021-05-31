@@ -7,8 +7,7 @@ login = () => {
     .then((userCredential) => {
       // Signed in
       var user = userCredential.user;
-      // ...
-      console.log(user);
+      window.location.replace("/")
     })
     .catch((error) => {
       var errorCode = error.code;
@@ -28,9 +27,5 @@ login = () => {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
-          window.location.replace("/")
-        }
-      });
+    firebase.auth().signOut();
 });

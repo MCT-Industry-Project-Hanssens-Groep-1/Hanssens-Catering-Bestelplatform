@@ -11,6 +11,7 @@
 
     <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-firestore.js"></script>
 
     <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js"></script>
 
@@ -27,8 +28,6 @@
         firebase.initializeApp(firebaseConfig);
         firebase.analytics();
     </script>
-
-    <script src="../../script/checkLoggedIn.js"></script>
 </head>
 <body>
     <section class="c-instellingen">
@@ -39,7 +38,7 @@
                 <img class="c-sidebar-logo" src="../../src/Logo.png" alt="Hanssens Catering Logo">
               <ul>
                 <li class="active">
-                    <a href="/instellingen/profielen"><i class="material-icons">account_circle</i>Profielen</a>
+                    <a href="/instellingen/kinderen"><i class="material-icons">account_circle</i>Kinderen</a>
                 </li>
                 <li>
                     <a href="#"><i class="material-icons">language</i>Taalinstellingen</a>
@@ -55,8 +54,8 @@
             <div class="c-profielen">
                 <div class="c-profielen-container">
                     <div class="c-profielen-title">
-                        <h1>Profielen</h1>
-                        <i class="material-icons">add</i>
+                        <h1>Jouw kinderen</h1>
+                        <i class="material-icons" onclick="openModal()">add</i>
                     </div>
                     <div class="c-profielen-list">
                         <div class="c-profielen-subtitle">
@@ -80,8 +79,42 @@
                     </div>
                 </div>
             </div>
+            <div id="profielen-modal" class="c-profielen-modal">
+
+                <!-- Modal content -->
+                <div class="c-profielen-modal-content">
+                  <span class="c-profielen-modal-close" onclick="closeModal()">&times;</span>
+                  <h1>Voeg jouw kind toe</h1>
+                  <div>
+                    <label class="c-label">Naam:</label>
+                    <input class="c-input" type="text" id="emailField">
+                  </div>
+                  <div>
+                    <label class="c-label">Voornaam:</label>
+                    <input class="c-input" type="text" id="emailField">
+                  </div>
+                  <div>
+                    <label class="c-label">E-mailadres:</label>
+                    <input class="c-input" type="text" id="emailField">
+                  </div>
+                  <div>
+                    <label class="c-label">Rijksregisternummer:</label>
+                    <input class="c-input" type="text" id="emailField">
+                  </div>
+                  <div>
+                    <label class="c-label">School:</label>
+                    <input class="c-input" type="text" id="emailField">
+                  </div>
+                  <div>
+                    <label class="c-label">Leerjaar:</label>
+                    <input class="c-input" type="text" id="emailField">
+                  </div>
+                <button class="o-button-reset c-button" onclick="addProfiel()">OPSLAAN</button>
+                </div>
+              
+              </div>
     </section>
 
-    <script src="../../script/profielen.js"></script>
+    <script src="../../script/kinderen.js"></script>
 </body>
 </html>
