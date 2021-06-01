@@ -918,6 +918,11 @@ display: grid;
   max-width: 36em;
 }
 
+.c-profielen-modal-content .c-label {
+  font-size: 14px;
+  font-weight: 400;
+}
+
 .c-profielen-modal-content h1 {
   font-size: 24px;
   margin-top: -16px;
