@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!user) {
             window.location.replace("/login")
         } else if (user) {
-            console.log(user.getIdToken());
+            console.log(user);
         }
       });
 });

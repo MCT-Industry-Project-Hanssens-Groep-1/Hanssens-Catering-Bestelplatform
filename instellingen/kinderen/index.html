@@ -33,7 +33,7 @@
     <section class="c-instellingen">
             <div class="c-sidebar">
                 <div class="c-sidebar-back">
-                    <a href="#"><i class="material-icons">arrow_back</i>Ga terug</a>
+                    <a href="/"><i class="material-icons">arrow_back</i>Ga terug</a>
                 </div>
                 <img class="c-sidebar-logo" src="../../src/Logo.png" alt="Hanssens Catering Logo">
               <ul>
@@ -57,8 +57,8 @@
                         <h1>Jouw kinderen</h1>
                         <i class="material-icons" onclick="openModal()">add</i>
                     </div>
-                    <div class="c-profielen-list">
-                        <div class="c-profielen-subtitle">
+                    <div class="js-kinderen c-profielen-list">
+                        <!-- <div class="c-profielen-subtitle">
                             <h2>John</h2>
                             <i class="material-icons">edit</i>
                         </div>
@@ -66,16 +66,7 @@
                             <p>Voorkeuren: Vegetarisch</p>
                             <p>School: Howest Kortrijk Weide</p>
                             <p>Leerjaar: 4a</p>
-                        </div>
-                        <div class="c-profielen-subtitle">
-                            <h2>John</h2>
-                            <i class="material-icons">edit</i>
-                        </div>
-                        <div class="c-profielen-voorkeuren">
-                            <p>Voorkeuren: Vegetarisch</p>
-                            <p>School: Howest Kortrijk Weide</p>
-                            <p>Leerjaar: 4a</p>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -87,31 +78,73 @@
                   <h1>Voeg jouw kind toe</h1>
                   <div>
                     <label class="c-label">Naam:</label>
-                    <input class="c-input" type="text" id="emailField">
+                    <input class="c-input" type="text" id="naamField">
                   </div>
                   <div>
                     <label class="c-label">Voornaam:</label>
-                    <input class="c-input" type="text" id="emailField">
+                    <input class="c-input" type="text" id="voornaamField">
                   </div>
-                  <div>
+                  <!-- <div>
                     <label class="c-label">E-mailadres:</label>
                     <input class="c-input" type="text" id="emailField">
-                  </div>
+                  </div> -->
                   <div>
                     <label class="c-label">Rijksregisternummer:</label>
-                    <input class="c-input" type="text" id="emailField">
+                    <input class="c-input" type="text" id="rijksregisterField">
                   </div>
                   <div>
                     <label class="c-label">School:</label>
-                    <input class="c-input" type="text" id="emailField">
+                    <div class="select-box">
+                      <div class="js-scholen options-container">
+                      </div>
+                      <div class="js-scholen-selected selected">Selecteer een school</div>
+                      <div class="js-scholen-search search-box">
+                        <input type="text" placeholder="Zoeken..">
+                      </div>
+                    </div>
                   </div>
                   <div>
                     <label class="c-label">Leerjaar:</label>
-                    <input class="c-input" type="text" id="emailField">
+                    <div class="select-box">
+                      <div class="js-leerjaar options-container">
+                        <div class="js-leerjaar-option option">
+                          <input type="radio" class="radio" id="R24A" name="leerjaar"/>
+                          <label for="kleuter">Kleuter</label>
+                        </div>
+                        <div class="js-leerjaar-option option">
+                          <input type="radio" class="radio" id="R24C" name="leerjaar"/>
+                          <label for="1e leerjaar">1e leerjaar</label>
+                        </div>
+                        <div class="js-leerjaar-option option">
+                          <input type="radio" class="radio" id="R24C" name="leerjaar"/>
+                          <label for="2e leerjaar">2e leerjaar</label>
+                        </div>
+                        <div class="js-leerjaar-option option">
+                          <input type="radio" class="radio" id="R24B" name="leerjaar"/>
+                          <label for="3e leerjaar">3e leerjaar</label>
+                        </div>
+                        <div class="js-leerjaar-option option">
+                          <input type="radio" class="radio" id="R24B" name="leerjaar"/>
+                          <label for="4e leerjaar">4e leerjaar</label>
+                        </div>
+                        <div class="js-leerjaar-option option">
+                          <input type="radio" class="radio" id="R24C" name="leerjaar"/>
+                          <label for="5e leerjaar">5e leerjaar</label>
+                        </div>
+                        <div class="js-leerjaar-option option">
+                          <input type="radio" class="radio" id="R24B" name="leerjaar"/>
+                          <label for="6e leerjaar">6e leerjaar</label>
+                        </div>
+                      </div>
+                      <div class="js-leerjaar-selected selected">Selecteer een leerjaar</div>
+                    </div>
+                  </div>
+                  <div class="js-voorkeuren">
+                  </div>
+                  <div class="js-error c-error">
+                    Something went wrong!
                   </div>
                 <button class="o-button-reset c-button" onclick="addProfiel()">OPSLAAN</button>
-                </div>
-              
               </div>
     </section>
 
