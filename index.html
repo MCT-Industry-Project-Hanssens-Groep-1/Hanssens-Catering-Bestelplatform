@@ -10,6 +10,9 @@
 
     <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js"></script>
 
+    <link rel="stylesheet" href="../style/normalize.css">
+    <link rel="stylesheet" href="../style/screen.css">
+
     <script>
         var firebaseConfig = {
             apiKey: "AIzaSyBdUbMGYO_xd0GfKlS1okuTAistnWoMsxA",
@@ -23,9 +26,182 @@
         firebase.initializeApp(firebaseConfig);
         firebase.analytics();
     </script>
+
 </head>
 <body>
-    <button onclick="logout()">Logout</button>
+    <header class="c-header">
+        <img class="c-logo" src="../src/Logo.png" alt="Hanssens Catering Logo">
+        <nav class="c-nav c-nav-list">
+
+            <div class="c-nav-list__item c-custom-select c-nav-list__item-text">
+                <select class="c-custom-select__input" name="select1" id="select1">
+                    <option value="volvo">Aaron</option>
+                    <option value="saab">Sander</option>
+                </select>
+                <svg class="c-custom-select__symbol" id="Arrow_dropdown" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path id="Path_5" data-name="Path 5" d="M0,0H24V24H0Z" fill="none"/>
+                    <path id="Path_6" data-name="Path 6" d="M7,10l5,5,5-5Z" fill="#dfdfdf"/>
+                </svg>                  
+            </div>
+
+            <div class="c-nav-list__item c-nav-week">
+                <a href="">
+                    <svg id="Arrow_left" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                        <path id="Path_11" data-name="Path 11" d="M0,0H32V32H0Z" fill="none"/>
+                        <path id="Path_12" data-name="Path 12" d="M15.41,7.41,14,6,8,12l6,6,1.41-1.41L10.83,12Z" transform="translate(3.858 4)" fill="#f8b000"/>
+                    </svg>              
+                </a>
+                <p class="u-mb-sm">Januari - Week 1</p>
+                <a href="">
+                    <svg id="Arrow_right" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                        <path id="Path_13" data-name="Path 13" d="M0,0H32V32H0Z" fill="none"/>
+                        <path id="Path_14" data-name="Path 14" d="M10,6,8.59,7.41,13.17,12,8.59,16.59,10,18l6-6Z" transform="translate(4.142 4)" fill="#f8b000"/>
+                    </svg>                           
+                </a>
+            </div>
+            <a class="c-nav-list__item c-nav-list__item-text" href="/instellingen/kinderen/">
+                <p>
+                    Instellingen
+                </p>
+                <svg class="c-nav-icon" id="Settings" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path id="Path_7" data-name="Path 7" d="M0,0H24V24H0Z" fill="none"/>
+                    <path id="Path_8" data-name="Path 8" d="M19.14,12.94A7.074,7.074,0,0,0,19.2,12a5.777,5.777,0,0,0-.07-.94l2.03-1.58a.491.491,0,0,0,.12-.61L19.36,5.55a.488.488,0,0,0-.59-.22l-2.39.96a7.064,7.064,0,0,0-1.62-.94L14.4,2.81a.484.484,0,0,0-.48-.41H10.08a.474.474,0,0,0-.47.41L9.25,5.35a7.22,7.22,0,0,0-1.62.94L5.24,5.33a.477.477,0,0,0-.59.22L2.74,8.87a.455.455,0,0,0,.12.61l2.03,1.58a5.563,5.563,0,0,0-.02,1.88L2.84,14.52a.491.491,0,0,0-.12.61l1.92,3.32a.488.488,0,0,0,.59.22l2.39-.96a7.064,7.064,0,0,0,1.62.94l.36,2.54a.492.492,0,0,0,.48.41h3.84a.466.466,0,0,0,.47-.41l.36-2.54a6.859,6.859,0,0,0,1.62-.94l2.39.96a.477.477,0,0,0,.59-.22l1.92-3.32a.463.463,0,0,0-.12-.61ZM12,15.6A3.6,3.6,0,1,1,15.6,12,3.611,3.611,0,0,1,12,15.6Z" fill="#f8b000"/>
+                </svg>                  
+            </a>
+            <a class="c-nav-list__item c-nav-list__item-text" onclick="logout()">
+                <p>
+                    Uitloggen
+                </p>
+                <svg class="c-nav-icon" id="Logout" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path id="Path_9" data-name="Path 9" d="M0,0H24V24H0Z" fill="none"/>
+                    <path id="Path_10" data-name="Path 10" d="M17,7,15.59,8.41,18.17,11H8v2H18.17l-2.58,2.58L17,17l5-5ZM4,5h8V3H4A2.006,2.006,0,0,0,2,5V19a2.006,2.006,0,0,0,2,2h8V19H4Z" fill="#f8b000"/>
+                </svg>                                 
+            </a>
+         </nav>
+    </header>
+    <main class="c-dashboard">
+        <div class="c-dashboard-item">
+            <div class="c-dashboard-item__day">
+                <p class="c-dashboard-item__day-text">Maandag</p>
+                <p class="c-dashboard-item__day-number ">30</p>
+            </div>
+            <div class="c-dashboard-item__content">
+                <div class="c-dashboard-item__content-option">
+                    <li class="c-form-field c-form-field--option c-option-list__item">
+                        <input class="o-hide-accessible c-option c-option--hidden" type="checkbox" id="checkbox1" checked>
+                        <label class="c-label c-label--option c-custom-option" for="checkbox1">
+                            <span class="c-custom-option__fake-input c-custom-option__fake-input--checkbox">
+                                <svg class="c-custom-option__symbol" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 6.75">
+                                    <path d="M4.75,9.5a1,1,0,0,1-.707-.293l-2.25-2.25A1,1,0,1,1,3.207,5.543L4.75,7.086,8.793,3.043a1,1,0,0,1,1.414,1.414l-4.75,4.75A1,1,0,0,1,4.75,9.5" transform="translate(-1.5 -2.75)"/>
+                                </svg>
+                            </span>
+                            Soep
+                        </label>
+                    </li>
+                    <p class="c-dashboard-text">Kippensoep</p>
+                </div>
+                <div class="c-dashboard-item__content-option">
+                    <li class="c-form-field c-form-field--option c-option-list__item">
+                        <input class="o-hide-accessible c-option c-option--hidden" type="checkbox" id="checkbox2" checked>
+                        <label class="c-label c-label--option c-custom-option" for="checkbox2">
+                            <span class="c-custom-option__fake-input c-custom-option__fake-input--checkbox">
+                                <svg class="c-custom-option__symbol" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 6.75">
+                                    <path d="M4.75,9.5a1,1,0,0,1-.707-.293l-2.25-2.25A1,1,0,1,1,3.207,5.543L4.75,7.086,8.793,3.043a1,1,0,0,1,1.414,1.414l-4.75,4.75A1,1,0,0,1,4.75,9.5" transform="translate(-1.5 -2.75)"/>
+                                </svg>
+                            </span>
+                            Maaltijd
+                        </label>
+                    </li>
+                    <p class="c-dashboard-text">Balletjes in tomatensaus<br>Wortelpuree</p>
+                </div>
+                <div class="c-dashboard-item__content-option">
+                    <li class="c-form-field c-form-field--option c-option-list__item">
+                        <input class="o-hide-accessible c-option c-option--hidden" type="checkbox" id="checkbox3" checked>
+                        <label class="c-label c-label--option c-custom-option" for="checkbox3">
+                            <span class="c-custom-option__fake-input c-custom-option__fake-input--checkbox">
+                                <svg class="c-custom-option__symbol" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 6.75">
+                                    <path d="M4.75,9.5a1,1,0,0,1-.707-.293l-2.25-2.25A1,1,0,1,1,3.207,5.543L4.75,7.086,8.793,3.043a1,1,0,0,1,1.414,1.414l-4.75,4.75A1,1,0,0,1,4.75,9.5" transform="translate(-1.5 -2.75)"/>
+                                </svg>
+                            </span>
+                            Naar huis
+                        </label>
+                    </li>
+                </div>
+                <div class="c-dashboard-item__content-button">
+                    <button class="o-button-reset c-button c-button-dashboard" onclick="">OPSLAAN</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="c-dashboard-item">
+            <div class="c-dashboard-item__day">
+                <p class="c-dashboard-item__day-text">Dinsdag</p>
+                <p class="c-dashboard-item__day-number ">31</p>
+            </div>
+            <div class="c-dashboard-item__content">
+                <div class="c-dashboard-item__content-option">
+                    <li class="c-form-field c-form-field--option c-option-list__item">
+                        <input class="o-hide-accessible c-option c-option--hidden" type="checkbox" id="checkbox4" checked>
+                        <label class="c-label c-label--option c-custom-option" for="checkbox4">
+                            <span class="c-custom-option__fake-input c-custom-option__fake-input--checkbox">
+                                <svg class="c-custom-option__symbol" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 6.75">
+                                    <path d="M4.75,9.5a1,1,0,0,1-.707-.293l-2.25-2.25A1,1,0,1,1,3.207,5.543L4.75,7.086,8.793,3.043a1,1,0,0,1,1.414,1.414l-4.75,4.75A1,1,0,0,1,4.75,9.5" transform="translate(-1.5 -2.75)"/>
+                                </svg>
+                            </span>
+                            Soep
+                        </label>
+                    </li>
+                    <p class="c-dashboard-text">Kippensoep</p>
+                </div>
+                <div class="c-dashboard-item__content-option">
+                    <li class="c-form-field c-form-field--option c-option-list__item">
+                        <input class="o-hide-accessible c-option c-option--hidden" type="checkbox" id="checkbox5" checked>
+                        <label class="c-label c-label--option c-custom-option" for="checkbox5">
+                            <span class="c-custom-option__fake-input c-custom-option__fake-input--checkbox">
+                                <svg class="c-custom-option__symbol" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 6.75">
+                                    <path d="M4.75,9.5a1,1,0,0,1-.707-.293l-2.25-2.25A1,1,0,1,1,3.207,5.543L4.75,7.086,8.793,3.043a1,1,0,0,1,1.414,1.414l-4.75,4.75A1,1,0,0,1,4.75,9.5" transform="translate(-1.5 -2.75)"/>
+                                </svg>
+                            </span>
+                            Maaltijd
+                        </label>
+                    </li>
+                    <p class="c-dashboard-text">Macaroni<br>Met hesp en kaassaus</p>
+                </div>
+                <div class="c-dashboard-item__content-option">
+                    <li class="c-form-field c-form-field--option c-option-list__item">
+                        <input class="o-hide-accessible c-option c-option--hidden" type="checkbox" id="checkbox6" checked>
+                        <label class="c-label c-label--option c-custom-option" for="checkbox6">
+                            <span class="c-custom-option__fake-input c-custom-option__fake-input--checkbox">
+                                <svg class="c-custom-option__symbol" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 6.75">
+                                    <path d="M4.75,9.5a1,1,0,0,1-.707-.293l-2.25-2.25A1,1,0,1,1,3.207,5.543L4.75,7.086,8.793,3.043a1,1,0,0,1,1.414,1.414l-4.75,4.75A1,1,0,0,1,4.75,9.5" transform="translate(-1.5 -2.75)"/>
+                                </svg>
+                            </span>
+                            Naar huis
+                        </label>
+                    </li>
+                </div>
+                <div class="c-dashboard-item__content-button">
+                    <button class="o-button-reset c-button c-button-dashboard" onclick="">OPSLAAN</button>
+                </div>
+            </div>
+        </div>
+        <div class="c-dashboard-item">
+            <div class="c-dashboard-item__day">
+
+            </div>
+        </div>
+        <div class="c-dashboard-item">
+            <div class="c-dashboard-item__day">
+
+            </div>
+        </div>
+        <div class="c-dashboard-item">
+            <div class="c-dashboard-item__day">
+
+            </div>
+        </div>
+    </main>
+
 
     <script src="script/index.js"></script>
 </body>
