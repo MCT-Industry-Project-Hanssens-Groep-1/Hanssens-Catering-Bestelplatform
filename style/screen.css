@@ -746,6 +746,7 @@ input::placeholder {
 
 .c-profielen-modal-content h1 {
   font-size: 24px;
+  margin-top: -16px;
 }
 
 .c-profielen-modal-content .c-input {
@@ -761,6 +762,8 @@ input::placeholder {
   float: right;
   font-size: 28px;
   font-weight: bold;
+  margin-top: -14px;
+
 }
 
 .c-profielen-modal-close:hover,
