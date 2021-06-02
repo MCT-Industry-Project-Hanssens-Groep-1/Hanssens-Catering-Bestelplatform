@@ -30,7 +30,7 @@ closeModal = () => {
     optionsContainerLeerjaar.classList.remove("active");
 }
 
-window.onmousedown = function(event) {
+window.onclick = function(event) {
     if (event.target == modal) {
       closeModal();
     }
@@ -146,12 +146,11 @@ getScholen = () => {
 }
 
 getKinderen = (user) => {
-  let htmlString = ""
   let kinderenHTML = document.querySelector('.js-kinderen');
   db.collection("kinderen")
   .where("ouders", "array-contains", `${user.uid}`)
-  .get()
-  .then((querySnapshot) => {
+  .onSnapshot((querySnapshot) => {
+    let htmlString = ""
     querySnapshot.forEach((doc) => {
       htmlString += `<div class="c-profielen-subtitle">
       <h2>${doc.data().naam}</h2>
