@@ -9,8 +9,9 @@ signup = async () => {
       firebase.auth().createUserWithEmailAndPassword(userEmail, userPassword)
         .then((userCredential) => {
             var user = userCredential.user;
+            var name = `${userNaam.charAt(0).toUpperCase() + userNaam.slice(1)}` + " " + `${userVoornaam.charAt(0).toUpperCase() + userVoornaam.slice(1)}`;
             user.updateProfile({
-              displayName: `${userNaam.charAt(0).toUpperCase() + userNaam.slice(1)}` + " " + `${userVoornaam.charAt(0).toUpperCase() + userVoornaam.slice(1)}`,
+              displayName: name,
             }).then(window.location.replace("/"));
         })
         .catch((error) => {

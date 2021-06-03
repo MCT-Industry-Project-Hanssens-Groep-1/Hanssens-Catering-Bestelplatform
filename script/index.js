@@ -165,6 +165,7 @@ showMenus = (data) => {
                     </li>
                 </div>
                 <div class="c-dashboard-item__button">
+                    <p>Bestellen mogelijk tot 19:00</p>
                     <button class="o-button-reset c-button c-button-dashboard" onclick="">OPSLAAN</button>
                 </div>
             </div>

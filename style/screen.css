@@ -688,6 +688,10 @@ input::placeholder {
   margin: 0;
 }
 
+.c-sidebar-selected {
+  background-image: linear-gradient(to right, rgba(255,255,255,0.1) 7px, rgba(255,255,255,0.1) 7px);
+}
+
 /*
     Component: nav
 */
