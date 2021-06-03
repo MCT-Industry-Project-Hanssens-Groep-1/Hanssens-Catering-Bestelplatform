@@ -157,9 +157,9 @@ getKinderen = (user) => {
       <i class="material-icons">edit</i>
   </div>
   <div class="c-profielen-voorkeuren">
-      <p>Voorkeur: ${doc.data().voorkeur}</p>
-      <p>School: ${doc.data().school}</p>
-      <p>Leerjaar: ${doc.data().leerjaar}</p>
+      <p><b>Voorkeur:</b> ${doc.data().voorkeur}</p>
+      <p><b>School:</b> ${doc.data().school}</p>
+      <p><b>Leerjaar:</b> ${doc.data().leerjaar}</p>
   </div>`
     })
     kinderenHTML.innerHTML = htmlString;

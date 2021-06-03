@@ -1,4 +1,4 @@
-signup = () => {
+signup = async () => {
     var userEmail = document.getElementById("emailField").value;
     var userPassword = document.getElementById("passwordField").value;
     var userNaam = (document.getElementById("naamField").value).toLowerCase();
@@ -11,8 +11,7 @@ signup = () => {
             var user = userCredential.user;
             user.updateProfile({
               displayName: `${userNaam.charAt(0).toUpperCase() + userNaam.slice(1)}` + " " + `${userVoornaam.charAt(0).toUpperCase() + userVoornaam.slice(1)}`,
-            })
-            window.location.replace("/")
+            }).then(window.location.replace("/"));
         })
         .catch((error) => {
             var errorCode = error.code;

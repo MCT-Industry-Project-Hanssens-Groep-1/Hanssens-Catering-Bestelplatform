@@ -30,27 +30,46 @@
     </script>
 </head>
 <body>
-    <section class="c-instellingen">
-            <div class="c-sidebar">
-                <div class="c-sidebar-back">
-                    <a href="/"><i class="material-icons">arrow_back</i>Ga terug</a>
-                </div>
-                <img class="c-sidebar-logo" src="../../src/Logo.png" alt="Hanssens Catering Logo">
-              <ul>
-                <li class="active">
-                    <a href="/instellingen/kinderen"><i class="material-icons">account_circle</i>Kinderen</a>
-                </li>
-                <li>
-                    <a href="#"><i class="material-icons">language</i>Taalinstellingen</a>
-                </li>
-                <li>
-                    <a href="#"><i class="material-icons">password</i>Wachtwoord wijzigen</a>
-                </li>
-                <li>
-                    <a href="#" onclick="logout()"><i class="material-icons">logout</i>Uitloggen</a>
-                </li>
-              </ul>
-            </div>
+    <div class="c-sidebar">
+      <nav class="c-sidebar-nav">
+          <ul class="c-sidebar-ul">
+              <div>
+                  <li>
+                      <a href="/">
+                        <i class="material-icons">home</i>
+                        <p>Hoofdpagina</p>
+                      </a>
+                  </li>
+                  <li>
+                      <a href="#">
+                          <i class="material-icons">account_circle</i>
+                          <p>Profiel</p>
+                      </a>
+                  </li>
+                  <li>
+                      <a href="/instellingen/kinderen/">
+                          <i class="material-icons">settings</i>
+                          <p>Settings</p>
+                      </a>
+                  </li>
+              </div>
+              <li>
+                  <a href="#" onclick="logout()">
+                      <i class="material-icons">logout</i>
+                      <p>Log out</p>
+                  </a>
+              </li>
+          </ul>
+      </nav>
+  </div>
+  <header class="c-header c-header-center">
+      <nav class="c-nav c-nav-list">
+          <div class="c-header__item">
+              <img class="c-logo" src="../../src/Logo.png" alt="Hanssens Catering Logo">
+          </div>
+      </nav>
+  </header>
+    <main class="c-instellingen">
             <div class="c-profielen">
                 <div class="c-profielen-container">
                     <div class="c-profielen-title">

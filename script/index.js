@@ -82,6 +82,8 @@ getKinderen = (user) => {
 getMenus = async (codeId, startDate, endDate) => {
     if(kindNaam != "Selecteer jouw kind") {
         let token = await userData.getIdToken();
+        document.querySelector('.c-dashboard').style.filter = "blur(2px)"
+        document.querySelector('.c-loader').style.display = "block";
         const data = await fetch(`https://hanssens-catering-soapapi.azurewebsites.net/api/menu/${codeId}/${startDate}/${endDate}/`, {
             method: 'GET',
             headers: {
@@ -92,6 +94,8 @@ getMenus = async (codeId, startDate, endDate) => {
             .then((r) => r.json())
             .catch((err) => console.error('An error occured:', err));
 
+        document.querySelector('.c-loader').style.display = "none";
+        document.querySelector('.c-dashboard').style.filter = "none"
         showMenus(data);
     } else {
         console.log("Geen kind geselecteerd!")
