@@ -33,7 +33,8 @@
   --global-color-alpha-x-transparent: #3385ff4d;
   --global-color-beta: #f8b000;
 
-  --global-color-neutral-x-light: #ffffff;
+  --global-color-neutral-xx-light: #ffffff;
+  --global-color-neutral-x-light: #fafafa;
   --global-color-neutral-light: #f3f3f6;
   --global-color-neutral: #dfdfdf;
   --global-color-neutral-dark: #cbcbcb;
@@ -42,7 +43,7 @@
   --global-color-neutral-xxx-dark: #1f1f1f;
 
   --global-backgroundcolor-dark: var(--global-color-neutral-light);
-  --global-backgroundcolor-light: var(--global-color-neutral-x-light);
+  --global-backgroundcolor-light: var(--global-color-neutral-xx-light);
   /* border  */
   --global-borderRadius: 8px;
   --global-borderWidth: 1px;
@@ -214,7 +215,7 @@ input {
 }
 
 input::placeholder {
-  color: var(--global-color-neutral-x-light);
+  color: var(--global-color-neutral-xx-light);
 }
 
 /*------------------------------------*\
@@ -327,7 +328,7 @@ input::placeholder {
   border: var(--global-borderWidth) solid var(--global-color-neutral);
   border-radius: var(--global-borderRadius);
   color: var(--global-color-neutral-xx-dark);
-  background-color: var(--global-color-neutral-x-light);
+  background-color: var(--global-color-neutral-xx-light);
   font-family: inherit;
   font-size: 16px;
   line-height: calc(var(--global-baseline) * 3);
@@ -474,7 +475,7 @@ input::placeholder {
   margin-right: var(--global-whitespace-sm);
   border: var(--global-borderWidth) solid
     var(--custom-option-borderColor, var(--global-input-borderColor));
-  background: var(--global-color-neutral-x-light);
+  background: var(--global-color-neutral-xx-light);
   box-shadow: var(--custom-option-boxShadow, 0);
   transition: border var(--global-transitionTiming-alpha),
     box-shadow var(--global-transitionTiming-alpha);
@@ -731,6 +732,20 @@ input::placeholder {
   overflow: hidden;
 }
 
+.c-nav-arrows {
+  margin: 20px;
+  background-color: var(--global-color-neutral-x-light);
+  border: var(--global-borderWidth) solid var(--global-color-neutral);
+  border-color: var(--global-color-neutral-xx-light);
+  border-radius: 50%;
+  transition: border-radius 0.2s;
+}
+
+.c-nav-arrows:hover {
+  border-radius: 8px;
+  border-color: var(--global-color-neutral);
+}
+
 .c-nav-week a {
   display: flex;
 }
@@ -777,8 +792,8 @@ input::placeholder {
 
 .c-dashboard-item {
   grid-row: 1;
-  border: 1px solid var(--global-color-neutral-x-light);
-  background-color: var(--global-color-neutral-x-light);
+  border: 1px solid var(--global-color-neutral-xx-light);
+  background-color: var(--global-color-neutral-xx-light);
   box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.16);
 }
 
@@ -810,7 +825,7 @@ input::placeholder {
   padding: 50px;
   width: 100%;
   height: 77vh;
-  border-right: 2px solid var(--global-color-neutral-x-light);
+  border-right: 2px solid var(--global-color-neutral-xx-light);
 }
 
 .c-dashboard-item__content .c-label {
@@ -1041,14 +1056,14 @@ input::placeholder {
   border: var(--global-borderWidth) solid var(--global-color-neutral);
   border-radius: 0 0 var(--global-borderRadius) var(--global-borderRadius);
   color: var(--global-color-neutral-xx-dark);
-  background-color: var(--global-color-neutral-x-light);
+  background-color: var(--global-color-neutral-xx-light);
 }
 
 .selected {
   border: var(--global-borderWidth) solid var(--global-color-neutral);
   border-radius: var(--global-borderRadius);
   color: var(--global-color-neutral-xx-dark);
-  background-color: var(--global-color-neutral-x-light);
+  background-color: var(--global-color-neutral-xx-light);
   margin-bottom: 8px;
   position: relative;
 
