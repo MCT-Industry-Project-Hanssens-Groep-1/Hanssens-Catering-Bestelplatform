@@ -26,7 +26,7 @@
 
 :root {
   /* colors */
-  --global-color-alpha-light: #3738a6;
+  --global-color-alpha-light: #3e40af;
   --global-color-alpha: #2e2f8b;
   --global-color-alpha-dark: #262773;
   --global-color-alpha-transparent: #3385ffbf;
@@ -60,6 +60,8 @@
   --global-whitespace-lg: calc(var(--global-baseline) * 4); /*  = 32px */
   --global-whitespace-xl: calc(var(--global-whitespace) * 2); /*  = 48px */
   --global-whitespace-xxl: calc(var(--global-whitespace) * 3); /*  = 72px */
+
+  --global-transition-timing-alpha: 0.1s ease-in;
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -653,12 +655,23 @@ input::placeholder {
   background-color: var(--global-color-neutral-light);
 }
 
-.c-dashboard h1 {
-  font-size: 18px;
+.c-dashboard-welkom {
   grid-column: 1/-1;
+  grid-row: 1/-1;
   display: flex;
-  text-align: center;
-  margin: auto;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.c-dashboard h1 {
+  font-size: 32px;
+  margin-bottom: 0;
+}
+
+.c-dashboard h2 {
+  font-size: 20px;
+  font-weight: 400;
 }
 
 .c-dashboard-text {

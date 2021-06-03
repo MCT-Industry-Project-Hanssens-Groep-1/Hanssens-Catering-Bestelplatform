@@ -19,9 +19,12 @@ e.addEventListener('change', function() {
 
     if(kindNaam == "Selecteer jouw kind") {
         menuData = "";
-        menuHTML.innerHTML = "<h1>Selecteer jouw kind of voeg jouw kind toe in de instellingen.</h1>"
+        menuHTML.innerHTML = `<div class="c-dashboard-welkom">
+        <h1 class="js-welkom">Welkom, </h1>
+        <h2>Selecteer jouw kind of voeg jouw kind toe in de instellingen.</h2>
+    </div>`
+        setWelkom(userData);
     }
-
     getMenus(kindVoorkeurCode, firstDayOfWeek, lastDayOfWorkWeek)
 })
 
@@ -52,6 +55,11 @@ lastWeek = () => {
 
     setDate();
     getMenus(kindVoorkeurCode, firstDayOfWeek, lastDayOfWorkWeek);
+}
+
+setWelkom = (user) => {
+    let welkomHTML = document.querySelector(".js-welkom");
+    welkomHTML.innerText = `Welkom, ${user.displayName}`
 }
 
 logout = () => {
@@ -93,6 +101,7 @@ getMenus = async (codeId, startDate, endDate) => {
 showMenus = (data) => {
     let htmlString = ""
     let dagLong = dt.startOf('week');
+    let count = 1;
     for(let obj of data) {
         let menu = obj.menu.toString();
         if(!menu == "" && obj.status == "incomplete") {
@@ -140,8 +149,8 @@ showMenus = (data) => {
                 </div>
                 <div class="c-dashboard-item__content-option">
                     <li class="c-form-field c-form-field--option c-option-list__item">
-                        <input class="o-hide-accessible c-option c-option--hidden" type="checkbox" id="checkbox3">
-                        <label class="c-label c-label--option c-custom-option" for="checkbox3">
+                        <input class="o-hide-accessible c-option c-option--hidden" type="checkbox" id="naarhuis${count}">
+                        <label class="c-label c-label--option c-custom-option" for="naarhuis${count}">
                             <span class="c-custom-option__fake-input c-custom-option__fake-input--checkbox">
                                 <svg class="c-custom-option__symbol" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 6.75">
                                     <path d="M4.75,9.5a1,1,0,0,1-.707-.293l-2.25-2.25A1,1,0,1,1,3.207,5.543L4.75,7.086,8.793,3.043a1,1,0,0,1,1.414,1.414l-4.75,4.75A1,1,0,0,1,4.75,9.5" transform="translate(-1.5 -2.75)"/>
@@ -189,6 +198,7 @@ showMenus = (data) => {
         }
 
         dagLong = dagLong.plus({days: 1});
+        count += 1;
     }
 
     menuHTML.innerHTML = htmlString;
@@ -201,6 +211,7 @@ document.addEventListener('DOMContentLoaded', function() {
         } else if (user) {
             userData = user;
             getKinderen(user);
+            setWelkom(user);
             setDate();
         }
       });
