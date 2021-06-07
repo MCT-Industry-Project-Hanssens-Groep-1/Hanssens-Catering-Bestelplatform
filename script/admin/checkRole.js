@@ -19,7 +19,7 @@ const setupUI = (user) => {
 document.addEventListener('DOMContentLoaded', function() {
     firebase.auth().onAuthStateChanged((user) => {
       if (!user) {
-          window.location.replace("/admin/login")
+          window.location.replace("/school/login")
       } else if (user) {
         setupUI(user)
       }

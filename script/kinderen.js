@@ -1,10 +1,26 @@
 //###########  MODAL ##################
 
 var modal = document.getElementById("profielen-modal");
+var confirmModal = document.getElementById("confirm-modal");
 
 openModal = () => {
     modal.style.transform = "translate(0)";
     modal.style.opacity = "1";
+}
+
+openConfirmModal = (rijksregisternummer) => {
+  const confirmButton = document.querySelector('.js-confirm');
+
+  confirmModal.style.transform = "translate(0)";
+  confirmModal.style.opacity = "1";
+
+  confirmButton.addEventListener('click', () => {
+    db.collection("kinderen")
+    .doc(rijksregisternummer)
+    .delete()
+
+    closeConfirmModal();
+  })
 }
 
 closeModal = () => {
@@ -16,6 +32,7 @@ closeModal = () => {
 
     modal.style.transform = "translate(9999px)";
     modal.style.opacity = "0";
+
     var elements = document.getElementsByTagName("input");
     for (var ii=0; ii < elements.length; ii++) {
       if (elements[ii].type == "text") {
@@ -30,12 +47,18 @@ closeModal = () => {
     optionsContainerLeerjaar.classList.remove("active");
 }
 
+closeConfirmModal = () => {
+  confirmModal.style.transform = "translate(9999px)";
+  confirmModal.style.opacity = "0";
+}
+
 window.onclick = function(event) {
     if (event.target == modal) {
       closeModal();
+    }else if (event.target == confirmModal) {
+      closeConfirmModal();
     }
   }
-
 
 //###########  DROPDOWN ##################
 
@@ -155,6 +178,7 @@ getKinderen = (user) => {
       htmlString += `<div class="c-profielen-subtitle">
       <h2>${doc.data().naam}</h2>
       <i class="material-icons">edit</i>
+      <i class="material-icons" onclick="openConfirmModal('${doc.data().rijksregisternummer}')">delete</i>
   </div>
   <div class="c-profielen-voorkeuren">
       <p><b>Voorkeur:</b> ${doc.data().voorkeur}</p>
@@ -209,6 +233,10 @@ addProfiel = () => {
     errorText.innerText = "Alle velden moeten ingevuld zijn!"
     errorText.style.opacity = "100";
   }
+}
+
+logout = () => {
+  firebase.auth().signOut();
 }
 
 document.addEventListener('DOMContentLoaded', function() {
