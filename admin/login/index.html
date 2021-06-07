@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hanssens Catering - Login</title>
+
+    <link rel="stylesheet" href="../style/normalize.css">
+    <link rel="stylesheet" href="../../style/screen.css">
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js"></script>
+
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyBJPqFRk3_YcG1XdS5-mwRxkQ-rY8NQ_9A",
+            authDomain: "hanssens-catering-admin.firebaseapp.com",
+            projectId: "hanssens-catering-admin",
+            storageBucket: "hanssens-catering-admin.appspot.com",
+            messagingSenderId: "777404201780",
+            appId: "1:777404201780:web:728c530b08767e99480361",
+            measurementId: "G-QG0J3JDW1D"
+        };
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+    </script>
+</head>
+<body>
+    <section class="c-login">
+        <div class="c-login__item">
+            <div class="c-slogan">
+                <img class="c-slogan-logo" src="../../src/Logo.png" alt="Hanssens Catering Logo">
+                <p class="c-slogan-title">Wie slim is, eet gezond!</p>
+                <p class="c-slogan-subtitle">LEKKERE EN GEVARIEERDE MAALTIJDEN, DAGVERS VOOR U BEREID!</p>
+            </div>
+        </div>
+        <div class="c-login__item c-login__background">
+            <div>
+                <h1 class="c-form-title">Bestelplatform Admin Dashboard</h1>
+                <div class="c-form">
+                        <div>
+                            <label class="c-label">E-mailadres:</label>
+                            <input class="c-input" type="text" id="emailField">
+                        </div>
+                        <div>
+                            <label class="c-label">Wachtwoord: </label>
+                            <input class="c-input" type="password" id="passwordField">
+                        </div>
+                        <button class="o-button-reset c-button" onclick="login()">AANMELDEN</button>
+
+                        <div class="js-error c-error">
+                            Something went wrong!
+                        </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="../../script/admin/login.js"></script>
+</body>
+</html>

@@ -1,0 +1,3 @@
+logout = () => {
+    firebase.auth().signOut();
+}
