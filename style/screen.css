@@ -218,6 +218,41 @@ input::placeholder {
   color: var(--global-color-neutral-xx-light);
 }
 
+
+/*
+Elements: Table
+---
+Default markup for tables to make them responsive
+*/
+
+table {
+  width: 100%;
+  border: 1px solid var(--global-color-neutral);
+  background: var(--global-color-neutral-xx-light);
+  border-collapse: collapse;
+}
+
+tr:hover {
+  background-color: var(--global-color-neutral-light);
+}
+
+th, td {
+  border-bottom: 1px solid var(--global-color-neutral);
+}
+
+th {
+  text-align: left;
+  font-size: 20px;
+  font-weight: 500;
+  padding: 8px 16px;
+}
+
+td {
+  font-size: 16px;
+  color: var(--global-color-neutral-xx-dark);
+  padding: 8px 16px;
+}
+
 /*------------------------------------*\
 #OBJECTS
 \*------------------------------------*/
@@ -1163,6 +1198,21 @@ input::placeholder {
   pointer-events: auto;
 }
 
+/*
+    Component: Scholen - Overzicht leerlingen
+    ---
+    Leerlingen
+*/
+
+.c-table {
+  margin-top: 16px;
+}
+
+.c-table-icons {
+  width: 24px;
+  padding-right: 24px;
+  color: var(--global-color-beta);
+}
 /*------------------------------------*\
 #UTILITIES
 \*------------------------------------*/
