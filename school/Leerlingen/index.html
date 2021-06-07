@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hanssens Catering - Login</title>
+
+    <link rel="stylesheet" href="../../style/normalize.css">
+    <link rel="stylesheet" href="../../style/screen.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-firestore.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js"></script>
+
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyBdUbMGYO_xd0GfKlS1okuTAistnWoMsxA",
+            authDomain: "hanssens-catering-project.firebaseapp.com",
+            projectId: "hanssens-catering-project",
+            storageBucket: "hanssens-catering-project.appspot.com",
+            messagingSenderId: "152936813269",
+            appId: "1:152936813269:web:35b11bceae2f01c291c85c",
+            measurementId: "G-SR3RLLW4CY"
+        };
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+    </script>
+</head>
+<body>
+    <div class="c-sidebar">
+        <nav class="c-sidebar-nav">
+            <ul class="c-sidebar-ul">
+                <div>
+                    <li>
+                        <a href="#">
+                            <i class="material-icons">account_circle</i> 
+                            <p>Leerlingen</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/school/Bestellingen/index.html">
+                            <i class="material-icons">date_range</i>
+                            <p>Bestellingen</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="material-icons">download</i>
+                            <p>Downloaden</p>
+                        </a>
+                    </li>
+                </div>  
+                <li>
+                    <a href="#" onclick="logout()">
+                        <i class="material-icons">logout</i>
+                        <p>Uitloggen</p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <header class="c-header c-header-center">
+        <nav class="c-nav c-nav-list">
+            <div class="c-header__item">
+                <img class="c-logo" src="../../src/Logo.png" alt="Hanssens Catering Logo">
+            </div>
+        </nav>
+    </header>
+    <main class="c-instellingen">
+        <div class="c-profielen">
+            <div class="c-profielen-container">
+                <div class="c-profielen-title">
+                    <h1>Nog te accepteren</h1>
+                </div>
+                <div class="c-table">
+                    <table>
+                        <tr>
+                            <th>Naam</th>
+                            <th>Voornaam</th>  
+                            <th>Leerjaar</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <td>Pander</td>
+                            <td>Floor</td>
+                            <td>4</td>
+                            <td class="c-table-icons">
+                                <i class="material-icons">done</i>
+                            </td>
+                            <td class="c-table-icons">
+                                <i class="material-icons">edit</i>
+                            </td>
+                            <td class="c-table-icons">
+                                <i class="material-icons">delete</i>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="c-profielen-title">
+                    <h1>Geaccepteerd</h1>
+                </div>
+                <div class="c-table">
+                    <table>
+                        <tr>
+                            <th>Naam</th>
+                            <th>Voornaam</th>
+                            <th>Leerjaar</th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <td>De Groot</td>
+                            <td>Andries</td>
+                            <td>3</td>
+                            <td class="c-table-icons">
+                                <i class="material-icons">edit</i>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
