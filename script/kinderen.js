@@ -220,6 +220,8 @@ addProfiel = () => {
     .doc(userRijksregister)
     .set({
       naam: `${userNaam.charAt(0).toUpperCase() + userNaam.slice(1)}` + " " + `${userVoornaam.charAt(0).toUpperCase() + userVoornaam.slice(1)}`,
+      voornaam: `${userVoornaam.charAt(0).toUpperCase() + userVoornaam.slice(1)}`,
+      familienaam: `${userNaam.charAt(0).toUpperCase() + userNaam.slice(1)}`,
       rijksregisternummer: userRijksregister,
       school: userSchool,
       leerjaar: userLeerjaar.innerText,
