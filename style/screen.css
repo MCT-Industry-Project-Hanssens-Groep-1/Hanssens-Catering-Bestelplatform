@@ -1213,6 +1213,81 @@ td {
   padding-right: 24px;
   color: var(--global-color-beta);
 }
+
+.c-th {
+  text-align: center;
+}
+
+.c-td {
+  margin: auto;
+}
+
+/*
+    Component: Search bar
+    ---
+    Search bar - Order page
+*/
+
+.c-search-bar {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 124px;
+  justify-content: center;
+  height: 42px;
+}
+
+.c-input-search {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  width: 624px;
+  border: 1px solid var(--global-color-neutral);
+  border-right: none;
+  border-radius: 8px 0px 0px 8px;
+  color: var(--global-color-neutral-xxx-dark);
+}
+
+.c-input-search:focus {
+  outline: none;
+  border: 1px solid var(--global-color-beta);
+}
+
+.c-input-search::placeholder {
+  color: var(--global-color-neutral-xxx-dark);
+}
+
+.c-button-search { 
+  border-top: 1px solid var(--global-color-neutral);
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid var(--global-color-neutral);
+  background-color: var(--global-color-neutral-xx-light);
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.c-input-date {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  width: 426px;
+  border: 1px solid var(--global-color-neutral);
+  border-radius: 0px 8px 8px 0px;
+}
+
+.c-input-date:focus {
+  outline: none;
+  border: 1px solid var(--global-color-beta);
+}
+
+input[type="date"]::placeholder {
+  color: var(--global-color-neutral-x-dark);
+  position: relative;
+}
+
 /*------------------------------------*\
 #UTILITIES
 \*------------------------------------*/
