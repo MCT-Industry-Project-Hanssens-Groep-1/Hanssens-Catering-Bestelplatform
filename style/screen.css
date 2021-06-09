@@ -218,7 +218,6 @@ input::placeholder {
   color: var(--global-color-neutral-xx-light);
 }
 
-
 /*
 Elements: Table
 ---
@@ -236,7 +235,8 @@ tr:hover {
   background-color: var(--global-color-neutral-light);
 }
 
-th, td {
+th,
+td {
   border-bottom: 1px solid var(--global-color-neutral);
 }
 
@@ -643,8 +643,8 @@ td {
   padding: 0 2rem;
   padding-left: calc(85px + 2rem);
   box-shadow: 0 1px 4px 1px var(--global-color-neutral-light);
+  background-color: var(--global-backgroundcolor-light);
 }
-
 
 .c-header__item {
   display: flex;
@@ -670,7 +670,7 @@ td {
     Component: Header
 */
 
-.c-sidebar{
+.c-sidebar {
   height: 100vh;
   width: 85px;
   position: fixed;
@@ -713,7 +713,11 @@ td {
 }
 
 .c-sidebar-nav li a:hover {
-  background-image: linear-gradient(to right, var(--global-color-beta) 7px, rgba(255,255,255,0.1) 7px);
+  background-image: linear-gradient(
+    to right,
+    var(--global-color-beta) 7px,
+    rgba(255, 255, 255, 0.1) 7px
+  );
   color: #ffffff;
 }
 
@@ -732,7 +736,11 @@ td {
 }
 
 .c-sidebar-selected {
-  background-image: linear-gradient(to right, rgba(255,255,255,0.1) 7px, rgba(255,255,255,0.1) 7px);
+  background-image: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.1) 7px,
+    rgba(255, 255, 255, 0.1) 7px
+  );
 }
 
 /*
@@ -811,7 +819,7 @@ td {
   grid-gap: 0px;
   width: 100%;
   background-color: var(--global-color-neutral-light);
-  filter: "none";
+  filter: 'none';
 }
 
 .c-dashboard-welkom {
@@ -912,15 +920,22 @@ td {
 
 /* Safari */
 @-webkit-keyframes spin {
-  0% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
-
 
 /*
     Component: Slogan
@@ -961,7 +976,6 @@ td {
   display: flex;
   position: relative;
   padding-left: 85px;
-  height: 90vh;
 }
 
 .c-instellingen .c-profielen {
@@ -1291,20 +1305,20 @@ td {
   color: var(--global-color-neutral-xxx-dark);
 }
 
-.c-button-search { 
+.c-button-search {
   border-top: 1px solid var(--global-color-neutral);
   border-left: none;
   border-right: none;
   border-bottom: 1px solid var(--global-color-neutral);
   background-color: var(--global-color-neutral-xx-light);
-  display:flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   color: var(--global-color-neutral-xxx-dark);
   padding-right: 16px;
 }
 
-.c-button-search-scholen { 
+.c-button-search-scholen {
   border-right: 1px solid var(--global-color-neutral);
   border-radius: 0px 8px 8px 0px;
 }
@@ -1326,11 +1340,10 @@ td {
   border: 1px solid var(--global-color-beta);
 }
 
-input[type="date"]::placeholder {
+input[type='date']::placeholder {
   color: var(--global-color-neutral-x-dark);
   position: relative;
 }
-
 
 /*
     Component: Dropdownmenu

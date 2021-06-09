@@ -24,11 +24,10 @@ openConfirmModal = (rijksregisternummer) => {
 }
 
 closeModal = () => {
-    const selectedLeerjaar = document.querySelector(".js-leerjaar-selected");
-    const optionsContainerLeerjaar = document.querySelector(".js-leerjaar");
     const selectedSchool = document.querySelector(".js-scholen-selected");
     const optionsContainerScholen = document.querySelector(".js-scholen");
     const voorkeurenHTML = document.querySelector('.js-voorkeuren');
+    const leerjarenHTML = document.querySelector('.js-leerjaren');
 
     modal.style.transform = "translate(9999px)";
     modal.style.opacity = "0";
@@ -40,11 +39,10 @@ closeModal = () => {
       }
     }
 
-    selectedLeerjaar.innerHTML = "Selecteer een leerjaar";
     selectedSchool.innerHTML = "Selecteer een school";
-    voorkeurenHTML.innerHTML = ""
+    voorkeurenHTML.innerHTML = "";
+    leerjarenHTML.innerHTML = "";
     optionsContainerScholen.classList.remove("active");
-    optionsContainerLeerjaar.classList.remove("active");
 }
 
 closeConfirmModal = () => {
@@ -82,7 +80,9 @@ dropdownScholen = () => {
   optionsListScholen.forEach(o => {
     o.addEventListener("click", () => {
       let voorkeurenHTML = document.querySelector('.js-voorkeuren');
-      let htmlString = "";
+      let leerjarenHTML = document.querySelector('.js-leerjaren');
+      let htmlStringVoorkeuren = "";
+      let htmlStringLeerjaren = "";
       
       selectedSchool.innerHTML = o.querySelector("label").innerHTML;
       optionsContainerScholen.classList.remove("active");
@@ -91,18 +91,36 @@ dropdownScholen = () => {
       .get()
       .then((doc) => {
         if (doc.exists) {
-          if(doc.data().voorkeuren.length > 0) {
-            htmlString += "<label class='c-label'>Voorkeuren:</label>";
-            for(let voorkeur of doc.data().voorkeuren) {
-              htmlString += `<div>
-              <input type="radio" name="voorkeur" id="${voorkeur}">
-              <label for="${voorkeur}">${voorkeur}</label>
-              </div>`;
+          var voorkeuren = doc.data().voorkeuren;
+          if(Object.keys(voorkeuren).length > 0) {
+            htmlStringVoorkeuren = "<label class='c-label'>Voorkeuren:</label>";
+            for(var key in voorkeuren) {
+              htmlStringVoorkeuren += `<div>
+                <input type="radio" name="voorkeur" id="${key}" code="${voorkeuren[key]}">
+                <label for="${key}">${key}</label>
+                </div>`;
             }
           }
-          
+          var leerjaren = doc.data().leerjaren;
+          const sortedLeerjaren = Object.fromEntries(
+            Object.entries(leerjaren).sort()
+          );
+          htmlStringLeerjaren = `                    <label class="c-label">Leerjaar:</label>
+          <div class="select-box">
+            <div class="js-leerjaar options-container">`
+          for(var key in sortedLeerjaren) {
+            htmlStringLeerjaren += `<div class="js-leerjaar-option option">
+            <input type="radio" class="radio" id="${leerjaren[key]}" name="leerjaar"/>
+            <label for="${key}">${key}</label>
+            </div>`;
+          }
+          htmlStringLeerjaren += `                      </div>
+          <div class="js-leerjaar-selected selected">Selecteer een leerjaar</div>
+        </div>`;
         }
-        voorkeurenHTML.innerHTML = htmlString;
+        voorkeurenHTML.innerHTML = htmlStringVoorkeuren;
+        leerjarenHTML.innerHTML = htmlStringLeerjaren;
+        dropdownLeerjaar();
       });
     })
   });
@@ -204,33 +222,39 @@ addProfiel = () => {
 
   if(userVoorkeur != null) {
     voorkeurId = userVoorkeur.id;
-    if(voorkeurId == "Lactosevrij") {
-      voorkeurCode = "R24L"
-    } else {
-      voorkeurCode = "???"
-    }
+    voorkeurCode = userVoorkeur.getAttribute('code');
+    console.log(voorkeurCode);
+    console.log(voorkeurId);
   } else {
-    voorkeurCode = userLeerjaar.id;
+    if(userLeerjaar != null) {
+      voorkeurCode = userLeerjaar.id;
+      console.log(voorkeurCode);
+      console.log(voorkeurId);
+    }
   }
 
-  getKinderen(firebase.auth().currentUser);
-
-  if(!userNaam == "" && !userVoornaam == "" && !userRijksregister == "" && !userSchool == "" && !userLeerjaar.innerText == "" && !voorkeurCode == "" && userSchool != "Selecteer een school" && userLeerjaar.innerText != "Selecteer een leerjaar") {
-    db.collection("kinderen")
-    .doc(userRijksregister)
-    .set({
-      naam: `${userNaam.charAt(0).toUpperCase() + userNaam.slice(1)}` + " " + `${userVoornaam.charAt(0).toUpperCase() + userVoornaam.slice(1)}`,
-      voornaam: `${userVoornaam.charAt(0).toUpperCase() + userVoornaam.slice(1)}`,
-      familienaam: `${userNaam.charAt(0).toUpperCase() + userNaam.slice(1)}`,
-      rijksregisternummer: userRijksregister,
-      school: userSchool,
-      leerjaar: userLeerjaar.innerText,
-      voorkeur: voorkeurId,
-      code: voorkeurCode,
-      ouders: [firebase.auth().currentUser.uid],
-      status: "unverified"
-    })
-    closeModal();
+  if(userLeerjaar != null) {
+    if(!userNaam == "" && !userVoornaam == "" && !userRijksregister == "" && !userSchool == "" && !userLeerjaar.innerText == "" && !voorkeurCode == "" && userSchool != "Selecteer een school" && userLeerjaar.innerText != "Selecteer een leerjaar") {
+      db.collection("kinderen")
+      .doc(userRijksregister)
+      .set({
+        naam: `${userNaam.charAt(0).toUpperCase() + userNaam.slice(1)}` + " " + `${userVoornaam.charAt(0).toUpperCase() + userVoornaam.slice(1)}`,
+        voornaam: `${userVoornaam.charAt(0).toUpperCase() + userVoornaam.slice(1)}`,
+        familienaam: `${userNaam.charAt(0).toUpperCase() + userNaam.slice(1)}`,
+        rijksregisternummer: userRijksregister,
+        school: userSchool,
+        leerjaar: userLeerjaar.innerText,
+        voorkeur: voorkeurId,
+        code: voorkeurCode,
+        ouders: [firebase.auth().currentUser.uid],
+        status: "unverified"
+      })
+      getKinderen(firebase.auth().currentUser);
+      closeModal();
+    } else {
+      errorText.innerText = "Alle velden moeten ingevuld zijn!"
+      errorText.style.opacity = "100";
+    }
   } else {
     errorText.innerText = "Alle velden moeten ingevuld zijn!"
     errorText.style.opacity = "100";
@@ -248,7 +272,6 @@ document.addEventListener('DOMContentLoaded', function() {
     } else if (user) {
       getKinderen(user);
       getScholen();
-      dropdownLeerjaar();
       setTimeout(function(){ dropdownScholen(); }, 2000);
     }
   });
