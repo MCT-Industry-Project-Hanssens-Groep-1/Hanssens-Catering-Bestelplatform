@@ -475,6 +475,14 @@ td {
   box-shadow: none;
 }
 
+.c-button-scholen {
+  width: 250px;
+}
+
+.c-button-scholen .material-icons {
+  vertical-align: middle;
+}
+
 /*
     Component: Option list
 */
@@ -1077,6 +1085,23 @@ td {
   cursor: pointer;
 }
 
+.c-profielen-modal-codes {
+  display: flex;
+  justify-content: space-between;
+}
+
+.c-profielen-modal-codes input {
+  width: calc(100% - 10px);
+}
+
+.c-profielen-modal-voorkeuren {
+  margin-top: 16px;
+}
+
+.c-profielen-modal-voorkeuren input {
+  margin-top: 8px;
+}
+
 .select-box {
   position: relative;
   display: flex;
@@ -1254,6 +1279,7 @@ td {
   border-right: none;
   border-radius: 8px 0px 0px 8px;
   color: var(--global-color-neutral-xxx-dark);
+  padding-left: 16px;
 }
 
 .c-input-search:focus {
@@ -1274,6 +1300,13 @@ td {
   display:flex;
   justify-content: center;
   align-items: center;
+  color: var(--global-color-neutral-xxx-dark);
+  padding-right: 16px;
+}
+
+.c-button-search-scholen { 
+  border-right: 1px solid var(--global-color-neutral);
+  border-radius: 0px 8px 8px 0px;
 }
 
 .c-input-date {
@@ -1284,6 +1317,8 @@ td {
   width: 426px;
   border: 1px solid var(--global-color-neutral);
   border-radius: 0px 8px 8px 0px;
+  padding-left: 16px;
+  padding-right: 16px;
 }
 
 .c-input-date:focus {

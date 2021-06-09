@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Hanssens Catering - Login</title>
+        <title>Downloaden - Hanssens Catering Admin</title>
 
         <link rel="stylesheet" href="../../style/normalize.css">
         <link rel="stylesheet" href="../../style/screen.css">
@@ -34,19 +34,31 @@
             <nav class="c-sidebar-nav">
                 <ul class="c-sidebar-ul">
                     <div>
-                        <li>
+                        <li class="js-role-hanssens" style="display: none;">
+                            <a href="/admin/scholen">
+                                <i class="material-icons">school</i>
+                                <p>Scholen</p>
+                            </a>
+                        </li>
+                        <li class="js-role-school" style="display: none;">
                             <a href="/admin/leerlingen">
                             <i class="material-icons">account_circle</i>
                             <p>Leerlingen</p>
                             </a>
                         </li>
-                        <li>
+                        <li class="js-role-school" style="display: none;">
                             <a href="/admin/bestellingen">
                             <i class="material-icons">date_range</i>
                             <p>Bestellingen</p>
                             </a>
                         </li>
-                        <li>
+                        <li class="js-role-school c-sidebar-selected" style="display: none;">
+                            <a href="/admin/downloaden">
+                            <i class="material-icons">download</i>
+                            <p>Downloaden</p>
+                            </a>
+                        </li>
+                        <li class="js-role-hanssens c-sidebar-selected" style="display: none;">
                             <a href="/admin/downloaden">
                             <i class="material-icons">download</i>
                             <p>Downloaden</p>
@@ -127,5 +139,8 @@
                 </div>
             </div>
         </main>
+
+        <script src="../../script/admin/checkRole.js"></script>
+        <script src="../../script/admin/downloaden.js"></script>
     </body>
 </html>
