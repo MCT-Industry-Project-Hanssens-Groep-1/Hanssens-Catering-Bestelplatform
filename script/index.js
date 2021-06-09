@@ -9,12 +9,13 @@ var currentWeek = Math.ceil(dt.day / 7);
 var currentMonth = dt.monthLong;
 let menuHTML = document.querySelector(".js-menus");
 
-let userData, menuData = "", kindVoorkeurCode, kindNaam = "Selecteer jouw kind";
+let userData, menuData = "", kindVoorkeurCode, kindNaam = "Selecteer jouw kind", kindStatus;
 
 var e = document.getElementById("select-kinderen");
 
 e.addEventListener('change', function() {
     kindVoorkeurCode = e.options[e.selectedIndex].getAttribute("code");
+    kindStatus = e.options[e.selectedIndex].getAttribute("status");
     kindNaam = e.options[e.selectedIndex].value;
 
     if(kindNaam == "Selecteer jouw kind") {
@@ -25,7 +26,14 @@ e.addEventListener('change', function() {
     </div>`
         setWelkom(userData);
     }
-    getMenus(kindVoorkeurCode, firstDayOfWeek, lastDayOfWorkWeek)
+
+    if(kindStatus == "unverified") {
+        menuHTML.innerHTML = `<div class="c-dashboard-welkom">
+        <h2>Jouw kind is nog niet geverifieerd om bestellingen te maken, wacht op de school om uw kind te verifiëren.</h2>
+    </div>`
+    } else if(kindStatus == "verified") {
+        getMenus(kindVoorkeurCode, firstDayOfWeek, lastDayOfWorkWeek)
+    }
 })
 
 setDate = () => {
@@ -73,14 +81,14 @@ getKinderen = (user) => {
     .onSnapshot((querySnapshot) => {
         let htmlString = "<option>Selecteer jouw kind</option>"
         querySnapshot.forEach((doc) => {
-        htmlString += `<option code="${doc.data().code}" value="${doc.data().naam}">${doc.data().naam}</option>`
+        htmlString += `<option code="${doc.data().code}" status="${doc.data().status}" value="${doc.data().naam}">${doc.data().naam}</option>`
         })
         kinderenHTML.innerHTML = htmlString;
     })
 }
 
 getMenus = async (codeId, startDate, endDate) => {
-    if(kindNaam != "Selecteer jouw kind") {
+    if(kindNaam != "Selecteer jouw kind" && kindStatus != "unverified") {
         let token = await userData.getIdToken();
         document.querySelector('.c-dashboard').style.filter = "blur(2px)"
         document.querySelector('.c-loader').style.display = "block";
