@@ -1219,7 +1219,15 @@ td {
 }
 
 .c-td {
-  margin: auto;
+  text-align: center;
+}
+
+.c-cell-width {
+  width: 200px;
+}
+
+.c-cell-margin {
+  padding: 8px 150px;
 }
 
 /*
@@ -1286,6 +1294,55 @@ td {
 input[type="date"]::placeholder {
   color: var(--global-color-neutral-x-dark);
   position: relative;
+}
+
+
+/*
+    Component: Dropdownmenu
+    ---
+    Dropdown menu - Download page
+*/
+
+.c-select-leerjaar {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  width: 620px;
+  height: 42px;
+  border: 1px solid var(--global-color-neutral);
+  border-radius: 8px 0px 0px 8px;
+  padding: 8px;
+}
+
+.c-select-leerjaar:focus {
+  outline: none;
+  border: 1px solid var(--global-color-beta);
+}
+
+.c-select-maand {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  width: 430px;
+  height: 42px;
+  border: 1px solid var(--global-color-neutral);
+  border-radius: 0px 8px 8px 0px;
+  padding: 8px;
+}
+
+.c-select-maand:focus {
+  outline: none;
+  border: 1px solid var(--global-color-beta);
+}
+
+.c-icon-select {
+  fill: var(--global-color-beta);
+}
+
+.c-icon-margin {
+  padding: 8px 72px;
 }
 
 /*------------------------------------*\
