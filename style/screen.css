@@ -1253,6 +1253,10 @@ td {
   color: var(--global-color-beta);
 }
 
+.c-table-icons .material-icons {
+  cursor: pointer;
+}
+
 .c-th {
   text-align: center;
 }

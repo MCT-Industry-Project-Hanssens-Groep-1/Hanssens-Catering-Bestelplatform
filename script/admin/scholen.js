@@ -167,6 +167,7 @@ addSchool = () => {
               // An error happened.
             });
 
+            closeModal();
             secondaryApp.auth().signOut();
         })
         .catch((error) => {
