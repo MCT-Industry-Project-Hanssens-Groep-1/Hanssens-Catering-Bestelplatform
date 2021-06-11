@@ -70,6 +70,9 @@ logout = () => {
 document.addEventListener('DOMContentLoaded', function() {
     firebase.auth().onAuthStateChanged((user) => {
         if (user) {
+            if(localStorage.getItem('role') == "hanssens") {
+                window.location.replace('/admin/scholen');
+            }
             getLeerlingen(user);
         }
     });

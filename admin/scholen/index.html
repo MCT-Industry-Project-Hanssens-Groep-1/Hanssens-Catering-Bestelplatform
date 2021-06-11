@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en" style="background-color: var(--global-color-neutral-light);">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scholen - Hanssens Catering Admin</title>
+
+    <link rel="stylesheet" href="../../style/normalize.css">
+    <link rel="stylesheet" href="../../style/screen.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-firestore.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js"></script>
+
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyBdUbMGYO_xd0GfKlS1okuTAistnWoMsxA",
+            authDomain: "hanssens-catering-project.firebaseapp.com",
+            projectId: "hanssens-catering-project",
+            storageBucket: "hanssens-catering-project.appspot.com",
+            messagingSenderId: "152936813269",
+            appId: "1:152936813269:web:35b11bceae2f01c291c85c",
+            measurementId: "G-SR3RLLW4CY"
+        };
+        firebase.initializeApp(firebaseConfig);
+        var secondaryApp = firebase.initializeApp(firebaseConfig, "secondary");
+
+        firebase.analytics();
+    </script>
+</head>
+<body>
+    <div class="c-sidebar">
+        <nav class="c-sidebar-nav">
+            <ul class="c-sidebar-ul">
+                <div>
+                    <li class="js-role-school" style="display: none;">
+                        <a href="/admin/leerlingen">
+                            <i class="material-icons">account_circle</i> 
+                            <p>Leerlingen</p>
+                        </a>
+                    </li>
+                    <li class="js-role-school" style="display: none;">
+                        <a href="/admin/bestellingen">
+                            <i class="material-icons">date_range</i>
+                            <p>Bestellingen</p>
+                        </a>
+                    </li>
+                    <li class="js-role-school" style="display: none;">
+                        <a href="/admin/downloaden">
+                            <i class="material-icons">download</i>
+                            <p>Downloaden</p>
+                        </a>
+                    </li>
+                    <li class="js-role-hanssens c-sidebar-selected" style="display: none;">
+                        <a href="/admin/scholen">
+                            <i class="material-icons">school</i>
+                            <p>Scholen</p>
+                        </a>
+                    </li>
+                    <li class="js-role-hanssens" style="display: none;">
+                        <a href="/admin/downloaden">
+                            <i class="material-icons">download</i>
+                            <p>Downloaden</p>
+                        </a>
+                    </li>
+                </div>  
+                <li>
+                    <a href="#" onclick="logout()">
+                        <i class="material-icons">logout</i>
+                        <p>Uitloggen</p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <header class="c-header c-header-center">
+        <nav class="c-nav c-nav-list">
+            <div class="c-header__item">
+                <img class="c-logo" src="../../src/Logo.png" alt="Hanssens Catering Logo">
+            </div>
+        </nav>
+    </header>
+    <main class="c-instellingen">
+        <div class="c-profielen">
+            <div class="c-profielen-container">
+                <div>
+                    <div class="c-search-bar" action="">
+                        <input class="c-input-search" type="text" placeholder="Naam" name="search">
+                        <div class="c-button-search c-button-search-scholen">
+                            <i class="material-icons">search</i>
+                        </div>
+                    </div>
+                </div>
+                <div class="c-button-scholen">
+                    <button class="o-button-reset c-button" onclick="openModal()"><i class="material-icons">add</i> SCHOOL TOEVOEGEN</button>
+                </div>
+                <div class="c-table">
+                    <table class="js-scholen">
+                        <!-- <tr>
+                            <th>Naam</th>
+                            <th>Adres</th>
+                            <th>E-mailadres</th>
+                            <th>Telefoonnummer</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <td>Howest Kortrijk</td>
+                            <td>Marksesteenweg 58, 5800 Kortrijk</td>
+                            <td>info@howest.be</td>
+                            <td>+32 56 24 12 90</td>
+                            <td class="c-table-icons">
+                                <i class="material-icons">edit</i>
+                            </td>
+                            <td class="c-table-icons">
+                                <i class="material-icons">delete</i>
+                            </td>
+                        </tr> -->
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div id="profielen-modal" class="c-profielen-modal">
+
+            <!-- Modal content -->
+            <div class="c-profielen-modal-content">
+              <span class="c-profielen-modal-close" onclick="closeModal()">&times;</span>
+              <h1>Voeg een school toe</h1>
+              <div>
+                <label class="c-label">Naam:</label>
+                <input class="c-input" type="text" id="naamField">
+              </div>
+              <div>
+                <label class="c-label">E-mailadres:</label>
+                <input class="c-input" type="text" id="emailField">
+              </div>
+              <div>
+                <label class="c-label">Adres:</label>
+                <input class="c-input" type="text" id="adresField">
+              </div>
+              <div>
+                <label class="c-label">Telefoonnummer:</label>
+                <input class="c-input" type="tel" id="telefoonnummerField">
+              </div>
+              <h1>Codes</h1>
+              <div class="c-profielen-modal-codes">
+                    <div>
+                        <label class="c-label">Kleuter:</label>
+                        <input class="c-input" type="text" id="kleuterField">
+                    </div>
+                    <div>
+                        <label class="c-label">1e leerjaar:</label>
+                        <input class="c-input" type="text" id="eersteLeerjaarField">
+                    </div>
+                    <div>
+                        <label class="c-label">2e leerjaar:</label>
+                        <input class="c-input" type="text" id="tweedeLeerjaarField">
+                    </div>
+                    <div>
+                        <label class="c-label">3e leerjaar:</label>
+                        <input class="c-input" type="text" id="derdeLeerjaarField">
+                    </div>
+              </div>
+              <div class="c-profielen-modal-codes">
+                <div>
+                    <label class="c-label">4e leerjaar:</label>
+                    <input class="c-input" type="text" id="vierdeLeerjaarField">
+                </div>
+                <div>
+                    <label class="c-label">5e leerjaar:</label>
+                    <input class="c-input" type="text" id="vijfdeLeerjaarField">
+                </div>
+                <div>
+                    <label class="c-label">6e leerjaar:</label>
+                    <input class="c-input" type="text" id="zesdeLeerjaarField">
+                </div>
+            </div>
+            <div class="c-profielen-modal-voorkeuren">
+                <div>
+                    <input class="o-hide-accessible c-option c-option--hidden" type="checkbox" id="lactoseCheckbox" onclick="showInputLactose()">
+                    <label class="c-label c-label--option c-custom-option" for="lactoseCheckbox">
+                        <span class="c-custom-option__fake-input c-custom-option__fake-input--checkbox">
+                            <svg class="c-custom-option__symbol" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 6.75">
+                                <path d="M4.75,9.5a1,1,0,0,1-.707-.293l-2.25-2.25A1,1,0,1,1,3.207,5.543L4.75,7.086,8.793,3.043a1,1,0,0,1,1.414,1.414l-4.75,4.75A1,1,0,0,1,4.75,9.5" transform="translate(-1.5 -2.75)"/>
+                            </svg>
+                        </span>
+                        Lactosevrij
+                    </label>
+                </div>
+                <input class="c-input" type="text" id="lactoseField" style="display: none;">
+            </div>
+            <div class="c-profielen-modal-voorkeuren">
+                <div>
+                    <input class="o-hide-accessible c-option c-option--hidden" type="checkbox" id="varkensvleesCheckbox" onclick="showInputVarkensvlees()">
+                    <label class="c-label c-label--option c-custom-option" for="varkensvleesCheckbox">
+                        <span class="c-custom-option__fake-input c-custom-option__fake-input--checkbox">
+                            <svg class="c-custom-option__symbol" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 6.75">
+                                <path d="M4.75,9.5a1,1,0,0,1-.707-.293l-2.25-2.25A1,1,0,1,1,3.207,5.543L4.75,7.086,8.793,3.043a1,1,0,0,1,1.414,1.414l-4.75,4.75A1,1,0,0,1,4.75,9.5" transform="translate(-1.5 -2.75)"/>
+                            </svg>
+                        </span>
+                        Varkensvleesvrij
+                    </label>
+                </div>
+                <input class="c-input" type="text" id="varkensvleesField" style="display: none;">
+            </div>
+            <div class="c-profielen-modal-voorkeuren">
+                <div>
+                    <input class="o-hide-accessible c-option c-option--hidden" type="checkbox" id="vegetarischCheckbox" onclick="showInputVegetarisch()">
+                    <label class="c-label c-label--option c-custom-option" for="vegetarischCheckbox">
+                        <span class="c-custom-option__fake-input c-custom-option__fake-input--checkbox">
+                            <svg class="c-custom-option__symbol" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 6.75">
+                                <path d="M4.75,9.5a1,1,0,0,1-.707-.293l-2.25-2.25A1,1,0,1,1,3.207,5.543L4.75,7.086,8.793,3.043a1,1,0,0,1,1.414,1.414l-4.75,4.75A1,1,0,0,1,4.75,9.5" transform="translate(-1.5 -2.75)"/>
+                            </svg>
+                        </span>
+                        Vegetarisch
+                    </label>
+                </div>
+                <input class="c-input" type="text" id="vegetarischField" style="display: none;">
+            </div>
+              <div class="js-error c-error">
+                Something went wrong!
+              </div>
+            <button class="o-button-reset c-button" onclick="addSchool()">OPSLAAN</button>
+          </div>
+        </div>
+    </main>
+
+    <script src="../../script/admin/checkRole.js"></script>
+    <script src="../../script/admin/scholen.js"></script>
+</body>
+</html>

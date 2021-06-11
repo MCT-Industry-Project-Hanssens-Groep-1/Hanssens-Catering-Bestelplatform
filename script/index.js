@@ -9,13 +9,15 @@ var currentWeek = Math.ceil(dt.day / 7);
 var currentMonth = dt.monthLong;
 let menuHTML = document.querySelector(".js-menus");
 
-let userData, menuData = "", kindVoorkeurCode, kindNaam = "Selecteer jouw kind", kindStatus;
+let userData, menuData = "", kindVoorkeurCode, kindNaam = "Selecteer jouw kind", kindStatus, kindSchool, kindRijksregister;
 
 var e = document.getElementById("select-kinderen");
 
 e.addEventListener('change', function() {
     kindVoorkeurCode = e.options[e.selectedIndex].getAttribute("code");
     kindStatus = e.options[e.selectedIndex].getAttribute("status");
+    kindSchool = e.options[e.selectedIndex].getAttribute("school");
+    kindRijksregister = e.options[e.selectedIndex].getAttribute("rijksregister");
     kindNaam = e.options[e.selectedIndex].value;
 
     if(kindNaam == "Selecteer jouw kind") {
@@ -81,7 +83,7 @@ getKinderen = (user) => {
     .onSnapshot((querySnapshot) => {
         let htmlString = "<option>Selecteer jouw kind</option>"
         querySnapshot.forEach((doc) => {
-        htmlString += `<option code="${doc.data().code}" status="${doc.data().status}" value="${doc.data().naam}">${doc.data().naam}</option>`
+        htmlString += `<option code="${doc.data().code}" status="${doc.data().status}" school="${doc.data().school}" rijksregister="${doc.data().rijksregisternummer}" value="${doc.data().naam}">${doc.data().naam}</option>`
         })
         kinderenHTML.innerHTML = htmlString;
     })
@@ -133,8 +135,8 @@ showMenus = (data) => {
             <div class="c-dashboard-item__content">
                 <div class="c-dashboard-item__content-option">
                     <li class="c-form-field c-form-field--option c-option-list__item">
-                        <input class="o-hide-accessible c-option c-option--hidden" type="checkbox" id="${dagMenu[0]}">
-                        <label class="c-label c-label--option c-custom-option" for="${dagMenu[0]}">
+                        <input class="o-hide-accessible c-option c-option--hidden" type="checkbox" id="Soep${count}">
+                        <label class="c-label c-label--option c-custom-option" for="Soep${count}">
                             <span class="c-custom-option__fake-input c-custom-option__fake-input--checkbox">
                                 <svg class="c-custom-option__symbol" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 6.75">
                                     <path d="M4.75,9.5a1,1,0,0,1-.707-.293l-2.25-2.25A1,1,0,1,1,3.207,5.543L4.75,7.086,8.793,3.043a1,1,0,0,1,1.414,1.414l-4.75,4.75A1,1,0,0,1,4.75,9.5" transform="translate(-1.5 -2.75)"/>
@@ -147,8 +149,8 @@ showMenus = (data) => {
                 </div>
                 <div class="c-dashboard-item__content-option">
                     <li class="c-form-field c-form-field--option c-option-list__item">
-                        <input class="o-hide-accessible c-option c-option--hidden" type="checkbox" id="${dagMenu[1]}">
-                        <label class="c-label c-label--option c-custom-option" for="${dagMenu[1]}">
+                        <input class="o-hide-accessible c-option c-option--hidden" type="checkbox" id="Maaltijd${count}">
+                        <label class="c-label c-label--option c-custom-option" for="Maaltijd${count}">
                             <span class="c-custom-option__fake-input c-custom-option__fake-input--checkbox">
                                 <svg class="c-custom-option__symbol" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 6.75">
                                     <path d="M4.75,9.5a1,1,0,0,1-.707-.293l-2.25-2.25A1,1,0,1,1,3.207,5.543L4.75,7.086,8.793,3.043a1,1,0,0,1,1.414,1.414l-4.75,4.75A1,1,0,0,1,4.75,9.5" transform="translate(-1.5 -2.75)"/>
@@ -161,8 +163,21 @@ showMenus = (data) => {
                 </div>
                 <div class="c-dashboard-item__content-option">
                     <li class="c-form-field c-form-field--option c-option-list__item">
-                        <input class="o-hide-accessible c-option c-option--hidden" type="checkbox" id="naarhuis${count}">
-                        <label class="c-label c-label--option c-custom-option" for="naarhuis${count}">
+                        <input class="o-hide-accessible c-option c-option--hidden" type="checkbox" id="Toezicht${count}">
+                        <label class="c-label c-label--option c-custom-option" for="Toezicht${count}">
+                            <span class="c-custom-option__fake-input c-custom-option__fake-input--checkbox">
+                                <svg class="c-custom-option__symbol" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 6.75">
+                                    <path d="M4.75,9.5a1,1,0,0,1-.707-.293l-2.25-2.25A1,1,0,1,1,3.207,5.543L4.75,7.086,8.793,3.043a1,1,0,0,1,1.414,1.414l-4.75,4.75A1,1,0,0,1,4.75,9.5" transform="translate(-1.5 -2.75)"/>
+                                </svg>
+                            </span>
+                            Toezicht
+                        </label>
+                    </li>
+                </div>
+                <div class="c-dashboard-item__content-option">
+                    <li class="c-form-field c-form-field--option c-option-list__item">
+                        <input class="o-hide-accessible c-option c-option--hidden" type="checkbox" id="Naarhuis${count}">
+                        <label class="c-label c-label--option c-custom-option" for="Naarhuis${count}">
                             <span class="c-custom-option__fake-input c-custom-option__fake-input--checkbox">
                                 <svg class="c-custom-option__symbol" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 6.75">
                                     <path d="M4.75,9.5a1,1,0,0,1-.707-.293l-2.25-2.25A1,1,0,1,1,3.207,5.543L4.75,7.086,8.793,3.043a1,1,0,0,1,1.414,1.414l-4.75,4.75A1,1,0,0,1,4.75,9.5" transform="translate(-1.5 -2.75)"/>
@@ -174,7 +189,7 @@ showMenus = (data) => {
                 </div>
                 <div class="c-dashboard-item__button">
                     <p>Bestellen mogelijk tot 19:00</p>
-                    <button class="o-button-reset c-button c-button-dashboard" onclick="">OPSLAAN</button>
+                    <button class="o-button-reset c-button c-button-dashboard" onclick="addBestelling('Soep${count}', 'Maaltijd${count}', 'Toezicht${count}', 'Naarhuis${count}', '${dagLong.toISODate()}')">VERZENDEN</button>
                 </div>
             </div>
         </div>`
@@ -215,6 +230,21 @@ showMenus = (data) => {
     }
 
     menuHTML.innerHTML = htmlString;
+}
+
+addBestelling = (soepCheckbox, maaltijdCheckbox, toezichtCheckbox, naarhuisCheckbox, datum) => {
+    var soep = document.getElementById(soepCheckbox).checked;
+    var maaltijd = document.getElementById(maaltijdCheckbox).checked;
+    var toezicht = document.getElementById(toezichtCheckbox).checked;
+    var naarhuis = document.getElementById(naarhuisCheckbox).checked;
+
+    if(soep == true || maaltijd == true || toezicht == true || naarhuis == true) {
+        db.collection("bestellingen").doc(kindRijksregister).set({
+            bestellingen: {[datum]: {naam: kindNaam, datum: datum, soep: soep, maaltijd: maaltijd, toezicht: toezicht, naarhuis: naarhuis, code: kindVoorkeurCode, school: kindSchool}}
+        }, { merge: true })
+    } else {
+        console.log("Niets geselecteerd!")
+    }
 }
 
 document.addEventListener('DOMContentLoaded', function() {
