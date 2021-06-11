@@ -8,11 +8,11 @@ document.addEventListener('DOMContentLoaded', function() {
             db.collection('users').doc(user.uid).get().then(doc => {
                 if(doc.data() !== undefined) {
                     if(doc.data().role == "hanssens") {
-                        sessionStorage.setItem('role', 'hanssens');
+                        localStorage.setItem('role', 'hanssens');
                         window.location.replace("/admin/scholen");
                     }
                     else if(doc.data().role == "school") {
-                        sessionStorage.setItem('role', 'school');
+                        localStorage.setItem('role', 'school');
                         window.location.replace("/admin/leerlingen");
                     } else {
                         firebase.auth().signOut();

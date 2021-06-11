@@ -227,7 +227,7 @@ logout = () => {
 document.addEventListener('DOMContentLoaded', function() {
     firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-        if(sessionStorage.getItem('role') == "school") {
+        if(localStorage.getItem('role') == "school") {
           window.location.replace('/admin/leerlingen');
         }
       }

@@ -1257,6 +1257,14 @@ td {
   cursor: pointer;
 }
 
+.material-icons.check {
+  color: limegreen;
+}
+
+.material-icons.remove {
+  color: silver;
+}
+
 .c-th {
   text-align: center;
 }
@@ -1287,6 +1295,12 @@ td {
   height: 42px;
 }
 
+.c-search-bar-search {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
 .c-input-search {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -1310,16 +1324,10 @@ td {
 }
 
 .c-button-search {
-  border-top: 1px solid var(--global-color-neutral);
-  border-left: none;
-  border-right: none;
-  border-bottom: 1px solid var(--global-color-neutral);
-  background-color: var(--global-color-neutral-xx-light);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: absolute;
   color: var(--global-color-neutral-xxx-dark);
-  padding-right: 16px;
+  margin: 9px;
+  margin-right: 16px;
 }
 
 .c-button-search-scholen {

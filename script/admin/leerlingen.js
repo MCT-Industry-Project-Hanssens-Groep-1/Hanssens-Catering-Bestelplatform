@@ -70,7 +70,7 @@ logout = () => {
 document.addEventListener('DOMContentLoaded', function() {
     firebase.auth().onAuthStateChanged((user) => {
         if (user) {
-            if(sessionStorage.getItem('role') == "hanssens") {
+            if(localStorage.getItem('role') == "hanssens") {
                 window.location.replace('/admin/scholen');
             }
             getLeerlingen(user);
