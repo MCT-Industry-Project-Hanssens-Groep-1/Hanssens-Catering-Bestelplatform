@@ -1,17 +1,28 @@
 var db = firebase.firestore()
 
 var searchBar = document.getElementById('js-search');
+var searchBarKlas = document.getElementById('js-search-klas');
 var datePicker = document.getElementById('js-datepicker');
 
 var userData = "", bestellingData = [];
 
-var searchString, dateString;
+var searchString, searchStringKlas, dateString;
 
 searchBar.addEventListener('keyup', (e) => {
     searchString = e.target.value.toLowerCase();
     var filteredBestellingData = bestellingData.filter(bestelling => {
-        if(!dateString == "") {
-            return bestelling.naam.toLowerCase().includes(searchString) && bestelling.datum.toLowerCase().includes(dateString) || bestelling.naam.toLowerCase().includes(dateString) && bestelling.datum.toLowerCase().includes(searchString);
+        if(!dateString == "" && !searchStringKlas == "") {
+            return bestelling.naam.toLowerCase().includes(searchString) && bestelling.datum.toLowerCase().includes(dateString) && bestelling.klas.toLowerCase().includes(searchStringKlas) || bestelling.datum.toLowerCase().includes(dateString) && bestelling.klas.toLowerCase().includes(searchStringKlas) && bestelling.naam.toLowerCase().includes(searchString) || bestelling.klas.toLowerCase().includes(searchStringKlas) && bestelling.naam.toLowerCase().includes(searchString) && bestelling.datum.toLowerCase().includes(dateString);
+        } else if (!dateString == "" && !searchString == "") {
+            return bestelling.naam.toLowerCase().includes(searchString) && bestelling.datum.toLowerCase().includes(dateString) || bestelling.datum.toLowerCase().includes(dateString) && bestelling.naam.toLowerCase().includes(searchString);
+        } else if (!searchStringKlas == "" && !searchString == "") {
+            return bestelling.naam.toLowerCase().includes(searchString) && bestelling.klas.toLowerCase().includes(searchStringKlas) || bestelling.klas.toLowerCase().includes(searchStringKlas) && bestelling.naam.toLowerCase().includes(searchString);
+        } else if (!searchStringKlas == "" && !dateString == "") {
+            return bestelling.klas.toLowerCase().includes(searchStringKlas) && bestelling.datum.toLowerCase().includes(dateString) || bestelling.datum.toLowerCase().includes(dateString) && bestelling.klas.toLowerCase().includes(searchStringKlas);
+        } else if (!searchStringKlas == "") {
+            return bestelling.klas.toLowerCase().includes(searchStringKlas);
+        } else if (!dateString == "") {
+            return bestelling.datum.toLowerCase().includes(dateString);
         } else {
             return bestelling.naam.toLowerCase().includes(searchString);
         }
@@ -23,14 +34,47 @@ datePicker.addEventListener('change', (e) => {
     dateString = e.target.value.toLowerCase();
     console.log(dateString);
     var filteredBestellingData = bestellingData.filter(bestelling => {
-        if(!searchString == "") {
-            return bestelling.datum.toLowerCase().includes(dateString) && bestelling.datum.toLowerCase().includes(searchString) || bestelling.naam.toLowerCase().includes(searchString) && bestelling.datum.toLowerCase().includes(dateString);
+        if(!searchString == "" && !searchStringKlas == "") {
+            return bestelling.naam.toLowerCase().includes(searchString) && bestelling.datum.toLowerCase().includes(dateString) && bestelling.klas.toLowerCase().includes(searchStringKlas) || bestelling.datum.toLowerCase().includes(dateString) && bestelling.klas.toLowerCase().includes(searchStringKlas) && bestelling.naam.toLowerCase().includes(searchString) || bestelling.klas.toLowerCase().includes(searchStringKlas) && bestelling.naam.toLowerCase().includes(searchString) && bestelling.datum.toLowerCase().includes(dateString);
+        } else if (!searchString == "" && !dateString == "") {
+            return bestelling.naam.toLowerCase().includes(searchString) && bestelling.datum.toLowerCase().includes(dateString) || bestelling.datum.toLowerCase().includes(dateString) && bestelling.naam.toLowerCase().includes(searchString);
+        } else if (!searchStringKlas == "" && !dateString == "") {
+            return bestelling.datum.toLowerCase().includes(dateString) && bestelling.klas.toLowerCase().includes(searchStringKlas) || bestelling.klas.toLowerCase().includes(searchStringKlas) && bestelling.datum.toLowerCase().includes(dateString);
+        } else if (!searchStringKlas == "" && !searchString == "") {
+            return bestelling.naam.toLowerCase().includes(searchString) && bestelling.klas.toLowerCase().includes(searchStringKlas) || bestelling.klas.toLowerCase().includes(searchStringKlas) && bestelling.naam.toLowerCase().includes(searchString);
+        } else if (!searchStringKlas == "") {
+            return bestelling.klas.toLowerCase().includes(searchStringKlas);
+        } else if (!searchString == "") {
+            return bestelling.naam.toLowerCase().includes(searchString);
         } else {
             return bestelling.datum.toLowerCase().includes(dateString);
         }
     })
     showBestellingen(filteredBestellingData);
 })
+
+searchBarKlas.addEventListener('keyup', (e) => {
+    searchStringKlas = e.target.value.toLowerCase();
+    var filteredBestellingData = bestellingData.filter(bestelling => {
+        if(!dateString == "" && !searchString == "") {
+            return bestelling.naam.toLowerCase().includes(searchString) && bestelling.datum.toLowerCase().includes(dateString) && bestelling.klas.toLowerCase().includes(searchStringKlas) || bestelling.datum.toLowerCase().includes(dateString) && bestelling.klas.toLowerCase().includes(searchStringKlas) && bestelling.naam.toLowerCase().includes(searchString) || bestelling.klas.toLowerCase().includes(searchStringKlas) && bestelling.naam.toLowerCase().includes(searchString) && bestelling.datum.toLowerCase().includes(dateString);
+        } else if (!searchString == "" && !searchStringKlas == "") {
+            return bestelling.naam.toLowerCase().includes(searchString) && bestelling.klas.toLowerCase().includes(searchStringKlas) || bestelling.klas.toLowerCase().includes(searchStringKlas) && bestelling.naam.toLowerCase().includes(searchString);
+        } else if (!dateString == "" && !searchStringKlas == "") {
+            return bestelling.datum.toLowerCase().includes(dateString) && bestelling.klas.toLowerCase().includes(searchStringKlas) || bestelling.klas.toLowerCase().includes(searchStringKlas) && bestelling.datum.toLowerCase().includes(dateString);
+        } else if (!searchString == "" && !dateString == "") {
+            return bestelling.datum.toLowerCase().includes(dateString) && bestelling.naam.toLowerCase().includes(searchString) || bestelling.naam.toLowerCase().includes(searchString) && bestelling.datum.toLowerCase().includes(dateString);
+        } else if (!searchString == "") {
+            return bestelling.naam.toLowerCase().includes(searchString);
+        } else if (!dateString == "") {
+            return bestelling.datum.toLowerCase().includes(dateString);
+        } else {
+            return bestelling.klas.toLowerCase().includes(searchStringKlas);
+        }
+    })
+    showBestellingen(filteredBestellingData);
+});
+
 
 getBestellingen = () => {
     db.collection('bestellingen')
@@ -53,6 +97,7 @@ showBestellingen = (data) => {
     var htmlString = "";
     htmlString = `                        <tr>
     <th>Naam</th>
+    <th>Klas</th>
     <th>Datum</th>
     <th class="c-th">Soep</th>
     <th class="c-th">Maaltijd</th>
@@ -63,6 +108,7 @@ showBestellingen = (data) => {
     for(var obj of data) {
         htmlString += `<tr>
             <td>${obj.naam}</td>
+            <td>${obj.klas}</td>
             <td>${obj.datum}</td>`
         if(obj.soep == true) {
             htmlString += `<td class="c-td">

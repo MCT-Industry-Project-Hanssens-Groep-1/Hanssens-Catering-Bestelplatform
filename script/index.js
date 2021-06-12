@@ -9,7 +9,7 @@ var currentWeek = Math.ceil(dt.day / 7);
 var currentMonth = dt.monthLong;
 let menuHTML = document.querySelector(".js-menus");
 
-let userData, menuData = "", kindVoorkeurCode, kindNaam = "Selecteer jouw kind", kindStatus, kindSchool, kindRijksregister;
+let userData, menuData = "", kindVoorkeurCode, kindNaam = "Selecteer jouw kind", kindStatus, kindSchool, kindRijksregister, kindLeerjaar, kindKlas;
 
 var e = document.getElementById("select-kinderen");
 
@@ -17,6 +17,8 @@ e.addEventListener('change', function() {
     kindVoorkeurCode = e.options[e.selectedIndex].getAttribute("code");
     kindStatus = e.options[e.selectedIndex].getAttribute("status");
     kindSchool = e.options[e.selectedIndex].getAttribute("school");
+    kindLeerjaar = e.options[e.selectedIndex].getAttribute("leerjaar");
+    kindKlas = e.options[e.selectedIndex].getAttribute("klas");
     kindRijksregister = e.options[e.selectedIndex].getAttribute("rijksregister");
     kindNaam = e.options[e.selectedIndex].value;
 
@@ -83,7 +85,7 @@ getKinderen = (user) => {
     .onSnapshot((querySnapshot) => {
         let htmlString = "<option>Selecteer jouw kind</option>"
         querySnapshot.forEach((doc) => {
-        htmlString += `<option code="${doc.data().code}" status="${doc.data().status}" school="${doc.data().school}" rijksregister="${doc.data().rijksregisternummer}" value="${doc.data().naam}">${doc.data().naam}</option>`
+        htmlString += `<option code="${doc.data().code}" status="${doc.data().status}" school="${doc.data().school}" leerjaar="${doc.data().leerjaar}" klas="${doc.data().klas}" rijksregister="${doc.data().rijksregisternummer}" value="${doc.data().naam}">${doc.data().naam}</option>`
         })
         kinderenHTML.innerHTML = htmlString;
     })
@@ -104,6 +106,7 @@ getMenus = async (codeId, startDate, endDate) => {
             .then((r) => r.json())
             .catch((err) => console.error('An error occured:', err));
 
+        console.log(data);
         document.querySelector('.c-loader').style.display = "none";
         document.querySelector('.c-dashboard').style.filter = "none"
         showMenus(data);
@@ -240,7 +243,7 @@ addBestelling = (soepCheckbox, maaltijdCheckbox, toezichtCheckbox, naarhuisCheck
 
     if(soep == true || maaltijd == true || toezicht == true || naarhuis == true) {
         db.collection("bestellingen").doc(kindRijksregister).set({
-            bestellingen: {[datum]: {naam: kindNaam, datum: datum, soep: soep, maaltijd: maaltijd, toezicht: toezicht, naarhuis: naarhuis, code: kindVoorkeurCode, school: kindSchool}}
+            bestellingen: {[datum]: {naam: kindNaam, datum: datum, soep: soep, maaltijd: maaltijd, toezicht: toezicht, naarhuis: naarhuis, code: kindVoorkeurCode, school: kindSchool, leerjaar: kindLeerjaar, klas: kindKlas}}
         }, { merge: true })
     } else {
         console.log("Niets geselecteerd!")

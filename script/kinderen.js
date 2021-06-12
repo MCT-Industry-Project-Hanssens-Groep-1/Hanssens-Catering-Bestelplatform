@@ -28,6 +28,7 @@ closeModal = () => {
     const optionsContainerScholen = document.querySelector(".js-scholen");
     const voorkeurenHTML = document.querySelector('.js-voorkeuren');
     const leerjarenHTML = document.querySelector('.js-leerjaren');
+    const klasHTML = document.querySelector('.js-klas');
 
     modal.style.transform = "translate(9999px)";
     modal.style.opacity = "0";
@@ -42,6 +43,9 @@ closeModal = () => {
     selectedSchool.innerHTML = "Selecteer een school";
     voorkeurenHTML.innerHTML = "";
     leerjarenHTML.innerHTML = "";
+    klasHTML.style.display = "none";
+    klasHTML.querySelector("input").placeholder = "bv. A, B, C";
+    klasHTML.querySelector("input").setAttribute('maxlength', 1);
     optionsContainerScholen.classList.remove("active");
 }
 
@@ -81,6 +85,7 @@ dropdownScholen = () => {
     o.addEventListener("click", () => {
       let voorkeurenHTML = document.querySelector('.js-voorkeuren');
       let leerjarenHTML = document.querySelector('.js-leerjaren');
+      let klasHTML = document.querySelector('.js-klas');
       let htmlStringVoorkeuren = "";
       let htmlStringLeerjaren = "";
       
@@ -105,19 +110,23 @@ dropdownScholen = () => {
           const sortedLeerjaren = Object.fromEntries(
             Object.entries(leerjaren).sort()
           );
+          var value = 1;
           htmlStringLeerjaren = `                    <label class="c-label">Leerjaar:</label>
           <div class="select-box">
             <div class="js-leerjaar options-container">`
           for(var key in sortedLeerjaren) {
             htmlStringLeerjaren += `<div class="js-leerjaar-option option">
-            <input type="radio" class="radio" id="${leerjaren[key]}" name="leerjaar"/>
+            <input type="radio" class="radio" id="${leerjaren[key]}" value="${value}" name="leerjaar"/>
             <label for="${key}">${key}</label>
             </div>`;
+            value += 1;
           }
           htmlStringLeerjaren += `                      </div>
           <div class="js-leerjaar-selected selected">Selecteer een leerjaar</div>
-        </div>`;
+          </div>`;
         }
+        value = 1;
+        klasHTML.style.display = "block";
         voorkeurenHTML.innerHTML = htmlStringVoorkeuren;
         leerjarenHTML.innerHTML = htmlStringLeerjaren;
         dropdownLeerjaar();
@@ -146,6 +155,7 @@ dropdownLeerjaar = () => {
   const selectedLeerjaar = document.querySelector(".js-leerjaar-selected");
   const optionsContainerLeerjaar = document.querySelector(".js-leerjaar");
   const optionsListLeerjaar = document.querySelectorAll(".js-leerjaar-option");
+  const klasHTML = document.querySelector('.js-klas');
 
   selectedLeerjaar.addEventListener("click", () => {
     optionsContainerLeerjaar.classList.toggle("active");
@@ -155,7 +165,17 @@ dropdownLeerjaar = () => {
     o.addEventListener("click", () => {
       selectedLeerjaar.innerHTML = o.querySelector("label").innerHTML;
       selectedLeerjaar.id = o.querySelector("input").id;
+      selectedLeerjaar.setAttribute('value', o.querySelector("input").getAttribute('value'));
       optionsContainerLeerjaar.classList.remove("active");
+      if(selectedLeerjaar.innerText == "Kleuter") {
+        klasHTML.querySelector("input").placeholder = "bv. 1A, 2A, 3B";
+        klasHTML.querySelector("input").setAttribute('maxlength', 2);
+        klasHTML.querySelector("input").value = "";
+      } else {
+        klasHTML.querySelector("input").placeholder = "bv. A, B, C";
+        klasHTML.querySelector("input").setAttribute('maxlength', 1);
+        klasHTML.querySelector("input").value = "";
+      }
     });
   });
 }
@@ -215,6 +235,7 @@ addProfiel = () => {
   var userSchool = document.querySelector('.js-scholen-selected').innerHTML;
   var userLeerjaar = document.querySelector('.js-leerjaar-selected');
   var userVoorkeur = document.querySelector('input[name="voorkeur"]:checked')
+  var userKlas = (document.getElementById('klasField').value).toUpperCase();
   var errorText = document.querySelector('.js-error');
 
   let voorkeurCode = ""
@@ -232,9 +253,15 @@ addProfiel = () => {
       console.log(voorkeurId);
     }
   }
+  if(!userLeerjaar == "") {
+    var userLeerjaarNummer = userLeerjaar.getAttribute('value');
+      if(userLeerjaar.getAttribute('value') == 7) {
+      userLeerjaarNummer = "K";
+  }
+  }
 
   if(userLeerjaar != null) {
-    if(!userNaam == "" && !userVoornaam == "" && !userRijksregister == "" && !userSchool == "" && !userLeerjaar.innerText == "" && !voorkeurCode == "" && userSchool != "Selecteer een school" && userLeerjaar.innerText != "Selecteer een leerjaar") {
+    if(!userNaam == "" && !userVoornaam == "" && !userRijksregister == "" && !userSchool == "" && !userLeerjaar.innerText == "" && !voorkeurCode == "" && !userKlas == "" && userSchool != "Selecteer een school" && userLeerjaar.innerText != "Selecteer een leerjaar") {
       db.collection("kinderen")
       .doc(userRijksregister)
       .set({
@@ -247,7 +274,8 @@ addProfiel = () => {
         voorkeur: voorkeurId,
         code: voorkeurCode,
         ouders: [firebase.auth().currentUser.uid],
-        status: "unverified"
+        status: "unverified",
+        klas: `${userLeerjaarNummer}` + `${userKlas}`
       })
       getKinderen(firebase.auth().currentUser);
       closeModal();

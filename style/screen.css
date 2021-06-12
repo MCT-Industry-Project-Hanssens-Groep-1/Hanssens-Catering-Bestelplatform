@@ -383,6 +383,10 @@ td {
   border-color: var(--global-color-alpha);
 }
 
+.c-input::placeholder {
+  color: var(--global-color-neutral-x-dark);
+}
+
 /*
     Component: Select
     ---
@@ -1292,7 +1296,17 @@ td {
   flex-direction: row;
   margin-bottom: 124px;
   justify-content: center;
-  height: 42px;
+  height: 48px;
+}
+
+.c-search-bar-label {
+  display: flex;
+  flex-direction: column;
+  margin-top: -24px;
+}
+
+.c-search-bar-label label {
+  margin-left: 16px;
 }
 
 .c-search-bar-search {
@@ -1306,12 +1320,20 @@ td {
   -moz-appearance: none;
   appearance: none;
 
-  width: 624px;
+  width: 20vw;
   border: 1px solid var(--global-color-neutral);
   border-right: none;
   border-radius: 8px 0px 0px 8px;
   color: var(--global-color-neutral-xxx-dark);
   padding-left: 16px;
+  height: 100%;
+}
+
+.c-input-search-klas {
+  width: 10vw;
+  border: 1px solid var(--global-color-neutral);
+  border-right: none;
+  border-radius: 0px 0px 0px 0px;
 }
 
 .c-input-search:focus {
@@ -1320,14 +1342,17 @@ td {
 }
 
 .c-input-search::placeholder {
-  color: var(--global-color-neutral-xxx-dark);
+  color: var(--global-color-neutral-x-dark);
 }
 
 .c-button-search {
   position: absolute;
   color: var(--global-color-neutral-xxx-dark);
-  margin: 9px;
-  margin-right: 16px;
+  margin-top: 3px;
+  margin-right: 1px;
+  padding:7px;
+  padding-bottom: 3px;
+  background: white;
 }
 
 .c-button-search-scholen {
@@ -1340,11 +1365,25 @@ td {
   -moz-appearance: none;
   appearance: none;
 
-  width: 426px;
+  width: 15vw;
   border: 1px solid var(--global-color-neutral);
   border-radius: 0px 8px 8px 0px;
   padding-left: 16px;
   padding-right: 16px;
+  height: 100%;
+}
+
+.c-input-startdate {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  width: 15vw;
+  border: 1px solid var(--global-color-neutral);
+  border-right: none;
+  padding-left: 16px;
+  padding-right: 16px;
+  height: 100%;
 }
 
 .c-input-date:focus {
@@ -1352,10 +1391,11 @@ td {
   border: 1px solid var(--global-color-beta);
 }
 
-input[type='date']::placeholder {
+input[type=date] {
   color: var(--global-color-neutral-x-dark);
   position: relative;
 }
+
 
 /*
     Component: Dropdownmenu

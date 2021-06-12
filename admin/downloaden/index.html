@@ -15,6 +15,8 @@
 
         <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js"></script>
 
+        <script src="../../script/luxon.js"></script>
+
         <script>
             var firebaseConfig = {
                 apiKey: "AIzaSyBdUbMGYO_xd0GfKlS1okuTAistnWoMsxA",
@@ -84,56 +86,60 @@
         <main class="c-instellingen">
             <div class="c-profielen">
                 <div class="c-profielen-container">
-                    <div>
-                        <form class="c-search-bar" action="">
-                            <span>
-                                <select class="c-input c-select-leerjaar" name="leerjaar" id="leerjaar">
-                                    <option value="leerjaar">Selecteer een leerjaar</option>
-                                    <option value="leerjaar1">1ste leerjaar</option>
-                                    <option value="leerjaar2">2de leerjaar</option>
-                                    <option value="leerjaar3">3de leerjaar</option>
-                                    <option value="leerjaar4">4de leerjaar</option>
-                                    <option value="leerjaar5">5de leerjaar</option>
-                                    <option value="leerjaar6">6de leerjaar</option>
-                                </select>
-                                <svg class="c-icon-select c-custom-select__symbol" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                    <path d="M7,10l5,5,5-5Z"/>
-                                </svg>
-                            </span>
-                            <span>
-                                <select class="c-input c-select-maand" name="maand" id="maand">
-                                    <option value="maand">Selecteer een maand</option>
-                                    <option value="januari">Januari</option>
-                                    <option value="februari">Februari</option>
-                                    <option value="maart">Maart</option>
-                                    <option value="april">April</option>
-                                    <option value="mei">Mei</option>
-                                    <option value="juni">Juni</option>
-                                    <option value="september">September</option>
-                                    <option value="oktober">Oktober</option>
-                                    <option value="november">November</option>
-                                    <option value="december">December</option>
-                                </select>
-                                <svg class="c-icon-select c-custom-select__symbol" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"> 
-                                    <path d="M7,10l5,5,5-5Z"/>
-                                </svg>
-                            </span>
-                        </form>
-                    </div>
+                        <div class="c-search-bar" action="">
+                            <div class="c-search-bar-search">
+                                <div class="c-search-bar-label">
+                                    <label for="">School:</label>
+                                    <input class="c-input-search" list="scholen" id="js-search" type="text" placeholder="Howest Kortrijk">
+                                    <datalist id="scholen">
+                                        <option value="Edge">
+                                        <option value="Firefox">
+                                        <option value="Chrome">
+                                        <option value="Opera">
+                                        <option value="Safari">
+                                      </datalist>
+                                </div>
+                                <div class="c-button-search">
+                                    <i class="material-icons">search</i>
+                                </div>
+                            </div>
+                            <div class="c-search-bar-label">
+                                <label for="">Start datum:</label>
+                                <input class="c-input-startdate" type="date" name="date" id="js-startdate">
+                            </div>
+                            <div class="c-search-bar-label">
+                                <label for="">Eind datum:</label>
+                                <input class="c-input-date" type="date" name="date" id="js-enddate">
+                            </div>
+                        </div>
                     <div class="c-table">
-                        <table>
+                        <table class="js-downloads">
                             <tr>
-                                <th class="c-th c-cell-width">Leerjaar</th>
-                                <th class="c-cell-margin">Maand</th>
+                                <th class="c-cell-margin">Start datum</th>
+                                <th class="c-cell-margin">Eind datum</th>
                                 <th class="c-th"></th>
                             </tr>
                             <tr>
-                                <td class="c-td">1</td>
-                                <td class="c-cell-margin">Januari</td>
+                                <td class="c-cell-margin">2020-06-21</td>
+                                <td class="c-cell-margin">2020-06-22</td>
                                 <td class="c-table-icons c-icon-margin">
                                     <i class="material-icons">download</i>
                                 </td>
                             </tr>
+                        </table>
+                        <table id="January 2020">
+                            <thead>
+                                <tr>
+                                    <th>Naam</th>
+                                    <th>Datum</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Aaron</td>
+                                    <td>2020-04-20</td>
+                                </tr>
+                            </tbody>
                         </table>
                     </div>
                 </div>
