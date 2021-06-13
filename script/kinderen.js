@@ -24,6 +24,7 @@ openConfirmModal = (rijksregisternummer) => {
 }
 
 closeModal = () => {
+    var errorText = document.querySelector('.js-error');
     const selectedSchool = document.querySelector(".js-scholen-selected");
     const optionsContainerScholen = document.querySelector(".js-scholen");
     const voorkeurenHTML = document.querySelector('.js-voorkeuren');
@@ -43,6 +44,7 @@ closeModal = () => {
     selectedSchool.innerHTML = "Selecteer een school";
     voorkeurenHTML.innerHTML = "";
     leerjarenHTML.innerHTML = "";
+    errorText.style.opacity = 0;
     klasHTML.style.display = "none";
     klasHTML.querySelector("input").placeholder = "bv. A, B, C";
     klasHTML.querySelector("input").setAttribute('maxlength', 1);
@@ -98,30 +100,38 @@ dropdownScholen = () => {
         if (doc.exists) {
           var voorkeuren = doc.data().voorkeuren;
           if(Object.keys(voorkeuren).length > 0) {
-            htmlStringVoorkeuren = "<label class='c-label'>Voorkeuren:</label>";
+            htmlStringVoorkeuren = "<h5>Voorkeuren:<h5><ul class='o-list c-option-list'>";
             for(var key in voorkeuren) {
-              htmlStringVoorkeuren += `<div>
-                <input type="radio" name="voorkeur" id="${key}" code="${voorkeuren[key]}">
-                <label for="${key}">${key}</label>
-                </div>`;
+              htmlStringVoorkeuren += `
+              <li class="c-form-field--option c-option-list__item">
+                <input type="radio" class="o-hide-accessible c-option c-option--hidden" name="voorkeur" id="${key}" code="${voorkeuren[key]}">
+                <label class="c-label c-label--option c-custom-option" for="${key}">
+                  <span class="c-custom-option__fake-input c-custom-option__fake-input--radio">
+                    <span class="c-custom-option__symbol"></span>
+                  </span>
+                  ${key}
+                </label>
+              <li class="c-form-field c-form-field--option c-option-list__item">`;
             }
+            htmlStringVoorkeuren+=`</ul>`
           }
           var leerjaren = doc.data().leerjaren;
           const sortedLeerjaren = Object.fromEntries(
             Object.entries(leerjaren).sort()
           );
           var value = 1;
-          htmlStringLeerjaren = `                    <label class="c-label">Leerjaar:</label>
-          <div class="select-box">
-            <div class="js-leerjaar options-container">`
-          for(var key in sortedLeerjaren) {
-            htmlStringLeerjaren += `<div class="js-leerjaar-option option">
-            <input type="radio" class="radio" id="${leerjaren[key]}" value="${value}" name="leerjaar"/>
-            <label for="${key}">${key}</label>
-            </div>`;
+          htmlStringLeerjaren = `<label class="c-label">Leerjaar:</label>
+            <div class="select-box">
+              <div class="js-leerjaar options-container">`
+              for(var key in sortedLeerjaren) {
+                htmlStringLeerjaren += `<div class="js-leerjaar-option option">
+                <input type="radio" class="radio" id="${leerjaren[key]}" value="${value}" name="leerjaar"/>
+                <label for="${key}">${key}</label>
+                </div>`;
             value += 1;
           }
-          htmlStringLeerjaren += `                      </div>
+          htmlStringLeerjaren += `
+          </div>
           <div class="js-leerjaar-selected selected">Selecteer een leerjaar</div>
           </div>`;
         }
@@ -262,6 +272,7 @@ addProfiel = () => {
 
   if(userLeerjaar != null) {
     if(!userNaam == "" && !userVoornaam == "" && !userRijksregister == "" && !userSchool == "" && !userLeerjaar.innerText == "" && !voorkeurCode == "" && !userKlas == "" && userSchool != "Selecteer een school" && userLeerjaar.innerText != "Selecteer een leerjaar") {
+      if(userRijksregister.length == 11){
       db.collection("kinderen")
       .doc(userRijksregister)
       .set({
@@ -279,6 +290,11 @@ addProfiel = () => {
       })
       getKinderen(firebase.auth().currentUser);
       closeModal();
+      }
+      else{
+        errorText.innerText = "Voer een correct rijksregisternummer in."
+        errorText.style.opacity = "100";
+      }
     } else {
       errorText.innerText = "Alle velden moeten ingevuld zijn!"
       errorText.style.opacity = "100";
