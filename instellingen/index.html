@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" style="background-color: var(--global-color-neutral-light);">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instellingen - Hanssens Catering Bestelplatform</title>
+
+    <link rel="stylesheet" href="../../style/normalize.css">
+    <link rel="stylesheet" href="../../style/screen.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-firestore.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js"></script>
+
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyBdUbMGYO_xd0GfKlS1okuTAistnWoMsxA",
+            authDomain: "hanssens-catering-project.firebaseapp.com",
+            projectId: "hanssens-catering-project",
+            storageBucket: "hanssens-catering-project.appspot.com",
+            messagingSenderId: "152936813269",
+            appId: "1:152936813269:web:35b11bceae2f01c291c85c",
+            measurementId: "G-SR3RLLW4CY"
+        };
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+    </script>
+</head>
+<body>
+    <div class="c-sidebar">
+      <nav class="c-sidebar-nav">
+          <ul class="c-sidebar-ul">
+              <div>
+                  <li>
+                      <a href="/">
+                        <i class="material-icons">home</i>
+                        <p>Hoofdpagina</p>
+                      </a>
+                  </li>
+                  <li>
+                      <a href="/profiel">
+                          <i class="material-icons">account_circle</i>
+                          <p>Profiel</p>
+                      </a>
+                  </li>
+                  <li>
+                      <a class="c-sidebar-selected" href="/instellingen">
+                          <i class="material-icons">settings</i>
+                          <p>Instellingen</p>
+                      </a>
+                  </li>
+              </div>
+              <li>
+                  <a href="#" onclick="logout()">
+                      <i class="material-icons">logout</i>
+                      <p>Uitloggen</p>
+                  </a>
+              </li>
+          </ul>
+      </nav>
+  </div>
+  <header class="c-header c-header-center">
+      <nav class="c-nav c-nav-list">
+          <div class="c-header__item">
+              <img class="c-logo" src="../../src/Logo.png" alt="Hanssens Catering Logo">
+          </div>
+      </nav>
+  </header>
+    <main class="c-instellingen">
+            <div class="c-profielen">
+                <div class="c-profielen-container">
+                </div>
+            </div>
+    </section>
+
+    <script src="../../script/kinderen.js"></script>
+</body>
+</html>

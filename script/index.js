@@ -26,7 +26,7 @@ e.addEventListener('change', function() {
         menuData = "";
         menuHTML.innerHTML = `<div class="c-dashboard-welkom">
         <h1 class="js-welkom">Welkom, </h1>
-        <h2>Selecteer jouw kind of voeg jouw kind toe in de instellingen.</h2>
+        <h2>Selecteer jouw kind of voeg jouw kind toe in je profiel.</h2>
     </div>`
         setWelkom(userData);
     }

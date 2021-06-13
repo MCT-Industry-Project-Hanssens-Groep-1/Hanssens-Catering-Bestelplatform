@@ -216,6 +216,20 @@ getScholen = () => {
   })
 }
 
+getProfiel = (user) => {
+  let profielHTML = document.querySelector('.js-profiel');
+  let htmlString = `<div class="c-profielen-subtitle">
+  <h2>${user.displayName}</h2>
+  <i class="material-icons">edit</i>
+
+</div>
+<div class="c-profielen-voorkeuren">
+  <p><b>Email:</b> ${user.email}</p>
+</div>`
+
+  profielHTML.innerHTML = htmlString;
+}
+
 getKinderen = (user) => {
   let kinderenHTML = document.querySelector('.js-kinderen');
   db.collection("kinderen")
@@ -314,6 +328,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!user) {
         window.location.replace("/login")
     } else if (user) {
+      getProfiel(user);
       getKinderen(user);
       getScholen();
       setTimeout(function(){ dropdownScholen(); }, 2000);

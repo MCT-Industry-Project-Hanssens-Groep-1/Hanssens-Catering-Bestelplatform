@@ -487,6 +487,28 @@ td {
   vertical-align: middle;
 }
 
+.c-button-beta{
+  padding: 12px;
+  padding-left: 2px;
+  padding-right: 2px;
+  width: 200px;
+  color: var(--global-color-alpha-dark);
+  background-color: transparent;
+  margin-left: -16px;
+}
+
+.c-button-beta:hover {
+  border: 1px solid black;
+}
+
+.c-button-beta:focus {
+  font-weight: 600;
+}
+
+.c-button-beta:active {
+  font-weight: 600;
+}
+
 /*
     Component: Option list
 */
