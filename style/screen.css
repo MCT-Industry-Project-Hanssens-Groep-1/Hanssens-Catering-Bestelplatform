@@ -140,7 +140,7 @@ h4,
 h5,
 h6 {
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 400;
   line-height: calc(var(--global-baseline) * 3);
   margin: 0 0 var(--global-whitespace);
 }
@@ -544,6 +544,13 @@ td {
   width: 24px;
   height: 24px;
   fill: var(--custom-option__symbol-Fill);
+}
+
+.c-custom-option__fake-input--radio .c-custom-option__symbol {
+  background-color: var(--custom-option__symbol-Fill);
+  border-radius: 100%;
+  width: 6px;
+  height: 6px;
 }
 
 .c-option--hidden:checked + .c-custom-option .c-custom-option__symbol {
@@ -1052,6 +1059,7 @@ td {
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
   padding-top: 50px; /* Location of the box */
+  padding-bottom: 50px; /* Location of the box */
   left: 0;
   top: 0;
   width: 100%; /* Full width */
