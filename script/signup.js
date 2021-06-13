@@ -7,12 +7,13 @@ signup = async () => {
     
     if(!userNaam == "" && !userVoornaam == "") {
       firebase.auth().createUserWithEmailAndPassword(userEmail, userPassword)
-        .then((userCredential) => {
+        .then(async (userCredential) => {
             var user = userCredential.user;
             var name = `${userNaam.charAt(0).toUpperCase() + userNaam.slice(1)}` + " " + `${userVoornaam.charAt(0).toUpperCase() + userVoornaam.slice(1)}`;
-            user.updateProfile({
+            await user.updateProfile({
               displayName: name,
-            }).then(window.location.replace("/"));
+            });
+            window.location.replace("/");
         })
         .catch((error) => {
             var errorCode = error.code;
