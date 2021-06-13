@@ -19,13 +19,17 @@ searchBar.addEventListener('keyup', (e) => {
             return bestelling.school.toLowerCase().includes(searchString);
         }
     })
+    filteredBestellingData.sort(function(a,b){
+        return new Date(a.datum) - new Date(b.datum);
+    });
 
-    console.log(filteredBestellingData);
+    showBestellingen(filteredBestellingData, DateTime.fromJSDate(startDateString).toISODate(), DateTime.fromJSDate(endDateString).toISODate());
+
 });
 
 startDatePicker.addEventListener('change', (e) => {
     startDateString = new Date(e.target.value);
-    var resultProductData = bestellingData.filter(bestelling => {
+    var filteredBestellingData = bestellingData.filter(bestelling => {
         if(!searchString == "") {
             date = new Date(bestelling.datum)
             return (date >= startDateString && date <= endDateString) && bestelling.school.toLowerCase().includes(searchString) || bestelling.school.toLowerCase().includes(searchString) && (date >= startDateString && date <= endDateString);
@@ -34,12 +38,17 @@ startDatePicker.addEventListener('change', (e) => {
             return (date >= startDateString && date <= endDateString);;
         }
       });
-    console.log(resultProductData);
+
+    filteredBestellingData.sort(function(a,b){
+        return new Date(a.datum) - new Date(b.datum);
+    });
+
+    showBestellingen(filteredBestellingData, DateTime.fromJSDate(startDateString).toISODate(), DateTime.fromJSDate(endDateString).toISODate());
 })
 
 endDatePicker.addEventListener('change', (e) => {
     endDateString = new Date(e.target.value);
-    var resultProductData = bestellingData.filter(bestelling => {
+    var filteredBestellingData = bestellingData.filter(bestelling => {
         if(!searchString == "") {
             date = new Date(bestelling.datum)
             return (date >= startDateString && date <= endDateString) && bestelling.school.toLowerCase().includes(searchString) || bestelling.school.toLowerCase().includes(searchString) && (date >= startDateString && date <= endDateString);
@@ -48,7 +57,12 @@ endDatePicker.addEventListener('change', (e) => {
             return (date >= startDateString && date <= endDateString);;
         }
     });
-    console.log(resultProductData);
+
+    filteredBestellingData.sort(function(a,b){
+        return new Date(a.datum) - new Date(b.datum);
+    });
+
+    showBestellingen(filteredBestellingData, DateTime.fromJSDate(startDateString).toISODate(), DateTime.fromJSDate(endDateString).toISODate());
 })
 
 logout = () => {
@@ -68,54 +82,114 @@ getBestellingen = () => {
     })
 }
 
-splitBestellingenPerMonth = (startdate, enddate) => {
-    var startDate = new Date(startdate);
-    var endDate = new Date(enddate);
+showBestellingen = (data, startdatum, einddatum) => {
+    var bestellingenHTML = document.querySelector('.js-bestellingen');
+    var downloadHTML = document.querySelector('.js-download');
+    var htmlStringDownload = "";
+    var htmlStringBestellingen = "";
+    htmlStringBestellingen += `<thead>
+    <tr>
+        <th>School</th>
+        <th>Naam</th>
+        <th>Klas</th>
+        <th>Datum</th>
+        <th>Soep</th>
+        <th>Maaltijd</th>
+        <th>Toezicht</th>
+        <th>Naar huis</th>
+        <th>Code</th>
+    </tr>
+    </thead>
+    <tbody>`
+
+    if(data == "") {
+        htmlStringDownload = "";
+        htmlStringBestellingen = "";
+    } else {
+        if(!startdatum == "" && !einddatum == "") {
+            htmlStringDownload = `<tr>
+            <th class="c-cell-margin">Start datum</th>
+            <th class="c-cell-margin">Eind datum</th>
+            <th class="c-th"></th>
+            </tr>
+            <tr>
+            <td class="c-cell-margin">${startdatum}</td>
+            <td class="c-cell-margin">${einddatum}</td>
+            <td class="c-table-icons c-icon-margin">
+                <i class="material-icons" onclick="download()">download</i>
+            </td>
+            </tr>`
+        } else {
+            htmlStringDownload = `<tr>
+            <th class="c-cell-margin">Start datum</th>
+            <th class="c-cell-margin">Eind datum</th>
+            <th class="c-th"></th>
+            </tr>
+            <tr>
+            <td class="c-cell-margin">Geen einddatum</td>
+            <td class="c-cell-margin">Geen startdatum</td>
+            <td class="c-table-icons c-icon-margin">
+                <i class="material-icons" onclick="download()">download</i>
+            </td>
+            </tr>`
+        }
     
-    var resultProductData = bestellingData.filter(a => {
-      var date = new Date(a.datum);
-      return (date >= startDate && date <= endDate);
-    });
+        for(var key in data) {
+            var obj = data[key];
+            htmlStringBestellingen += `<tr>
+            <td>${obj.school}</td>
+            <td>${obj.naam}</td>
+            <td>${obj.klas}</td>
+            <td>${obj.datum}</td>`
+    
+            if(obj.soep == true) {
+                htmlStringBestellingen += `<td>JA</td>`
+            } else {
+                htmlStringBestellingen += `<td>NEE</td>`
+            }
+    
+            if(obj.maaltijd == true) {
+                htmlStringBestellingen += `<td>JA</td>`
+            } else {
+                htmlStringBestellingen += `<td>NEE</td>`
+            }
+    
+            if(obj.toezicht == true) {
+                htmlStringBestellingen += `<td>JA</td>`
+            } else {
+                htmlStringBestellingen += `<td>NEE</td>`
+            }
+    
+            if(obj.naarhuis == true) {
+                htmlStringBestellingen += `<td>JA</td>`
+            } else {
+                htmlStringBestellingen += `<td>NEE</td>`
+            }
+    
+            htmlStringBestellingen += `<td>${obj.code}</td>
+            </tr>`
+        }
+    
+        htmlStringBestellingen += `</tbody>`
+    }
 
-    console.log(resultProductData)
+    downloadHTML.innerHTML = htmlStringDownload;
+    bestellingenHTML.innerHTML = htmlStringBestellingen;
 
-    // for(var key in orderedBestellingen) {
-    //     var bestellingen = orderedBestellingen[key]
-    //     for(var key in bestellingen) {
-    //         if(bestellingen[key].leerjaar == "1ste leerjaar") {
-    //             console.log(bestellingen[key]);
-    //         }
-    //     }
-    //     for(var key in bestellingen) {
-    //         if(bestellingen[key].leerjaar == "Kleuter") {
-    //             console.log(bestellingen[key]);
-    //         }
-    //     }
-    // }
 }
 
-showBestellingen = (data) => {
-    var downloadsHTML = document.querySelector('.js-downloads');
-    var htmlString = `<tr>
-    <th class="c-cell-margin">Maand</th>
-    <th class="c-th"></th>
-</tr>`;
-    for(var key in data) {
-        var bestellingen = data[key]
-        console.log(key);
-        htmlString += `<tr>
-        <td class="c-cell-margin">${key}</td>
-        <td class="c-table-icons c-icon-margin">
-            <i class="material-icons" onclick="downloadExcel(${key})">download</i>
-        </td>
-        </tr>`
-    }
-    downloadsHTML.innerHTML = htmlString;
+download = () => {
+    var table2excel = new Table2Excel();
+    table2excel.export(document.querySelectorAll("#excel-table"));
 }
 
 document.addEventListener('DOMContentLoaded', function() {
     firebase.auth().onAuthStateChanged((user) => {
     if (user) {
+            if(localStorage.getItem('role') == "school") {
+                window.location.replace('/admin/leerlingen');
+            }
+
             userData = user;
             getBestellingen();
         }

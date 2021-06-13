@@ -16,6 +16,7 @@
         <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js"></script>
 
         <script src="../../script/luxon.js"></script>
+        <script src="../../script/table2excel.js"></script>
 
         <script>
             var firebaseConfig = {
@@ -36,31 +37,13 @@
             <nav class="c-sidebar-nav">
                 <ul class="c-sidebar-ul">
                     <div>
-                        <li class="js-role-hanssens" style="display: none;">
+                        <li>
                             <a href="/admin/scholen">
                                 <i class="material-icons">school</i>
                                 <p>Scholen</p>
                             </a>
                         </li>
-                        <li class="js-role-school" style="display: none;">
-                            <a href="/admin/leerlingen">
-                            <i class="material-icons">account_circle</i>
-                            <p>Leerlingen</p>
-                            </a>
-                        </li>
-                        <li class="js-role-school" style="display: none;">
-                            <a href="/admin/bestellingen">
-                            <i class="material-icons">date_range</i>
-                            <p>Bestellingen</p>
-                            </a>
-                        </li>
-                        <li class="js-role-school c-sidebar-selected" style="display: none;">
-                            <a href="/admin/downloaden">
-                            <i class="material-icons">download</i>
-                            <p>Downloaden</p>
-                            </a>
-                        </li>
-                        <li class="js-role-hanssens c-sidebar-selected" style="display: none;">
+                        <li class="c-sidebar-selected">
                             <a href="/admin/downloaden">
                             <i class="material-icons">download</i>
                             <p>Downloaden</p>
@@ -113,33 +96,9 @@
                             </div>
                         </div>
                     <div class="c-table">
-                        <table class="js-downloads">
-                            <tr>
-                                <th class="c-cell-margin">Start datum</th>
-                                <th class="c-cell-margin">Eind datum</th>
-                                <th class="c-th"></th>
-                            </tr>
-                            <tr>
-                                <td class="c-cell-margin">2020-06-21</td>
-                                <td class="c-cell-margin">2020-06-22</td>
-                                <td class="c-table-icons c-icon-margin">
-                                    <i class="material-icons">download</i>
-                                </td>
-                            </tr>
+                        <table class="js-download">
                         </table>
-                        <table id="January 2020">
-                            <thead>
-                                <tr>
-                                    <th>Naam</th>
-                                    <th>Datum</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Aaron</td>
-                                    <td>2020-04-20</td>
-                                </tr>
-                            </tbody>
+                        <table class="js-bestellingen" id="excel-table">
                         </table>
                     </div>
                 </div>
