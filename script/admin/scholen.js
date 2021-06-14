@@ -161,6 +161,7 @@ addSchool = () => {
   var emailField = document.getElementById("emailField").value;
   var adresField = document.getElementById("adresField").value;
   var telefoonnummerField = document.getElementById("telefoonnummerField").value;
+  var besteltijdField = document.getElementById("besteltijdField").value;
 
   var kleuterField = document.getElementById("kleuterField").value;
   var eersteLeerjaarField = document.getElementById("eersteLeerjaarField").value;
@@ -172,7 +173,7 @@ addSchool = () => {
 
   var errorText = document.querySelector('.js-error');
 
-  if(!naamField == "" && !emailField == "" && !adresField == "" && !telefoonnummerField == "" && !kleuterField == "" &&  !eersteLeerjaarField == "" && !tweedeLeerjaarField == "" && !derdeLeerjaarField == "" && !vierdeLeerjaarField == "" && !vijfdeLeerjaarField == "" && !zesdeLeerjaarField == "") {
+  if(!naamField == "" && !emailField == "" && !adresField == "" && !telefoonnummerField == "" && !besteltijdField == "" && !kleuterField == "" &&  !eersteLeerjaarField == "" && !tweedeLeerjaarField == "" && !derdeLeerjaarField == "" && !vierdeLeerjaarField == "" && !vijfdeLeerjaarField == "" && !zesdeLeerjaarField == "") {
     var leerjaarCodes = {};
     var userPassword = Math.random().toString(36).slice(-8);
     leerjaarCodes['Kleuter'] = kleuterField;
@@ -196,7 +197,8 @@ addSchool = () => {
               adres: adresField,
               telefoonnummer: telefoonnummerField,
               leerjaren: leerjaarCodes,
-              voorkeuren: voorkeurCodes
+              voorkeuren: voorkeurCodes,
+              besteltijd: besteltijdField,
             });
 
             db.collection('users').doc(user.uid).set({

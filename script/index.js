@@ -9,7 +9,7 @@ var currentWeek = Math.ceil(dt.day / 7);
 var currentMonth = dt.monthLong;
 let menuHTML = document.querySelector(".js-menus");
 
-let userData, menuData = "", kindVoorkeurCode, kindNaam = "Selecteer jouw kind", kindStatus, kindSchool, kindRijksregister, kindLeerjaar, kindKlas;
+let userData, menuData = "", kindVoorkeurCode, kindNaam = "Selecteer jouw kind", kindStatus, kindSchool, kindRijksregister, kindLeerjaar, kindKlas, schoolBesteltijd;
 
 var e = document.getElementById("select-kinderen");
 
@@ -21,6 +21,7 @@ e.addEventListener('change', function() {
     kindKlas = e.options[e.selectedIndex].getAttribute("klas");
     kindRijksregister = e.options[e.selectedIndex].getAttribute("rijksregister");
     kindNaam = e.options[e.selectedIndex].value;
+    schoolBesteltijd = kindKlas = e.options[e.selectedIndex].getAttribute("besteltijd");
 
     if(kindNaam == "Selecteer jouw kind") {
         menuData = "";
@@ -100,7 +101,7 @@ getKinderen = (user) => {
     .onSnapshot((querySnapshot) => {
         let htmlString = "<option>Selecteer jouw kind</option>"
         querySnapshot.forEach((doc) => {
-        htmlString += `<option code="${doc.data().code}" status="${doc.data().status}" school="${doc.data().school}" leerjaar="${doc.data().leerjaar}" klas="${doc.data().klas}" rijksregister="${doc.data().rijksregisternummer}" value="${doc.data().naam}">${doc.data().naam}</option>`
+        htmlString += `<option code="${doc.data().code}" besteltijd="${doc.data().besteltijd}" status="${doc.data().status}" school="${doc.data().school}" leerjaar="${doc.data().leerjaar}" klas="${doc.data().klas}" rijksregister="${doc.data().rijksregisternummer}" value="${doc.data().naam}">${doc.data().naam}</option>`
         })
         kinderenHTML.innerHTML = htmlString;
     })
@@ -239,7 +240,7 @@ showMenus = (data, bestellingData) => {
                     </li>
                 </div>
                 <div class="c-dashboard-item__button">
-                    <p>Bestellen mogelijk tot 19:00</p>
+                    <p>Bestellen mogelijk tot ${schoolBesteltijd}</p>
                     <button class="o-button-reset c-button c-button-dashboard" id="knop${count}" onclick="addBestelling('Soep${count}', 'Maaltijd${count}', 'Toezicht${count}', 'Naarhuis${count}', '${dagLong.toISODate()}')">${buttonText}</button>
                 </div>
             </div>

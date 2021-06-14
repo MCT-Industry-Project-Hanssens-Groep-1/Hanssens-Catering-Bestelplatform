@@ -72,7 +72,7 @@ changeEmail = () => {
         getEmail(email);
         closeModal();
         }).catch((error) => {
-          errorText.innerText = "Nieuw E-mailadres is verkeerd of bestaat al!"
+          errorText.innerText = "Nieuw e-mailadres is verkeerd of bestaat al!"
           errorText.style.opacity = "100";
         });
     }).catch((error) => {

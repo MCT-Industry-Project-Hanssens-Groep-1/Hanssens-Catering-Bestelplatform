@@ -92,6 +92,7 @@ dropdownScholen = () => {
       let htmlStringLeerjaren = "";
       
       selectedSchool.innerHTML = o.querySelector("label").innerHTML;
+      selectedSchool.setAttribute("besteltijd", o.querySelector("label").getAttribute("besteltijd"));
       optionsContainerScholen.classList.remove("active");
       db.collection("scholen")
       .doc(o.querySelector("input").id)
@@ -209,7 +210,7 @@ getScholen = () => {
         id="${doc.id}"
         name="school"
       />
-      <label for="${doc.data().naam}">${doc.data().naam}</label>
+      <label besteltijd="${doc.data().besteltijd}" for="${doc.data().naam}">${doc.data().naam}</label>
     </div>`
   });
   dropdownScholen.innerHTML = htmlString;
@@ -256,6 +257,7 @@ addProfiel = () => {
   var userVoornaam = (document.getElementById("voornaamField").value).toLowerCase();
   var userRijksregister = (document.getElementById("rijksregisterField").value).toLowerCase();
   var userSchool = document.querySelector('.js-scholen-selected').innerHTML;
+  var schoolBesteltijd = document.querySelector('.js-scholen-selected').getAttribute("besteltijd");
   var userLeerjaar = document.querySelector('.js-leerjaar-selected');
   var userVoorkeur = document.querySelector('input[name="voorkeur"]:checked')
   var userKlas = (document.getElementById('klasField').value).toUpperCase();
@@ -267,13 +269,9 @@ addProfiel = () => {
   if(userVoorkeur != null) {
     voorkeurId = userVoorkeur.id;
     voorkeurCode = userVoorkeur.getAttribute('code');
-    console.log(voorkeurCode);
-    console.log(voorkeurId);
   } else {
     if(userLeerjaar != null) {
       voorkeurCode = userLeerjaar.id;
-      console.log(voorkeurCode);
-      console.log(voorkeurId);
     }
   }
   if(!userLeerjaar == "") {
@@ -299,7 +297,8 @@ addProfiel = () => {
         code: voorkeurCode,
         ouders: [firebase.auth().currentUser.uid],
         status: "unverified",
-        klas: `${userLeerjaarNummer}` + `${userKlas}`
+        klas: `${userLeerjaarNummer}` + `${userKlas}`,
+        besteltijd: schoolBesteltijd,
       })
       getKinderen(firebase.auth().currentUser);
       closeModal();
