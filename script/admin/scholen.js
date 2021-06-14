@@ -191,7 +191,7 @@ addSchool = () => {
             user.updateProfile({
               displayName: naamField,
             });
-            db.collection('scholen').doc().set({
+            db.collection('scholen').doc(user.uid).set({
               naam: naamField,
               email: emailField,
               adres: adresField,

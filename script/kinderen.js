@@ -259,7 +259,7 @@ addProfiel = () => {
   var userSchool = document.querySelector('.js-scholen-selected').innerHTML;
   var schoolBesteltijd = document.querySelector('.js-scholen-selected').getAttribute("besteltijd");
   var userLeerjaar = document.querySelector('.js-leerjaar-selected');
-  var userVoorkeur = document.querySelector('input[name="voorkeur"]:checked')
+  var userVoorkeur = document.querySelector('input[name="voorkeur"]:checked');
   var userKlas = (document.getElementById('klasField').value).toUpperCase();
   var errorText = document.querySelector('.js-error');
 

@@ -37,7 +37,19 @@
             <nav class="c-sidebar-nav">
                 <ul class="c-sidebar-ul">
                     <div>
-                        <li>
+                        <li class="js-school" style="display: none;">
+                            <a href="/admin/leerlingen">
+                                <i class="material-icons">account_circle</i> 
+                                <p>Leerlingen</p>
+                            </a>
+                        </li>
+                        <li class="js-school" style="display: none;">
+                            <a href="/admin/bestellingen">
+                                <i class="material-icons">date_range</i>
+                                <p>Bestellingen</p>
+                            </a>
+                        </li>
+                        <li class="js-hanssens" style="display: none;">
                             <a href="/admin/scholen">
                                 <i class="material-icons">school</i>
                                 <p>Scholen</p>
@@ -70,7 +82,7 @@
             <div class="c-profielen">
                 <div class="c-profielen-container">
                         <div class="c-search-bar" action="">
-                            <div class="c-search-bar-search">
+                            <div class="js-search-school c-search-bar-search">
                                 <div class="c-search-bar-label">
                                     <label for="">School:</label>
                                     <input class="c-input-search" id="js-search" type="text" placeholder="Howest Kortrijk">
@@ -81,7 +93,7 @@
                             </div>
                             <div class="c-search-bar-label">
                                 <label for="">Start datum:</label>
-                                <input class="c-input-startdate" type="date" name="date" id="js-startdate">
+                                <input class="js-search-datum c-input-startdate" type="date" name="date" id="js-startdate">
                             </div>
                             <div class="c-search-bar-label">
                                 <label for="">Eind datum:</label>

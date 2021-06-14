@@ -46,6 +46,12 @@
                             <p>Bestellingen</p>
                         </a>
                     </li>
+                    <li>
+                        <a href="/admin/downloaden">
+                            <i class="material-icons">download</i>
+                            <p>Downloaden</p>
+                        </a>
+                    </li>
                 </div>  
                 <li>
                     <a href="#" onclick="logout()">
@@ -77,6 +83,68 @@
                 <div class="c-table js-verified">
                 </div>
             </div>
+        </div>
+        <div id="profielen-modal" class="c-profielen-modal">
+
+            <!-- Modal content -->
+            <div class="c-profielen-modal-content">
+              <span class="c-profielen-modal-close" onclick="closeModal()">&times;</span>
+              <h1>Voeg jouw kind toe</h1>
+              <div>
+                <label class="c-label">Naam:</label>
+                <input class="c-input" type="text" id="naamField">
+              </div>
+              <div>
+                <label class="c-label">Voornaam:</label>
+                <input class="c-input" type="text" id="voornaamField">
+              </div>
+              <div class="js-leerjaren">
+                <!-- <label class="c-label">Leerjaar:</label>
+                <div class="select-box">
+                  <div class="js-leerjaar options-container">
+                    <div class="js-leerjaar-option option">
+                      <input type="radio" class="radio" id="R24A" name="leerjaar"/>
+                      <label for="kleuter">Kleuter</label>
+                    </div>
+                    <div class="js-leerjaar-option option">
+                      <input type="radio" class="radio" id="R24C" name="leerjaar"/>
+                      <label for="1e leerjaar">1e leerjaar</label>
+                    </div>
+                    <div class="js-leerjaar-option option">
+                      <input type="radio" class="radio" id="R24C" name="leerjaar"/>
+                      <label for="2e leerjaar">2e leerjaar</label>
+                    </div>
+                    <div class="js-leerjaar-option option">
+                      <input type="radio" class="radio" id="R24B" name="leerjaar"/>
+                      <label for="3e leerjaar">3e leerjaar</label>
+                    </div>
+                    <div class="js-leerjaar-option option">
+                      <input type="radio" class="radio" id="R24B" name="leerjaar"/>
+                      <label for="4e leerjaar">4e leerjaar</label>
+                    </div>
+                    <div class="js-leerjaar-option option">
+                      <input type="radio" class="radio" id="R24C" name="leerjaar"/>
+                      <label for="5e leerjaar">5e leerjaar</label>
+                    </div>
+                    <div class="js-leerjaar-option option">
+                      <input type="radio" class="radio" id="R24B" name="leerjaar"/>
+                      <label for="6e leerjaar">6e leerjaar</label>
+                    </div>
+                  </div>
+                  <div class="js-leerjaar-selected selected">Selecteer een leerjaar</div>
+                </div> -->
+              </div>
+              <div class="js-klas">
+                <label class="c-label">Klas:</label>
+                <input maxlength="1" class="c-input" type="text" id="klasField" placeholder="bv. A, B, C, ..">
+              </div>
+              <div class="js-voorkeuren">
+              </div>
+              <div class="js-error c-error">
+                Something went wrong!
+              </div>
+            <button class="o-button-reset c-button js-save">OPSLAAN</button>
+          </div>
         </div>
     </main>
 

@@ -82,6 +82,21 @@ getBestellingen = () => {
     })
 }
 
+getBestellingenSchool = () => {
+    db.collection('bestellingen')
+    .onSnapshot((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            bestellingen = doc.data().bestellingen;
+            for(var obj in bestellingen) {
+                var bestelling = bestellingen[obj];
+                if(bestelling.school == userData.displayName) {
+                    bestellingData.push(bestelling)
+                }
+            }
+        })
+    })
+}
+
 showBestellingen = (data, startdatum, einddatum) => {
     var bestellingenHTML = document.querySelector('.js-bestellingen');
     var downloadHTML = document.querySelector('.js-download');
@@ -184,14 +199,22 @@ download = () => {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+    var hanssensItems = document.querySelectorAll('.js-hanssens');
+    var schoolItems = document.querySelectorAll('.js-school');
+    var inputSchool = document.querySelector('.js-search-school');
+    var inputDatum = document.querySelector('.js-search-datum');
+    if(localStorage.getItem('role') == "school") {
+        schoolItems.forEach(item => item.style.display = "block");
+        inputSchool.style.display = "none";
+        inputDatum.style.borderRadius = "8px 0px 0px 8px";
+        getBestellingenSchool();
+    } else if(localStorage.getItem('role') == "hanssens") {
+        hanssensItems.forEach(item => item.style.display = "block");
+        getBestellingen();
+    }
     firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-            if(localStorage.getItem('role') == "school") {
-                window.location.replace('/admin/leerlingen');
-            }
-
-            userData = user;
-            getBestellingen();
+        userData = user;
         }
     });
 });
