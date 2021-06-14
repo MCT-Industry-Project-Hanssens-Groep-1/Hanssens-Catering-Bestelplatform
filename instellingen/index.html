@@ -72,10 +72,48 @@
     <main class="c-instellingen">
             <div class="c-profielen">
                 <div class="c-profielen-container">
+                    <div class="c-profielen-title">
+                        <h1>E-mailadres wijzigen</h1>
+                      </div>
+                      <div class="c-profielen-list c-instellingen-content">
+                        <div class="js-email c-profielen-subtitle">
+                        </div>
+                    </div>
+                    <div class="c-profielen-title">
+                        <h1>Wachtwoord wijzigen</h1> 
+                      </div>
+                      <div class="js-email c-profielen-list c-instellingen-content">
+                        <div class="c-profielen-subtitle c-instellingen-button">
+                            <button class="o-button-reset c-button" onclick="changePassword()">WIJZIGEN</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-    </section>
+            <div id="modal" class="c-profielen-modal">
 
-    <script src="../../script/kinderen.js"></script>
+                <!-- Modal content -->
+                <div class="c-profielen-modal-content">
+                  <span class="c-profielen-modal-close" onclick="closeModal()">&times;</span>
+                  <h3>E-mailadres wijzigen</h3>
+                  <div>
+                    <label class="c-label">E-mailadres:</label>
+                    <input class="c-input" type="text" id="emailField">
+                  </div>
+                  <button class="o-button-reset c-button" onclick="changeEmail()">BEVESTIGEN</button>
+              </div>
+    </section>
+    <div class="c-notification-wrapper js-notification hide c-instellingen-notification">
+        <div class="c-notification">
+            <div class="c-notification-content">
+                <div class="c-notification-icon"><i class="material-icons">info</i></div>
+                <div class="c-notification-details">
+                    <span>Wachtwoord wijzigen e-mail verstuurd!</span>
+                </div>
+            </div>
+            <div class="c-notification-closeicon" onclick="closeNotification()"><i class="material-icons">close</i></div></div>
+        </div>
+    </div>
+
+    <script src="../script/instellingen.js"></script>
 </body>
 </html>

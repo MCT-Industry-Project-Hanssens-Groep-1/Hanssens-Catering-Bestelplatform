@@ -1,6 +1,46 @@
 var db = firebase.firestore();
 
 var modal = document.getElementById("profielen-modal");
+var editModal = document.getElementById("edit-modal");
+
+var searchBar = document.getElementById('js-search');
+var scholenData = [];
+
+searchBar.addEventListener('keyup', (e) => {
+  var searchString = e.target.value.toLowerCase();
+  var filteredScholenData = scholenData.filter(school => {
+      return school.naam.toLowerCase().includes(searchString);
+  })
+  showScholen(filteredScholenData);
+});
+
+openEditModal = (id, naam, adres, telefoonnummer) => {
+  var saveButton = document.querySelector('.js-edit-save');
+  var naamField = document.getElementById("naamEditField");
+  var adresField = document.getElementById("adresEditField");
+  var telefoonnummerField = document.getElementById("telefoonnummerEditField");
+
+  naamField.value = naam;
+  adresField.value = adres;
+  telefoonnummerField.value = telefoonnummer;
+
+  editModal.style.transform = "translate(0)";
+  editModal.style.opacity = "1";
+
+  saveButton.addEventListener('click', () => {
+    db.collection('scholen').doc(id).update({
+      naam: naamField.value,
+      adres: adresField.value,
+      telefoonnummer: telefoonnummerField.value,
+    });
+    closeEditModal();
+  })
+}
+
+closeEditModal = () => {
+  editModal.style.transform = "translate(9999px)";
+  editModal.style.opacity = "0";
+}
 
 showInputLactose = () => {
     var checkBox = document.getElementById("lactoseCheckbox");
@@ -71,6 +111,8 @@ closeModal = () => {
 window.onclick = function(event) {
     if (event.target == modal) {
       closeModal();
+    } else if (event.target == editModal) {
+      closeEditModal();
     }
   }
 
@@ -191,33 +233,44 @@ addSchool = () => {
 }
 
 getScholen = () => {
+  db.collection('scholen')
+  .onSnapshot((querySnapshot) => {
+    scholenData = [];
+    querySnapshot.forEach((doc) => {
+      var object = doc.data();
+      object["id"] = doc.id;
+      scholenData.push(object);
+    })
+    showScholen(scholenData);
+  })
+}
+
+showScholen = (data) => {
   let scholenHTML = document.querySelector('.js-scholen');
-  db.collection('scholen').onSnapshot((querySnapshot) => {
-    let htmlString = `<tr>
-    <th>Naam</th>
-    <th>Adres</th>
-    <th>E-mailadres</th>
-    <th>Telefoonnummer</th>
-    <th></th>
-    <th></th>
+  let htmlString = `<tr>
+  <th>Naam</th>
+  <th>Adres</th>
+  <th>E-mailadres</th>
+  <th>Telefoonnummer</th>
+  <th></th>
+  <th></th>
 </tr>`
 
-    querySnapshot.forEach((doc) => {
-      htmlString += `<tr>
-      <td>${doc.data().naam}</td>
-      <td>${doc.data().adres}</td>
-      <td>${doc.data().email}</td>
-      <td>${doc.data().telefoonnummer}</td>
-      <td class="c-table-icons">
-          <i class="material-icons">edit</i>
-      </td>
-      <td class="c-table-icons">
-          <i class="material-icons">delete</i>
-      </td>
+  for(var obj of data) {
+    htmlString += `<tr>
+    <td>${obj.naam}</td>
+    <td>${obj.adres}</td>
+    <td>${obj.email}</td>
+    <td>${obj.telefoonnummer}</td>
+    <td class="c-table-icons">
+        <i class="material-icons" onclick="openEditModal('${obj.id}', '${obj.naam}', '${obj.adres}', '${obj.telefoonnummer}')">edit</i>
+    </td>
+    <td class="c-table-icons">
+        <i class="material-icons">delete</i>
+    </td>
   </tr>`
-    })
-    scholenHTML.innerHTML = htmlString;
-  })
+  }
+  scholenHTML.innerHTML = htmlString;
 }
 
 logout = () => {

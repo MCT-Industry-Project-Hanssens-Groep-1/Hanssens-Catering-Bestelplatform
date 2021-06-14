@@ -70,9 +70,11 @@
             <div class="c-profielen-container">
                 <div>
                     <div class="c-search-bar" action="">
-                        <input class="c-input-search" type="text" placeholder="Naam" name="search">
-                        <div class="c-button-search c-button-search-scholen">
-                            <i class="material-icons">search</i>
+                        <div class="c-search-bar-search">
+                            <input class="c-input-search c-input-search-scholen" id="js-search" type="text" placeholder="School">
+                            <div class="c-button-search">
+                                <i class="material-icons">search</i>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -206,6 +208,30 @@
                 Something went wrong!
               </div>
             <button class="o-button-reset c-button" onclick="addSchool()">OPSLAAN</button>
+          </div>
+        </div>
+        <div id="edit-modal" class="c-profielen-modal">
+
+            <!-- Modal content -->
+            <div class="c-profielen-modal-content">
+              <span class="c-profielen-modal-close" onclick="closeEditModal()">&times;</span>
+              <h1>School bewerken</h1>
+              <div>
+                <label class="c-label">Naam:</label>
+                <input class="c-input" type="text" id="naamEditField">
+              </div>
+              <div>
+                <label class="c-label">Adres:</label>
+                <input class="c-input" type="text" id="adresEditField">
+              </div>
+              <div>
+                <label class="c-label">Telefoonnummer:</label>
+                <input class="c-input" type="tel" id="telefoonnummerEditField">
+              </div>
+              <div class="js-error c-error">
+                Something went wrong!
+              </div>
+            <button class="o-button-reset c-button js-edit-save">OPSLAAN</button>
           </div>
         </div>
     </main>

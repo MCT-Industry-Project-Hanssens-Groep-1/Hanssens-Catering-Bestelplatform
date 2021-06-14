@@ -26,6 +26,7 @@
 
 :root {
   /* colors */
+  --global-color-alpha-x-light: #4243a7;
   --global-color-alpha-light: #3e40af;
   --global-color-alpha: #2e2f8b;
   --global-color-alpha-dark: #262773;
@@ -83,6 +84,7 @@ html {
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 *,
@@ -1077,6 +1079,19 @@ td {
   margin-left: 24px;
 }
 
+.c-instellingen-button {
+  width: 240px;
+}
+
+.c-notification-wrapper.c-instellingen-notification {
+  top: 20px;
+}
+
+.c-instellingen .c-profielen .c-instellingen-content {
+  margin-bottom: 5vh;
+  margin-left: 0px;
+}
+
 .c-profielen-modal {
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
@@ -1087,6 +1102,7 @@ td {
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
+  overflow-x: hidden;
   background-color: rgb(0, 0, 0); /* Fallback color */
   background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
   opacity: 0;
@@ -1359,6 +1375,11 @@ td {
   height: 100%;
 }
 
+.c-input-search-scholen {
+  border: 1px solid var(--global-color-neutral);
+  border-radius: 8px;
+}
+
 .c-input-search-klas {
   width: 10vw;
   border: 1px solid var(--global-color-neutral);
@@ -1378,11 +1399,8 @@ td {
 .c-button-search {
   position: absolute;
   color: var(--global-color-neutral-xxx-dark);
-  margin-top: 3px;
-  margin-right: 1px;
-  padding:7px;
-  padding-bottom: 3px;
-  background: white;
+  margin-right: 16px;
+  margin-top: 12px;
 }
 
 .c-button-search-scholen {
@@ -1473,6 +1491,112 @@ input[type=date] {
 
 .c-icon-margin {
   padding: 8px 72px;
+}
+
+
+/*
+    Component: Notification
+    ---
+    Notifications
+*/
+
+.c-notification-wrapper {
+  position: absolute;
+  top: 120px;
+  right: 20px;
+  animation: show_notification 0.8s ease forwards;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.c-notification-wrapper.show{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@keyframes show_notification {
+  0%{
+    transform: translateX(100%);
+  }
+  40%{
+    transform: translateX(-10%);
+  }
+  80%{
+    transform: translateX(0%);
+  }
+  100%{
+    transform: translateX(-10px);
+  }
+}
+
+.c-notification-wrapper.hide {
+  animation: hide_notification 1s ease forwards;
+}
+@keyframes hide_notification {
+  0%{
+    transform: translateX(-10px);
+  }
+  40%{
+    transform: translateX(0%);
+  }
+  80%, 100%{
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(100%);
+  }
+}
+
+.c-notification {
+  background: var(--global-color-alpha-dark);
+  padding: 20px 15px 20px 15px;
+  border-radius: 8px;
+  border-left: 8px solid var(--global-color-beta);
+  box-shadow: 1px 7px 14px -5px rgba(0, 0, 0, 0.15);
+  width: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+}
+
+.c-notification-content {
+  display: flex;
+  align-items: center;
+}
+
+.c-notification-icon {
+  display: flex;
+  justify-content: center;
+}
+
+.c-notification-icon i {
+  font-size: 30px;
+  color: var(--global-color-beta);
+}
+
+.c-notification-details {
+  margin-left: 15px;
+}
+
+.c-notification-details span {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.c-notification-closeicon {
+  color: var(--global-color-neutral);
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  padding: 3px;
+  text-align: center;
+  border-radius: 50%;
+  background: var(--global-color-alpha);
+  transition: all 0.3s ease;
+}
+
+.c-notification-closeicon:hover {
+  background: var(--global-color-alpha-x-light);
 }
 
 /*------------------------------------*\

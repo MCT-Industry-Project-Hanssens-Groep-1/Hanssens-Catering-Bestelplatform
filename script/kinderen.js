@@ -220,7 +220,6 @@ getProfiel = (user) => {
   let profielHTML = document.querySelector('.js-profiel');
   let htmlString = `<div class="c-profielen-subtitle">
   <h2>${user.displayName}</h2>
-  <i class="material-icons">edit</i>
 
 </div>
 <div class="c-profielen-voorkeuren">

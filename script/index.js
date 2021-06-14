@@ -40,6 +40,21 @@ e.addEventListener('change', function() {
     }
 })
 
+openNotification = () => {
+    var notification = document.querySelector('.js-notification');
+    notification.classList.remove("hide");
+    notification.classList.add("show");
+
+    setTimeout(() => {
+        notification.classList.add("hide");
+    }, 5000)
+}
+
+closeNotification = () => {
+    var notification = document.querySelector('.js-notification');
+    notification.classList.add("hide");
+}
+
 setDate = () => {
     let datumHTML = document.querySelector('.js-datum');
     datumHTML.innerHTML = `${currentMonth.charAt(0).toUpperCase() + currentMonth.slice(1)} - Week ${currentWeek}`;
@@ -96,7 +111,8 @@ getMenus = async (codeId, startDate, endDate) => {
         let token = await userData.getIdToken();
         document.querySelector('.c-dashboard').style.filter = "blur(2px)"
         document.querySelector('.c-loader').style.display = "block";
-        const data = await fetch(`https://hanssens-catering-soapapi.azurewebsites.net/api/menu/${codeId}/${startDate}/${endDate}/`, {
+        var bestellingData = [];
+        const menuData = await fetch(`https://hanssens-catering-soapapi.azurewebsites.net/api/menu/${codeId}/${startDate}/${endDate}/`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -106,16 +122,24 @@ getMenus = async (codeId, startDate, endDate) => {
             .then((r) => r.json())
             .catch((err) => console.error('An error occured:', err));
 
-        console.log(data);
+        await db.collection('bestellingen').doc(kindRijksregister).get().then((doc) => {
+            if(doc.exists) {
+                var bestellingen = doc.data().bestellingen;
+                for(var obj in bestellingen) {
+                    bestellingData.push(bestellingen[obj]);
+                }
+            }
+        })
+
         document.querySelector('.c-loader').style.display = "none";
         document.querySelector('.c-dashboard').style.filter = "none"
-        showMenus(data);
+        showMenus(menuData, bestellingData);
     } else {
         console.log("Geen kind geselecteerd!")
     }
 }
 
-showMenus = (data) => {
+showMenus = (data, bestellingData) => {
     let htmlString = ""
     let dagLong = dt.startOf('week');
     let count = 1;
@@ -130,6 +154,30 @@ showMenus = (data) => {
             if(dagMenu[3] != undefined) {
                 maaltijd += ", " + `${dagMenu[3]}`
             }
+            
+            let soepChecked = "";
+            let maaltijdChecked = "";
+            let toezichtChecked = "";
+            let naarhuisChecked = "";
+            let buttonText = "VERZENDEN";
+            for(var i = 0; i < bestellingData.length; i++) {
+                if (bestellingData[i].datum == dagLong.toISODate()) {
+                    if(bestellingData[i].soep == true) {
+                        soepChecked = "checked";
+                    }
+                    if(bestellingData[i].maaltijd == true) {
+                        maaltijdChecked = "checked";
+                    }
+                    if(bestellingData[i].toezicht == true) {
+                        toezichtChecked = "checked";
+                    }
+                    if(bestellingData[i].naarhuis == true) {
+                        naarhuisChecked = "checked";
+                    }
+                    buttonText = "BIJWERKEN";
+                }
+            }
+            
             htmlString += `<div class="c-dashboard-item">
             <div class="c-dashboard-item__day">
                 <p class="c-dashboard-item__day-text">${dagLong.weekdayLong.charAt(0).toUpperCase() + dagLong.weekdayLong.slice(1)}</p>
@@ -138,7 +186,7 @@ showMenus = (data) => {
             <div class="c-dashboard-item__content">
                 <div class="c-dashboard-item__content-option">
                     <li class="c-form-field c-form-field--option c-option-list__item">
-                        <input class="o-hide-accessible c-option c-option--hidden" type="checkbox" id="Soep${count}">
+                        <input class="o-hide-accessible c-option c-option--hidden" type="checkbox" id="Soep${count}" ${soepChecked}>
                         <label class="c-label c-label--option c-custom-option" for="Soep${count}">
                             <span class="c-custom-option__fake-input c-custom-option__fake-input--checkbox">
                                 <svg class="c-custom-option__symbol" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 6.75">
@@ -152,7 +200,7 @@ showMenus = (data) => {
                 </div>
                 <div class="c-dashboard-item__content-option">
                     <li class="c-form-field c-form-field--option c-option-list__item">
-                        <input class="o-hide-accessible c-option c-option--hidden" type="checkbox" id="Maaltijd${count}">
+                        <input class="o-hide-accessible c-option c-option--hidden" type="checkbox" id="Maaltijd${count}" ${maaltijdChecked}>
                         <label class="c-label c-label--option c-custom-option" for="Maaltijd${count}">
                             <span class="c-custom-option__fake-input c-custom-option__fake-input--checkbox">
                                 <svg class="c-custom-option__symbol" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 6.75">
@@ -166,7 +214,7 @@ showMenus = (data) => {
                 </div>
                 <div class="c-dashboard-item__content-option">
                     <li class="c-form-field c-form-field--option c-option-list__item">
-                        <input class="o-hide-accessible c-option c-option--hidden" type="checkbox" id="Toezicht${count}">
+                        <input class="o-hide-accessible c-option c-option--hidden" type="checkbox" id="Toezicht${count}" ${toezichtChecked}>
                         <label class="c-label c-label--option c-custom-option" for="Toezicht${count}">
                             <span class="c-custom-option__fake-input c-custom-option__fake-input--checkbox">
                                 <svg class="c-custom-option__symbol" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 6.75">
@@ -179,7 +227,7 @@ showMenus = (data) => {
                 </div>
                 <div class="c-dashboard-item__content-option">
                     <li class="c-form-field c-form-field--option c-option-list__item">
-                        <input class="o-hide-accessible c-option c-option--hidden" type="checkbox" id="Naarhuis${count}">
+                        <input class="o-hide-accessible c-option c-option--hidden" type="checkbox" id="Naarhuis${count}" ${naarhuisChecked}>
                         <label class="c-label c-label--option c-custom-option" for="Naarhuis${count}">
                             <span class="c-custom-option__fake-input c-custom-option__fake-input--checkbox">
                                 <svg class="c-custom-option__symbol" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 6.75">
@@ -192,7 +240,7 @@ showMenus = (data) => {
                 </div>
                 <div class="c-dashboard-item__button">
                     <p>Bestellen mogelijk tot 19:00</p>
-                    <button class="o-button-reset c-button c-button-dashboard" onclick="addBestelling('Soep${count}', 'Maaltijd${count}', 'Toezicht${count}', 'Naarhuis${count}', '${dagLong.toISODate()}')">VERZENDEN</button>
+                    <button class="o-button-reset c-button c-button-dashboard" id="knop${count}" onclick="addBestelling('Soep${count}', 'Maaltijd${count}', 'Toezicht${count}', 'Naarhuis${count}', '${dagLong.toISODate()}')">${buttonText}</button>
                 </div>
             </div>
         </div>`
@@ -245,8 +293,16 @@ addBestelling = (soepCheckbox, maaltijdCheckbox, toezichtCheckbox, naarhuisCheck
         db.collection("bestellingen").doc(kindRijksregister).set({
             bestellingen: {[datum]: {naam: kindNaam, datum: datum, soep: soep, maaltijd: maaltijd, toezicht: toezicht, naarhuis: naarhuis, code: kindVoorkeurCode, school: kindSchool, leerjaar: kindLeerjaar, klas: kindKlas}}
         }, { merge: true })
+        openNotification();
     } else {
-        console.log("Niets geselecteerd!")
+        db.collection("bestellingen").where(`bestellingen.${datum}.naam`, "==", kindNaam).get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                doc.ref.update({
+                    ['bestellingen.' + datum]: firebase.firestore.FieldValue.delete()
+                })
+            })
+        });
+        openNotification();
     }
 }
 
