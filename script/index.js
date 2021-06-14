@@ -21,7 +21,7 @@ e.addEventListener('change', function() {
     kindKlas = e.options[e.selectedIndex].getAttribute("klas");
     kindRijksregister = e.options[e.selectedIndex].getAttribute("rijksregister");
     kindNaam = e.options[e.selectedIndex].value;
-    schoolBesteltijd = kindKlas = e.options[e.selectedIndex].getAttribute("besteltijd");
+    schoolBesteltijd = e.options[e.selectedIndex].getAttribute("besteltijd");
 
     if(kindNaam == "Selecteer jouw kind") {
         menuData = "";
