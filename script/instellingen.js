@@ -10,10 +10,14 @@ openModal = () => {
 closeModal = () => {
     modal.style.transform = "translate(9999px)";
     modal.style.opacity = "0";
+    var errorText = document.querySelector('.js-error');
+    errorText.style.opacity = "0";
 
     var elements = document.getElementsByTagName("input");
     for (var ii=0; ii < elements.length; ii++) {
       if (elements[ii].type == "text") {
+        elements[ii].value = "";
+      }else if (elements[ii].type == "password") {
         elements[ii].value = "";
       }
     }
@@ -55,14 +59,26 @@ changePassword = () => {
 }
 
 changeEmail = () => {
-    email = document.getElementById('emailField').value;
-    userData.updateEmail(email).then(() => {
+    var currentEmail = document.getElementById('currentEmailField').value;
+    var password = document.getElementById('passwordField').value;
+    var email = document.getElementById('emailField').value;
+    var errorText = document.querySelector('.js-error');
+
+    var cred = firebase.auth.EmailAuthProvider.credential(
+      currentEmail, password
+    );
+    userData.reauthenticateWithCredential(cred).then(() => {
+      userData.updateEmail(email).then(() => {
         getEmail(email);
         closeModal();
-      }).catch((error) => {
-        // An error occurred
-        // ...
-      });
+        }).catch((error) => {
+          errorText.innerText = "Nieuw E-mailadres is verkeerd of bestaat al!"
+          errorText.style.opacity = "100";
+        });
+    }).catch((error) => {
+      errorText.innerText = "Gegevens verkeerd ingevuld!"
+      errorText.style.opacity = "100";
+    });
 }
 
 getEmail = (email) => {

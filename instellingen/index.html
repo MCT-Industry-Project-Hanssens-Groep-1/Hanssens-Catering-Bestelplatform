@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Instellingen - Hanssens Catering Bestelplatform</title>
 
-    <link rel="stylesheet" href="../../style/normalize.css">
-    <link rel="stylesheet" href="../../style/screen.css">
+    <link rel="stylesheet" href="../style/normalize.css">
+    <link rel="stylesheet" href="../style/screen.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
 
     <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
@@ -65,7 +65,7 @@
   <header class="c-header c-header-center">
       <nav class="c-nav c-nav-list">
           <div class="c-header__item">
-              <img class="c-logo" src="../../src/Logo.png" alt="Hanssens Catering Logo">
+              <img class="c-logo" src="../src/Logo.png" alt="Hanssens Catering Logo">
           </div>
       </nav>
   </header>
@@ -96,11 +96,24 @@
                   <span class="c-profielen-modal-close" onclick="closeModal()">&times;</span>
                   <h3>E-mailadres wijzigen</h3>
                   <div>
-                    <label class="c-label">E-mailadres:</label>
+                    <label class="c-label">Huidig E-mailadres:</label>
+                    <input class="c-input" type="text" id="currentEmailField">
+                  </div>
+                  <div>
+                    <label class="c-label">Wachtwoord:</label>
+                    <input class="c-input" type="password" id="passwordField">
+                  </div>
+                  <div>
+                    <label class="c-label">Nieuw E-mailadres:</label>
                     <input class="c-input" type="text" id="emailField">
+                  </div>
+                  <div class="js-error c-error">
+                    Something went wrong!
                   </div>
                   <button class="o-button-reset c-button" onclick="changeEmail()">BEVESTIGEN</button>
               </div>
+            </div>
+
     </section>
     <div class="c-notification-wrapper js-notification hide c-instellingen-notification">
         <div class="c-notification">
@@ -110,10 +123,9 @@
                     <span>Wachtwoord wijzigen e-mail verstuurd!</span>
                 </div>
             </div>
-            <div class="c-notification-closeicon" onclick="closeNotification()"><i class="material-icons">close</i></div></div>
+            <div class="c-notification-closeicon" onclick="closeNotification()"><i class="material-icons">close</i></div>
         </div>
     </div>
-
     <script src="../script/instellingen.js"></script>
 </body>
 </html>
