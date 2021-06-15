@@ -7,7 +7,7 @@ login = () => {
     .then((userCredential) => {
       // Signed in
       var user = userCredential.user;
-      window.location.replace("/")
+      window.location.replace("/admin")
     })
     .catch((error) => {
       var errorCode = error.code;

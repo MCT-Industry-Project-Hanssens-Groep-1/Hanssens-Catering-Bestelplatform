@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" style="background-color: var(--global-color-neutral-light);">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instellingen - Hanssens Catering Bestelplatform</title>
+
+    <link rel="stylesheet" href="../style/normalize.css">
+    <link rel="stylesheet" href="../style/screen.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-firestore.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js"></script>
+
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyBdUbMGYO_xd0GfKlS1okuTAistnWoMsxA",
+            authDomain: "hanssens-catering-project.firebaseapp.com",
+            projectId: "hanssens-catering-project",
+            storageBucket: "hanssens-catering-project.appspot.com",
+            messagingSenderId: "152936813269",
+            appId: "1:152936813269:web:35b11bceae2f01c291c85c",
+            measurementId: "G-SR3RLLW4CY"
+        };
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+    </script>
+</head>
+<body>
+    <div class="c-sidebar">
+      <nav class="c-sidebar-nav">
+          <ul class="c-sidebar-ul">
+              <div>
+                  <li>
+                      <a href="/">
+                        <i class="material-icons">home</i>
+                        <p>Hoofdpagina</p>
+                      </a>
+                  </li>
+                  <li>
+                      <a href="/profiel">
+                          <i class="material-icons">account_circle</i>
+                          <p>Profiel</p>
+                      </a>
+                  </li>
+                  <li>
+                      <a class="c-sidebar-selected" href="/instellingen">
+                          <i class="material-icons">settings</i>
+                          <p>Instellingen</p>
+                      </a>
+                  </li>
+              </div>
+              <li>
+                  <a href="#" onclick="logout()">
+                      <i class="material-icons">logout</i>
+                      <p>Uitloggen</p>
+                  </a>
+              </li>
+          </ul>
+      </nav>
+  </div>
+  <header class="c-header c-header-center">
+    <i class="material-icons c-header-hamburger">menu</i>
+      <nav class="c-nav c-nav-list c-nav-profiel">
+          <div class="c-header__item">
+              <img class="c-logo" src="../src/Logo.png" alt="Hanssens Catering Logo">
+          </div>
+      </nav>
+  </header>
+    <main class="c-instellingen">
+            <div class="c-profielen">
+                <div class="c-profielen-container">
+                    <div class="c-profielen-title">
+                        <h1>E-mailadres wijzigen</h1>
+                      </div>
+                      <div class="c-profielen-list c-instellingen-content">
+                        <div class="js-email c-profielen-email c-profielen-subtitle">
+                        </div>
+                    </div>
+                    <div class="c-profielen-title">
+                        <h1>Wachtwoord wijzigen</h1> 
+                      </div>
+                      <div class="js-email c-profielen-list c-instellingen-content">
+                        <div class="c-profielen-subtitle c-instellingen-button">
+                            <button class="o-button-reset c-button" onclick="changePassword()">WIJZIGEN</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="modal" class="c-profielen-modal">
+
+                <!-- Modal content -->
+                <div class="c-profielen-modal-content">
+                  <span class="c-profielen-modal-close" onclick="closeModal()">&times;</span>
+                  <h3>E-mailadres wijzigen</h3>
+                  <div>
+                    <label class="c-label">Huidig e-mailadres:</label>
+                    <input class="c-input" type="text" id="currentEmailField">
+                  </div>
+                  <div>
+                    <label class="c-label">Wachtwoord:</label>
+                    <input class="c-input" type="password" id="passwordField">
+                  </div>
+                  <div>
+                    <label class="c-label">Nieuw e-mailadres:</label>
+                    <input class="c-input" type="text" id="emailField">
+                  </div>
+                  <div class="js-error c-error">
+                    Something went wrong!
+                  </div>
+                  <button class="o-button-reset c-button" onclick="changeEmail()">BEVESTIGEN</button>
+              </div>
+            </div>
+
+    </section>
+    <aside class="c-notifications js-notifications">
+        <!-- <div class="c-notification">
+            <p class="c-notification__message js-notification-message">You have added Belgium to the places you want to visit.</p>
+            <button class="c-notification__button js-notification-button"><svg class="c-notification__icon" xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="arcs"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+        </div>
+        <div class="c-notification">
+            <p class="c-notification__message js-notification-message">You have added Belgium to the places you want to visit.</p>
+            <button class="c-notification__button js-notification-button"><svg class="c-notification__icon" xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="arcs"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+        </div> -->
+    </aside>
+    <script src="../script/notification.js"></script>
+    <script src="../script/instellingen.js"></script>
+    <script src="../script/nav.js"></script>
+</body>
+</html>

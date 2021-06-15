@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" style="background-color: var(--global-color-neutral-light);">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leerlingen - Hanssens Catering Admin</title>
+
+    <link rel="stylesheet" href="../../style/normalize.css">
+    <link rel="stylesheet" href="../../style/screen.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-firestore.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js"></script>
+
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyBdUbMGYO_xd0GfKlS1okuTAistnWoMsxA",
+            authDomain: "hanssens-catering-project.firebaseapp.com",
+            projectId: "hanssens-catering-project",
+            storageBucket: "hanssens-catering-project.appspot.com",
+            messagingSenderId: "152936813269",
+            appId: "1:152936813269:web:35b11bceae2f01c291c85c",
+            measurementId: "G-SR3RLLW4CY"
+        };
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+    </script>
+</head>
+<body>
+    <div class="c-sidebar">
+        <nav class="c-sidebar-nav">
+            <ul class="c-sidebar-ul">
+                <div>
+                    <li class="c-sidebar-selected">
+                        <a href="/admin/leerlingen">
+                            <i class="material-icons">account_circle</i> 
+                            <p>Leerlingen</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/bestellingen">
+                            <i class="material-icons">date_range</i>
+                            <p>Bestellingen</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/downloaden">
+                            <i class="material-icons">download</i>
+                            <p>Downloaden</p>
+                        </a>
+                    </li>
+                </div>  
+                <li>
+                    <a href="#" onclick="logout()">
+                        <i class="material-icons">logout</i>
+                        <p>Uitloggen</p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <header class="c-header c-header-center">
+      <i class="material-icons c-header-hamburger">menu</i>
+        <nav class="c-nav c-nav-list c-nav-profiel">
+            <div class="c-header__item">
+                <img class="c-logo" src="../../src/Logo.png" alt="Hanssens Catering Logo">
+            </div>
+        </nav>
+    </header>
+    <main class="c-instellingen">
+        <div class="c-profielen">
+            <div class="c-profielen-container">
+                <div class="c-profielen-title">
+                    <h1>Nog te accepteren</h1>
+                </div>
+                <div class="c-table js-unverified">
+                </div>
+                <div class="c-profielen-title">
+                    <h1>Geaccepteerd</h1>
+                </div>
+                <div class="c-table js-verified">
+                </div>
+            </div>
+        </div>
+        <div id="profielen-modal" class="c-profielen-modal">
+
+            <!-- Modal content -->
+            <div class="c-profielen-modal-content">
+              <span class="c-profielen-modal-close" onclick="closeModal()">&times;</span>
+              <h1>Leerling bewerken</h1>
+              <div>
+                <label class="c-label">Naam:</label>
+                <input class="c-input" type="text" id="naamField">
+              </div>
+              <div>
+                <label class="c-label">Voornaam:</label>
+                <input class="c-input" type="text" id="voornaamField">
+              </div>
+              <div class="js-leerjaren">
+                <!-- <label class="c-label">Leerjaar:</label>
+                <div class="select-box">
+                  <div class="js-leerjaar options-container">
+                    <div class="js-leerjaar-option option">
+                      <input type="radio" class="radio" id="R24A" name="leerjaar"/>
+                      <label for="kleuter">Kleuter</label>
+                    </div>
+                    <div class="js-leerjaar-option option">
+                      <input type="radio" class="radio" id="R24C" name="leerjaar"/>
+                      <label for="1e leerjaar">1e leerjaar</label>
+                    </div>
+                    <div class="js-leerjaar-option option">
+                      <input type="radio" class="radio" id="R24C" name="leerjaar"/>
+                      <label for="2e leerjaar">2e leerjaar</label>
+                    </div>
+                    <div class="js-leerjaar-option option">
+                      <input type="radio" class="radio" id="R24B" name="leerjaar"/>
+                      <label for="3e leerjaar">3e leerjaar</label>
+                    </div>
+                    <div class="js-leerjaar-option option">
+                      <input type="radio" class="radio" id="R24B" name="leerjaar"/>
+                      <label for="4e leerjaar">4e leerjaar</label>
+                    </div>
+                    <div class="js-leerjaar-option option">
+                      <input type="radio" class="radio" id="R24C" name="leerjaar"/>
+                      <label for="5e leerjaar">5e leerjaar</label>
+                    </div>
+                    <div class="js-leerjaar-option option">
+                      <input type="radio" class="radio" id="R24B" name="leerjaar"/>
+                      <label for="6e leerjaar">6e leerjaar</label>
+                    </div>
+                  </div>
+                  <div class="js-leerjaar-selected selected">Selecteer een leerjaar</div>
+                </div> -->
+              </div>
+              <div class="js-klas">
+                <label class="c-label">Klas:</label>
+                <input maxlength="1" class="c-input" type="text" id="klasField" placeholder="bv. A, B, C, ..">
+              </div>
+              <div class="js-voorkeuren">
+              </div>
+              <div class="js-error c-error">
+                Something went wrong!
+              </div>
+            <button class="o-button-reset c-button js-save">OPSLAAN</button>
+          </div>
+        </div>
+        <div id="confirm-modal" class="c-profielen-modal">
+
+          <!-- Modal content -->
+          <div class="c-profielen-modal-content">
+            <span class="c-profielen-modal-close" onclick="closeConfirmModal()">&times;</span>
+            <h3>Ben je zeker dat je deze school wilt verwijderen?</h3>
+            <button class="js-confirm o-button-reset c-button">BEVESTIGEN</button>
+        </div>
+    </main>
+
+    <script src="../../script/admin/checkRole.js"></script>
+    <script src="../../script/admin/leerlingen.js"></script>
+    <script src="../../script/nav.js"></script>
+</body>
+</html>

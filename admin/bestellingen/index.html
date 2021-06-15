@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" style="background-color: var(--global-color-neutral-light);">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bestellingen - Hanssens Catering Admin</title>
+
+    <link rel="stylesheet" href="../../style/normalize.css">
+    <link rel="stylesheet" href="../../style/screen.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-firestore.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js"></script>
+
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyBdUbMGYO_xd0GfKlS1okuTAistnWoMsxA",
+            authDomain: "hanssens-catering-project.firebaseapp.com",
+            projectId: "hanssens-catering-project",
+            storageBucket: "hanssens-catering-project.appspot.com",
+            messagingSenderId: "152936813269",
+            appId: "1:152936813269:web:35b11bceae2f01c291c85c",
+            measurementId: "G-SR3RLLW4CY"
+        };
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+    </script>
+</head>
+<body>
+    <div class="c-sidebar">
+        <nav class="c-sidebar-nav">
+            <ul class="c-sidebar-ul">
+                <div>
+                    <li>
+                        <a href="/admin/leerlingen">
+                            <i class="material-icons">account_circle</i>
+                            <p>Leerlingen</p>
+                        </a>
+                    </li>
+                    <li class="c-sidebar-selected">
+                        <a href="/admin/bestellingen">
+                            <i class="material-icons">date_range</i>
+                            <p>Bestellingen</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/downloaden">
+                            <i class="material-icons">download</i>
+                            <p>Downloaden</p>
+                        </a>
+                    </li>
+                </div>
+                <li>
+                    <a href="#" onclick="logout()">
+                        <i class="material-icons">logout</i>
+                        <p>Uitloggen</p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <header class="c-header c-header-center">
+        <i class="material-icons c-header-hamburger">menu</i>
+        <nav class="c-nav c-nav-list c-nav-profiel">
+            <div class="c-header__item">
+                <img class="c-logo" src="../../src/Logo.png" alt="Hanssens Catering Logo">
+            </div>
+        </nav>
+    </header>
+    <main class="c-instellingen">
+        <div class="c-profielen">
+            <div class="c-profielen-container">
+                <div>
+                    <div class="c-search-bar" action="">
+                        <div class="c-search-bar-search">
+                            <input class="c-input-search" id="js-search" type="text" placeholder="Naam" name="search">
+                            <div class="c-button-search">
+                                <i class="material-icons">search</i>
+                            </div>
+                        </div>
+                        <div class="c-search-bar-search">
+                            <input class="c-input-search c-input-search-klas" id="js-search-klas" type="text" placeholder="Klas" name="search-klas">
+                            <div class="c-button-search">
+                                <i class="material-icons">search</i>
+                            </div>
+                        </div>
+                        <input class="c-input-date" type="date" name="date" id="js-datepicker">
+                    </div>
+                </div>
+                <div>
+                    <table class="js-bestellingen">
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div id="edit-modal" class="c-profielen-modal">
+
+            <!-- Modal content -->
+            <div class="c-profielen-modal-content">
+              <span class="c-profielen-modal-close" onclick="closeEditModal()">&times;</span>
+              <h1>Bestelling bewerken</h1>
+              <div class="c-bestellingen-options">
+                <li class="c-form-field c-form-field--option c-option-list__item">
+                    <input class="o-hide-accessible c-option c-option--hidden" type="checkbox" id="soepCheckbox">
+                    <label class="c-label c-label--option c-custom-option" for="soepCheckbox">
+                        <span class="c-custom-option__fake-input c-custom-option__fake-input--checkbox">
+                            <svg class="c-custom-option__symbol" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 6.75">
+                                <path d="M4.75,9.5a1,1,0,0,1-.707-.293l-2.25-2.25A1,1,0,1,1,3.207,5.543L4.75,7.086,8.793,3.043a1,1,0,0,1,1.414,1.414l-4.75,4.75A1,1,0,0,1,4.75,9.5" transform="translate(-1.5 -2.75)"/>
+                            </svg>
+                        </span>
+                        Soep
+                    </label>
+                </li>
+                <li class="c-form-field c-form-field--option c-option-list__item">
+                    <input class="o-hide-accessible c-option c-option--hidden" type="checkbox" id="maaltijdCheckbox">
+                    <label class="c-label c-label--option c-custom-option" for="maaltijdCheckbox">
+                        <span class="c-custom-option__fake-input c-custom-option__fake-input--checkbox">
+                            <svg class="c-custom-option__symbol" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 6.75">
+                                <path d="M4.75,9.5a1,1,0,0,1-.707-.293l-2.25-2.25A1,1,0,1,1,3.207,5.543L4.75,7.086,8.793,3.043a1,1,0,0,1,1.414,1.414l-4.75,4.75A1,1,0,0,1,4.75,9.5" transform="translate(-1.5 -2.75)"/>
+                            </svg>
+                        </span>
+                        Maaltijd
+                    </label>
+                </li>
+                <li class="c-form-field c-form-field--option c-option-list__item">
+                    <input class="o-hide-accessible c-option c-option--hidden" type="checkbox" id="toezichtCheckbox">
+                    <label class="c-label c-label--option c-custom-option" for="toezichtCheckbox">
+                        <span class="c-custom-option__fake-input c-custom-option__fake-input--checkbox">
+                            <svg class="c-custom-option__symbol" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 6.75">
+                                <path d="M4.75,9.5a1,1,0,0,1-.707-.293l-2.25-2.25A1,1,0,1,1,3.207,5.543L4.75,7.086,8.793,3.043a1,1,0,0,1,1.414,1.414l-4.75,4.75A1,1,0,0,1,4.75,9.5" transform="translate(-1.5 -2.75)"/>
+                            </svg>
+                        </span>
+                        Toezicht
+                    </label>
+                </li>
+                <li class="c-form-field c-form-field--option c-option-list__item">
+                    <input class="o-hide-accessible c-option c-option--hidden" type="checkbox" id="naarhuisCheckbox">
+                    <label class="c-label c-label--option c-custom-option" for="naarhuisCheckbox">
+                        <span class="c-custom-option__fake-input c-custom-option__fake-input--checkbox">
+                            <svg class="c-custom-option__symbol" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 6.75">
+                                <path d="M4.75,9.5a1,1,0,0,1-.707-.293l-2.25-2.25A1,1,0,1,1,3.207,5.543L4.75,7.086,8.793,3.043a1,1,0,0,1,1.414,1.414l-4.75,4.75A1,1,0,0,1,4.75,9.5" transform="translate(-1.5 -2.75)"/>
+                            </svg>
+                        </span>
+                        Naar huis
+                    </label>
+                </li>
+              </div>
+            <button class="o-button-reset c-button js-edit-save">OPSLAAN</button>
+          </div>
+        </div>
+    </main>
+
+    <script src="../../script/admin/checkRole.js"></script>
+    <script src="../../script/admin/bestellingen.js"></script>
+    <script src="../../script/nav.js"></script>
+</body>
+</html>

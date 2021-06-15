@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html style="background-color: var(--global-color-neutral-light);">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Downloaden - Hanssens Catering Admin</title>
+
+        <link rel="stylesheet" href="../../style/normalize.css">
+        <link rel="stylesheet" href="../../style/screen.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+
+        <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-firestore.js"></script>
+
+        <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js"></script>
+
+        <script src="../../script/luxon.js"></script>
+        <script src="../../script/table2excel.js"></script>
+
+        <script>
+            var firebaseConfig = {
+                apiKey: "AIzaSyBdUbMGYO_xd0GfKlS1okuTAistnWoMsxA",
+                authDomain: "hanssens-catering-project.firebaseapp.com",
+                projectId: "hanssens-catering-project",
+                storageBucket: "hanssens-catering-project.appspot.com",
+                messagingSenderId: "152936813269",
+                appId: "1:152936813269:web:35b11bceae2f01c291c85c",
+                measurementId: "G-SR3RLLW4CY"
+            };
+            firebase.initializeApp(firebaseConfig);
+            firebase.analytics();
+        </script>
+    </head>
+    <body>
+        <div class="c-sidebar">
+            <nav class="c-sidebar-nav">
+                <ul class="c-sidebar-ul">
+                    <div>
+                        <li class="js-school" style="display: none;">
+                            <a href="/admin/leerlingen">
+                                <i class="material-icons">account_circle</i> 
+                                <p>Leerlingen</p>
+                            </a>
+                        </li>
+                        <li class="js-school" style="display: none;">
+                            <a href="/admin/bestellingen">
+                                <i class="material-icons">date_range</i>
+                                <p>Bestellingen</p>
+                            </a>
+                        </li>
+                        <li class="js-hanssens" style="display: none;">
+                            <a href="/admin/scholen">
+                                <i class="material-icons">school</i>
+                                <p>Scholen</p>
+                            </a>
+                        </li>
+                        <li class="c-sidebar-selected">
+                            <a href="/admin/downloaden">
+                            <i class="material-icons">download</i>
+                            <p>Downloaden</p>
+                            </a>
+                        </li>
+                    </div>
+                    <li>
+                        <a href="#" onclick="logout()">
+                        <i class="material-icons">logout</i>
+                        <p>Uitloggen</p>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <header class="c-header c-header-center">
+            <i class="material-icons c-header-hamburger">menu</i>
+            <nav class="c-nav c-nav-list c-nav-profiel">
+                <div class="c-header__item">
+                    <img class="c-logo" src="../../src/Logo.png" alt="Hanssens Catering Logo">
+                </div>
+            </nav>
+        </header>
+        <main class="c-instellingen">
+            <div class="c-profielen">
+                <div class="c-profielen-container">
+                        <div class="c-search-bar" action="">
+                            <div class="js-search-school c-search-bar-search">
+                                <div class="c-search-bar-label">
+                                    <label for="">School:</label>
+                                    <input class="c-input-search" id="js-search" type="text" placeholder="Howest Kortrijk">
+                                </div>
+                                <div class="c-button-search">
+                                    <i class="material-icons">search</i>
+                                </div>
+                            </div>
+                            <div class="c-search-bar-label">
+                                <label for="">Start datum:</label>
+                                <input class="js-search-datum c-input-startdate" type="date" name="date" id="js-startdate">
+                            </div>
+                            <div class="c-search-bar-label">
+                                <label for="">Eind datum:</label>
+                                <input class="c-input-date" type="date" name="date" id="js-enddate">
+                            </div>
+                        </div>
+                    <div class="c-table">
+                        <table class="js-download">
+                        </table>
+                        <table class="js-bestellingen" id="excel-table">
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <script src="../../script/admin/checkRole.js"></script>
+        <script src="../../script/admin/downloaden.js"></script>
+        <script src="../../script/nav.js"></script>
+    </body>
+</html>
