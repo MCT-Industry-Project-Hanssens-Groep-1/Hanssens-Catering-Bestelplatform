@@ -1,7 +1,7 @@
 var DateTime = luxon.DateTime;
 var db = firebase.firestore()
 
-var dt = DateTime.now();
+var dt = DateTime.now().setLocale('nl');
 var firstDayOfWeek = dt.startOf('week').toISODate();
 var lastDayOfWeek = dt.endOf('week');
 var lastDayOfWorkWeek = lastDayOfWeek.minus({days: 2}).toISODate();
@@ -40,21 +40,6 @@ e.addEventListener('change', function() {
         getMenus(kindVoorkeurCode, firstDayOfWeek, lastDayOfWorkWeek)
     }
 })
-
-openNotification = () => {
-    var notification = document.querySelector('.js-notification');
-    notification.classList.remove("hide");
-    notification.classList.add("show");
-
-    setTimeout(() => {
-        notification.classList.add("hide");
-    }, 5000)
-}
-
-closeNotification = () => {
-    var notification = document.querySelector('.js-notification');
-    notification.classList.add("hide");
-}
 
 setDate = () => {
     let datumHTML = document.querySelector('.js-datum');
@@ -146,6 +131,30 @@ showMenus = (data, bestellingData) => {
     let count = 1;
     for(let obj of data) {
         let menu = obj.menu.toString();
+        let besteld = false;
+        let soepChecked = "";
+        let maaltijdChecked = "";
+        let toezichtChecked = "";
+        let naarhuisChecked = "";
+        let buttonText = "VERZENDEN";
+        for(var i = 0; i < bestellingData.length; i++) {
+            if (bestellingData[i].datum == dagLong.toISODate()) {
+                if(bestellingData[i].soep == true) {
+                    soepChecked = "checked";
+                }
+                if(bestellingData[i].maaltijd == true) {
+                    maaltijdChecked = "checked";
+                }
+                if(bestellingData[i].toezicht == true) {
+                    toezichtChecked = "checked";
+                }
+                if(bestellingData[i].naarhuis == true) {
+                    naarhuisChecked = "checked";
+                }
+                besteld = true;
+                buttonText = "BIJWERKEN";
+            }
+        }
         if(!menu == "" && obj.status == "incomplete") {
             let dagMenu = menu.split(',');
             let maaltijd = `${dagMenu[1]}`
@@ -154,29 +163,6 @@ showMenus = (data, bestellingData) => {
             }
             if(dagMenu[3] != undefined) {
                 maaltijd += ", " + `${dagMenu[3]}`
-            }
-            
-            let soepChecked = "";
-            let maaltijdChecked = "";
-            let toezichtChecked = "";
-            let naarhuisChecked = "";
-            let buttonText = "VERZENDEN";
-            for(var i = 0; i < bestellingData.length; i++) {
-                if (bestellingData[i].datum == dagLong.toISODate()) {
-                    if(bestellingData[i].soep == true) {
-                        soepChecked = "checked";
-                    }
-                    if(bestellingData[i].maaltijd == true) {
-                        maaltijdChecked = "checked";
-                    }
-                    if(bestellingData[i].toezicht == true) {
-                        toezichtChecked = "checked";
-                    }
-                    if(bestellingData[i].naarhuis == true) {
-                        naarhuisChecked = "checked";
-                    }
-                    buttonText = "BIJWERKEN";
-                }
             }
             
             htmlString += `<div class="c-dashboard-item">
@@ -245,6 +231,81 @@ showMenus = (data, bestellingData) => {
                 </div>
             </div>
         </div>`
+        } else if(!menu == "" && obj.status == "past-deadline" && besteld == true) {
+            let dagMenu = menu.split(',');
+            let maaltijd = `${dagMenu[1]}`
+            if(dagMenu[2] != undefined) {
+                maaltijd += ", " + `${dagMenu[2]}`
+            }
+            if(dagMenu[3] != undefined) {
+                maaltijd += ", " + `${dagMenu[3]}`
+            }
+            
+            htmlString += `<div class="c-dashboard-item">
+            <div class="c-dashboard-item__day">
+                <p class="c-dashboard-item__day-text">${dagLong.weekdayLong.charAt(0).toUpperCase() + dagLong.weekdayLong.slice(1)}</p>
+                <p class="c-dashboard-item__day-number ">${dagLong.day}</p>
+            </div>
+            <div class="c-dashboard-item__content">
+                <div class="c-dashboard-item__content-option">
+                    <li class="c-form-field c-form-field--option c-option-list__item">
+                        <input class="o-hide-accessible c-option c-option--hidden" type="checkbox" id="Soep${count}" ${soepChecked} disabled>
+                        <label class="c-label c-label--option c-custom-option" for="Soep${count}">
+                            <span class="c-custom-option__fake-input c-custom-option__fake-input--checkbox">
+                                <svg class="c-custom-option__symbol" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 6.75">
+                                    <path d="M4.75,9.5a1,1,0,0,1-.707-.293l-2.25-2.25A1,1,0,1,1,3.207,5.543L4.75,7.086,8.793,3.043a1,1,0,0,1,1.414,1.414l-4.75,4.75A1,1,0,0,1,4.75,9.5" transform="translate(-1.5 -2.75)"/>
+                                </svg>
+                            </span>
+                            Soep
+                        </label>
+                    </li>
+                    <p class="c-dashboard-text">${dagMenu[0]}</p>
+                </div>
+                <div class="c-dashboard-item__content-option">
+                    <li class="c-form-field c-form-field--option c-option-list__item">
+                        <input class="o-hide-accessible c-option c-option--hidden" type="checkbox" id="Maaltijd${count}" ${maaltijdChecked} disabled>
+                        <label class="c-label c-label--option c-custom-option" for="Maaltijd${count}">
+                            <span class="c-custom-option__fake-input c-custom-option__fake-input--checkbox">
+                                <svg class="c-custom-option__symbol" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 6.75">
+                                    <path d="M4.75,9.5a1,1,0,0,1-.707-.293l-2.25-2.25A1,1,0,1,1,3.207,5.543L4.75,7.086,8.793,3.043a1,1,0,0,1,1.414,1.414l-4.75,4.75A1,1,0,0,1,4.75,9.5" transform="translate(-1.5 -2.75)"/>
+                                </svg>
+                            </span>
+                            Maaltijd
+                        </label>
+                    </li>
+                    <p class="c-dashboard-text">${maaltijd}
+                </div>
+                <div class="c-dashboard-item__content-option">
+                    <li class="c-form-field c-form-field--option c-option-list__item">
+                        <input class="o-hide-accessible c-option c-option--hidden" type="checkbox" id="Toezicht${count}" ${toezichtChecked} disabled>
+                        <label class="c-label c-label--option c-custom-option" for="Toezicht${count}">
+                            <span class="c-custom-option__fake-input c-custom-option__fake-input--checkbox">
+                                <svg class="c-custom-option__symbol" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 6.75">
+                                    <path d="M4.75,9.5a1,1,0,0,1-.707-.293l-2.25-2.25A1,1,0,1,1,3.207,5.543L4.75,7.086,8.793,3.043a1,1,0,0,1,1.414,1.414l-4.75,4.75A1,1,0,0,1,4.75,9.5" transform="translate(-1.5 -2.75)"/>
+                                </svg>
+                            </span>
+                            Toezicht
+                        </label>
+                    </li>
+                </div>
+                <div class="c-dashboard-item__content-option">
+                    <li class="c-form-field c-form-field--option c-option-list__item">
+                        <input class="o-hide-accessible c-option c-option--hidden" type="checkbox" id="Naarhuis${count}" ${naarhuisChecked} disabled>
+                        <label class="c-label c-label--option c-custom-option" for="Naarhuis${count}">
+                            <span class="c-custom-option__fake-input c-custom-option__fake-input--checkbox">
+                                <svg class="c-custom-option__symbol" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 6.75">
+                                    <path d="M4.75,9.5a1,1,0,0,1-.707-.293l-2.25-2.25A1,1,0,1,1,3.207,5.543L4.75,7.086,8.793,3.043a1,1,0,0,1,1.414,1.414l-4.75,4.75A1,1,0,0,1,4.75,9.5" transform="translate(-1.5 -2.75)"/>
+                                </svg>
+                            </span>
+                            Naar huis
+                        </label>
+                    </li>
+                </div>
+                <div class="c-dashboard-item__button">
+                    <p>Deze bestelling is verwerkt. <br> Je kan dit niet meer aanpassen.</p>
+                </div>
+            </div>
+        </div>`
         } else if(obj.status == "past-deadline") {
             htmlString += `<div class="c-dashboard-item">
             <div class="c-dashboard-item__day">
@@ -292,9 +353,9 @@ addBestelling = (soepCheckbox, maaltijdCheckbox, toezichtCheckbox, naarhuisCheck
 
     if(soep == true || maaltijd == true || toezicht == true || naarhuis == true) {
         db.collection("bestellingen").doc(kindRijksregister).set({
-            bestellingen: {[datum]: {naam: kindNaam, datum: datum, soep: soep, maaltijd: maaltijd, toezicht: toezicht, naarhuis: naarhuis, code: kindVoorkeurCode, school: kindSchool, leerjaar: kindLeerjaar, klas: kindKlas}}
+            bestellingen: {[datum]: {naam: kindNaam, datum: datum, soep: soep, maaltijd: maaltijd, toezicht: toezicht, naarhuis: naarhuis, code: kindVoorkeurCode, school: kindSchool, leerjaar: kindLeerjaar, klas: kindKlas, rijksregister: kindRijksregister}}
         }, { merge: true })
-        openNotification();
+        showNotification(`Jouw bestelling voor ${DateTime.fromISO(datum).setLocale('nl').weekdayLong} is opgeslagen!`, null);
     } else {
         db.collection("bestellingen").where(`bestellingen.${datum}.naam`, "==", kindNaam).get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
@@ -303,7 +364,7 @@ addBestelling = (soepCheckbox, maaltijdCheckbox, toezichtCheckbox, naarhuisCheck
                 })
             })
         });
-        openNotification();
+        showNotification(`Jouw bestelling voor ${DateTime.fromISO(datum).setLocale('nl').weekdayLong} is gewijzigd!`, null);
     }
 }
 

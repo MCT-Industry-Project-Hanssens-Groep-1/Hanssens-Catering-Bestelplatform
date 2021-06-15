@@ -3,10 +3,70 @@ var db = firebase.firestore()
 var searchBar = document.getElementById('js-search');
 var searchBarKlas = document.getElementById('js-search-klas');
 var datePicker = document.getElementById('js-datepicker');
+var editModal = document.getElementById("edit-modal");
 
 var userData = "", bestellingData = [];
 
 var searchString, searchStringKlas, dateString;
+
+var updateBestelling = function(){};
+
+openEditModal = (rijksregister, datum, soep, maaltijd, toezicht, naarhuis) => {
+    var saveButton = document.querySelector('.js-edit-save');
+    var soepCheckbox = document.getElementById('soepCheckbox');
+    var maaltijdCheckbox = document.getElementById('maaltijdCheckbox');
+    var toezichtCheckbox = document.getElementById('toezichtCheckbox');
+    var naarhuisCheckbox = document.getElementById('naarhuisCheckbox');
+
+    if(soep == "true") {
+        soepCheckbox.checked = true;
+    }
+    if(maaltijd == "true") {
+        maaltijdCheckbox.checked = true;
+    }
+    if(toezicht == "true") {
+        toezichtCheckbox.checked = true;
+    }
+    if(naarhuis == "true") {
+        naarhuisCheckbox.checked = true;
+    }
+
+    editModal.style.transform = "translate(0)";
+    editModal.style.opacity = "1";
+  
+    updateBestelling = () => {
+        db.collection("bestellingen").doc(rijksregister).get().then((doc) => {
+                doc.ref.update({
+                    ['bestellingen.' + datum + '.soep']: soepCheckbox.checked,
+                    ['bestellingen.' + datum + '.maaltijd']: maaltijdCheckbox.checked,
+                    ['bestellingen.' + datum + '.toezicht']: toezichtCheckbox.checked,
+                    ['bestellingen.' + datum + '.naarhuis']: naarhuisCheckbox.checked,
+            })
+        });
+    }
+  
+    saveButton.addEventListener('click', updateBestelling);
+  }
+  
+closeEditModal = () => {
+    var saveButton = document.querySelector('.js-edit-save');
+
+    editModal.style.transform = "translate(9999px)";
+    editModal.style.opacity = "0";
+
+    document.getElementById('soepCheckbox').checked = false;
+    document.getElementById('maaltijdCheckbox').checked = false;
+    document.getElementById('toezichtCheckbox').checked = false;
+    document.getElementById('naarhuisCheckbox').checked = false;
+    saveButton.removeEventListener('click', updateBestelling);
+}
+
+
+window.onclick = function(event) {
+    if (event.target == editModal) {
+        closeEditModal();
+    }
+}
 
 searchBar.addEventListener('keyup', (e) => {
     searchString = e.target.value.toLowerCase();
@@ -27,12 +87,14 @@ searchBar.addEventListener('keyup', (e) => {
             return bestelling.naam.toLowerCase().includes(searchString);
         }
     })
+    filteredBestellingData.sort(function(a,b){
+        return new Date(b.datum) - new Date(a.datum);
+    });
     showBestellingen(filteredBestellingData);
 });
 
 datePicker.addEventListener('change', (e) => {
     dateString = e.target.value.toLowerCase();
-    console.log(dateString);
     var filteredBestellingData = bestellingData.filter(bestelling => {
         if(!searchString == "" && !searchStringKlas == "") {
             return bestelling.naam.toLowerCase().includes(searchString) && bestelling.datum.toLowerCase().includes(dateString) && bestelling.klas.toLowerCase().includes(searchStringKlas) || bestelling.datum.toLowerCase().includes(dateString) && bestelling.klas.toLowerCase().includes(searchStringKlas) && bestelling.naam.toLowerCase().includes(searchString) || bestelling.klas.toLowerCase().includes(searchStringKlas) && bestelling.naam.toLowerCase().includes(searchString) && bestelling.datum.toLowerCase().includes(dateString);
@@ -50,6 +112,9 @@ datePicker.addEventListener('change', (e) => {
             return bestelling.datum.toLowerCase().includes(dateString);
         }
     })
+    filteredBestellingData.sort(function(a,b){
+        return new Date(b.datum) - new Date(a.datum);
+    });
     showBestellingen(filteredBestellingData);
 })
 
@@ -72,6 +137,9 @@ searchBarKlas.addEventListener('keyup', (e) => {
             return bestelling.klas.toLowerCase().includes(searchStringKlas);
         }
     })
+    filteredBestellingData.sort(function(a,b){
+        return new Date(b.datum) - new Date(a.datum);
+    });
     showBestellingen(filteredBestellingData);
 });
 
@@ -79,12 +147,16 @@ searchBarKlas.addEventListener('keyup', (e) => {
 getBestellingen = () => {
     db.collection('bestellingen')
     .onSnapshot((querySnapshot) => {
+        bestellingData = [];
         querySnapshot.forEach((doc) => {
             bestellingen = doc.data().bestellingen;
             for(var obj in bestellingen) {
                 var bestelling = bestellingen[obj];
                 if(bestelling.school == userData.displayName) {
                     bestellingData.push(bestelling)
+                    bestellingData.sort(function(a,b){
+                        return new Date(b.datum) - new Date(a.datum);
+                    });
                 }
             }
     })
@@ -151,7 +223,7 @@ showBestellingen = (data) => {
         }
 
         htmlString += `<td class="c-table-icons c-icon-margin">
-        <i class="material-icons">edit</i>
+        <i class="material-icons" onclick="openEditModal('${obj.rijksregister}', '${obj.datum}', '${obj.soep}', '${obj.maaltijd}', '${obj.toezicht}', '${obj.naarhuis}')">edit</i>
         </td>
         </tr>`
     }

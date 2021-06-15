@@ -3,6 +3,8 @@
 var modal = document.getElementById("profielen-modal");
 var confirmModal = document.getElementById("confirm-modal");
 
+var deleteKind = function(){};
+
 openModal = () => {
     modal.style.transform = "translate(0)";
     modal.style.opacity = "1";
@@ -14,13 +16,15 @@ openConfirmModal = (rijksregisternummer) => {
   confirmModal.style.transform = "translate(0)";
   confirmModal.style.opacity = "1";
 
-  confirmButton.addEventListener('click', () => {
+  deleteKind = () => {
     db.collection("kinderen")
     .doc(rijksregisternummer)
     .delete()
 
     closeConfirmModal();
-  })
+  }
+
+  confirmButton.addEventListener('click', deleteKind);
 }
 
 closeModal = () => {
@@ -52,8 +56,12 @@ closeModal = () => {
 }
 
 closeConfirmModal = () => {
+  const confirmButton = document.querySelector('.js-confirm');
+
   confirmModal.style.transform = "translate(9999px)";
   confirmModal.style.opacity = "0";
+
+  confirmButton.removeEventListener('click', deleteKind);
 }
 
 window.onclick = function(event) {
@@ -239,7 +247,6 @@ getKinderen = (user) => {
     querySnapshot.forEach((doc) => {
       htmlString += `<div class="c-profielen-subtitle">
       <h2>${doc.data().naam}</h2>
-      <i class="material-icons">edit</i>
       <i class="material-icons" onclick="openConfirmModal('${doc.data().rijksregisternummer}')">delete</i>
   </div>
   <div class="c-profielen-voorkeuren">

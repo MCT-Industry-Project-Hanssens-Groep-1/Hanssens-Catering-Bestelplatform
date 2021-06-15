@@ -29,27 +29,10 @@ window.onclick = function(event) {
     }
   }
 
-openNotification = () => {
-    var notification = document.querySelector('.js-notification');
-    notification.classList.remove("hide");
-    notification.classList.add("show");
-
-    setTimeout(() => {
-        notification.classList.add("hide");
-    }, 5000)
-}
-
-closeNotification = () => {
-    var notification = document.querySelector('.js-notification');
-    notification.classList.add("hide");
-}
-
 changePassword = () => {
-    openNotification();
     firebase.auth().sendPasswordResetEmail(userData.email)
         .then(() => {
-            // Password reset email sent!
-            // ..
+            showNotification(`E-mail verzonden naar ${userData.email}`, null);
         })
         .catch((error) => {
             var errorCode = error.code;

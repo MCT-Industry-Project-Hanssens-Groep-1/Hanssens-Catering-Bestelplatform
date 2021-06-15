@@ -2,9 +2,13 @@ var db = firebase.firestore();
 
 var modal = document.getElementById("profielen-modal");
 var editModal = document.getElementById("edit-modal");
+var confirmModal = document.getElementById("confirm-modal");
 
 var searchBar = document.getElementById('js-search');
 var scholenData = [];
+
+var updateSchool = function(){};
+var deleteSchool = function(){};
 
 searchBar.addEventListener('keyup', (e) => {
   var searchString = e.target.value.toLowerCase();
@@ -27,19 +31,55 @@ openEditModal = (id, naam, adres, telefoonnummer) => {
   editModal.style.transform = "translate(0)";
   editModal.style.opacity = "1";
 
-  saveButton.addEventListener('click', () => {
+  updateSchool = () => {
     db.collection('scholen').doc(id).update({
       naam: naamField.value,
       adres: adresField.value,
       telefoonnummer: telefoonnummerField.value,
     });
     closeEditModal();
-  })
+  }
+
+  saveButton.addEventListener('click', updateSchool);
 }
 
 closeEditModal = () => {
+  var saveButton = document.querySelector('.js-edit-save');
+
   editModal.style.transform = "translate(9999px)";
   editModal.style.opacity = "0";
+
+  saveButton.removeEventListener('click', updateSchool);
+}
+
+openConfirmModal = (id) => {
+  const confirmButton = document.querySelector('.js-confirm');
+
+  confirmModal.style.transform = "translate(0)";
+  confirmModal.style.opacity = "1";
+
+  deleteSchool = () => {
+    db.collection("scholen")
+    .doc(id)
+    .delete()
+
+    db.collection("users")
+    .doc(id)
+    .delete()
+
+    closeConfirmModal();
+  }
+
+  confirmButton.addEventListener('click', deleteSchool);
+}
+
+closeConfirmModal = () => {
+  const confirmButton = document.querySelector('.js-confirm');
+
+  confirmModal.style.transform = "translate(9999px)";
+  confirmModal.style.opacity = "0";
+
+  confirmButton.addEventListener('click', deleteSchool);
 }
 
 showInputLactose = () => {
@@ -113,6 +153,8 @@ window.onclick = function(event) {
       closeModal();
     } else if (event.target == editModal) {
       closeEditModal();
+    } else if (event.target == confirmModal) {
+      closeConfirmModal();
     }
   }
 
@@ -268,7 +310,7 @@ showScholen = (data) => {
         <i class="material-icons" onclick="openEditModal('${obj.id}', '${obj.naam}', '${obj.adres}', '${obj.telefoonnummer}')">edit</i>
     </td>
     <td class="c-table-icons">
-        <i class="material-icons">delete</i>
+        <i class="material-icons" onclick="openConfirmModal('${obj.id}')">delete</i>
     </td>
   </tr>`
   }

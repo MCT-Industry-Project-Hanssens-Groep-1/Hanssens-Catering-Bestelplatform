@@ -84,7 +84,6 @@ html {
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
 }
 
 *,
@@ -927,6 +926,12 @@ td {
   margin-top: 20%;
 }
 
+.c-bestellingen-options {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 48px;
+}
+
 .c-dashboard-item__button {
   position: absolute;
   bottom: 0;
@@ -1081,10 +1086,6 @@ td {
 
 .c-instellingen-button {
   width: 240px;
-}
-
-.c-notification-wrapper.c-instellingen-notification {
-  top: 20px;
 }
 
 .c-instellingen .c-profielen .c-instellingen-content {
@@ -1494,27 +1495,81 @@ input[type=date] {
 }
 
 
-/*
-    Component: Notification
-    ---
-    Notifications
-*/
-
-.c-notification-wrapper {
+/* NOTIFICATIONS */
+.c-notifications {
   position: absolute;
-  top: 120px;
-  right: 20px;
-  animation: show_notification 0.8s ease forwards;
-  opacity: 0;
+  right: 2rem;
+  top: 6rem;
+  max-width: 26rem;
+  bottom: var(--local-border-bottom-size);
+
+  padding-right: 0.25rem;
+  padding-bottom: 2rem;
+
   pointer-events: none;
 }
 
-.c-notification-wrapper.show{
-  opacity: 1;
-  pointer-events: auto;
+.c-notifications::-webkit-scrollbar {
+  display: none;
 }
 
-@keyframes show_notification {
+.c-notification {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 1.2rem 2rem;
+
+  background: var(--global-color-alpha-dark);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+  margin-bottom: 16px;
+  border-radius: 8px;
+  border-left: 8px solid var(--global-color-beta);
+
+  pointer-events: all;
+}
+
+.c-notification__message {
+  margin: auto;
+  font-size: 1.1rem;
+  margin-right: 3rem;
+  color: var(--global-color-neutral-xx-light);
+}
+
+.c-notification__button {
+
+  all: unset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  padding: 2px;
+  color: var(--global-color-neutral-light);
+  background: var(--global-color-alpha);
+
+  line-height: 1;
+
+  border-radius: 50%;
+
+  cursor: pointer;
+}
+
+.c-notification__button:hover {
+  background: var(--global-color-beta);
+}
+
+.c-notification__icon {
+  stroke-width: 2px;
+}
+
+.u-will-fade {
+  opacity: 1;
+    will-change: opacity;
+    transition: opacity 300ms ease-in-out;
+  animation: show_slide 1s ease forwards;
+}
+
+@keyframes show_slide {
   0%{
     transform: translateX(100%);
   }
@@ -1524,80 +1579,25 @@ input[type=date] {
   80%{
     transform: translateX(0%);
   }
-  100%{
-    transform: translateX(-10px);
-  }
 }
 
-.c-notification-wrapper.hide {
-  animation: hide_notification 1s ease forwards;
+.u-fading-out {
+  opacity: 0;
+  animation: hide_slide 1s ease forwards;
 }
-@keyframes hide_notification {
+
+@keyframes hide_slide {
   0%{
-    transform: translateX(-10px);
-  }
-  40%{
     transform: translateX(0%);
   }
-  80%, 100%{
-    opacity: 0;
-    pointer-events: none;
-    transform: translateX(100%);
+  40%{
+    transform: translateX(10%);
+  }
+  80%{
+    transform: translateX(-100%);
   }
 }
 
-.c-notification {
-  background: var(--global-color-alpha-dark);
-  padding: 20px 15px 20px 15px;
-  border-radius: 8px;
-  border-left: 8px solid var(--global-color-beta);
-  box-shadow: 1px 7px 14px -5px rgba(0, 0, 0, 0.15);
-  width: 400px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  color: white;
-}
-
-.c-notification-content {
-  display: flex;
-  align-items: center;
-}
-
-.c-notification-icon {
-  display: flex;
-  justify-content: center;
-}
-
-.c-notification-icon i {
-  font-size: 30px;
-  color: var(--global-color-beta);
-}
-
-.c-notification-details {
-  margin-left: 15px;
-}
-
-.c-notification-details span {
-  font-size: 18px;
-  font-weight: 500;
-}
-
-.c-notification-closeicon {
-  color: var(--global-color-neutral);
-  display: flex;
-  justify-content: center;
-  cursor: pointer;
-  padding: 3px;
-  text-align: center;
-  border-radius: 50%;
-  background: var(--global-color-alpha);
-  transition: all 0.3s ease;
-}
-
-.c-notification-closeicon:hover {
-  background: var(--global-color-alpha-x-light);
-}
 
 /*------------------------------------*\
 #UTILITIES

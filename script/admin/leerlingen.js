@@ -3,8 +3,10 @@ var db = firebase.firestore();
 var unverifiedData = [], verifiedData = [], userData;
 
 var modal = document.getElementById("profielen-modal");
+var confirmModal = document.getElementById("confirm-modal");
 
 var updateKind = function(){};
+var deleteKind = function(){};
 
 openModal = (familienaam, voornaam, rijksregisternummer, leerjaar, klas, voorkeur) => {
     const selectedLeerjaar = document.querySelector(".js-leerjaar-selected");
@@ -108,9 +110,37 @@ closeModal = () => {
     errorText.style.opacity = 0;
 }
 
+openConfirmModal = (rijksregisternummer) => {
+  const confirmButton = document.querySelector('.js-confirm');
+
+  confirmModal.style.transform = "translate(0)";
+  confirmModal.style.opacity = "1";
+
+  deleteKind = () => {
+    db.collection("kinderen")
+    .doc(rijksregisternummer)
+    .delete()
+
+    closeConfirmModal();
+  }
+
+  confirmButton.addEventListener('click', deleteKind);
+}
+
+closeConfirmModal = () => {
+  const confirmButton = document.querySelector('.js-confirm');
+
+  confirmModal.style.transform = "translate(9999px)";
+  confirmModal.style.opacity = "0";
+
+  confirmButton.addEventListener('click', deleteKind);
+}
+
 window.onclick = function(event) {
     if (event.target == modal) {
       closeModal();
+    }else if (event.target == confirmModal) {
+      closeConfirmModal();
     }
   }
 
@@ -253,7 +283,7 @@ showLeerlingen = () => {
                     <i class="material-icons" onclick="openModal('${leerling.familienaam}', '${leerling.voornaam}', '${leerling.rijksregisternummer}', '${leerling.leerjaar}', '${leerling.klas}', '${leerling.voorkeur}')">edit</i>
                 </td>
                 <td class="c-table-icons">
-                    <i class="material-icons">delete</i>
+                    <i class="material-icons" onclick="openConfirmModal('${leerling.rijksregisternummer}')">delete</i>
                 </td>
             </tr>`
         }
@@ -269,6 +299,7 @@ showLeerlingen = () => {
         <th>Leerjaar</th>
         <th>Klas</th>
         <th></th>
+        <th></th>
     </tr>`;
 
         for(var key in verifiedData) {
@@ -280,6 +311,9 @@ showLeerlingen = () => {
                     <td>${leerling.klas}</td>
                     <td class="c-table-icons">
                         <i class="material-icons" onclick="openModal('${leerling.familienaam}', '${leerling.voornaam}', '${leerling.rijksregisternummer}', '${leerling.leerjaar}', '${leerling.klas}', '${leerling.voorkeur}')">edit</i>
+                    </td>
+                    <td class="c-table-icons">
+                        <i class="material-icons" onclick="openConfirmModal('${leerling.rijksregisternummer}')">delete</i>
                     </td>
                 </tr>`
         }
