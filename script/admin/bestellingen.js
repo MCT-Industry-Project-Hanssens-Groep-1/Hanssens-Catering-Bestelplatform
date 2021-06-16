@@ -34,8 +34,8 @@ openEditModal = (rijksregister, datum, soep, maaltijd, toezicht, naarhuis) => {
     editModal.style.transform = "translate(0)";
     editModal.style.opacity = "1";
   
-    updateBestelling = () => {
-        db.collection("bestellingen").doc(rijksregister).get().then((doc) => {
+    updateBestelling = async () => {
+        await db.collection("bestellingen").doc(rijksregister).get().then((doc) => {
                 doc.ref.update({
                     ['bestellingen.' + datum + '.soep']: soepCheckbox.checked,
                     ['bestellingen.' + datum + '.maaltijd']: maaltijdCheckbox.checked,
@@ -43,6 +43,7 @@ openEditModal = (rijksregister, datum, soep, maaltijd, toezicht, naarhuis) => {
                     ['bestellingen.' + datum + '.naarhuis']: naarhuisCheckbox.checked,
             })
         });
+        closeEditModal();
     }
   
     saveButton.addEventListener('click', updateBestelling);

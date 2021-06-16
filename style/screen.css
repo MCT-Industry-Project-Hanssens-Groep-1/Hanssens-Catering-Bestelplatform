@@ -1878,6 +1878,10 @@ input[type=date] {
   .c-custom-select__input {
     font-size: 18px;
   }
+
+  .c-profielen-modal {
+    padding-top: 200px;
+  }
 }
 
 
